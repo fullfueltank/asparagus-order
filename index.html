@@ -6,6 +6,7 @@
   <title>화이트 아스파라거스 직거래 주문</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;700&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: #fdfcf9; font-family: 'Noto Serif KR', Georgia, serif; }
@@ -58,6 +59,10 @@
     .field input, .field textarea { width: 100%; border: 1px solid #ddd; border-radius: 8px; padding: 10px 12px; font-size: 14px; color: #1a1a1a; background: #fff; font-family: 'Noto Sans KR', sans-serif; outline: none; transition: border-color 0.15s; }
     .field input:focus, .field textarea:focus { border-color: #b07d3a; box-shadow: 0 0 0 2px rgba(176,125,58,0.1); }
     .field textarea { resize: vertical; min-height: 72px; line-height: 1.6; }
+    .field input[readonly] { background: #f7f7f5; color: #888; cursor: default; }
+
+    .address-search-btn { width: 100%; padding: 10px; background: #f0f7ea; color: #3b6d11; border: 1px solid #c0dd97; border-radius: 8px; font-size: 13px; font-family: 'Noto Sans KR', sans-serif; font-weight: 500; cursor: pointer; margin-bottom: 8px; transition: background 0.15s; }
+    .address-search-btn:hover { background: #e0f0d0; }
 
     .qty-row { display: flex; align-items: center; gap: 12px; }
     .qty-btn { width: 36px; height: 36px; border: 1px solid #ddd; border-radius: 50%; background: #fff; cursor: pointer; font-size: 18px; color: #1a1a1a; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 0.1s; user-select: none; }
@@ -168,25 +173,13 @@
   <div class="countdown-banner active" id="countdown-banner">
     <div class="countdown-title" id="countdown-title">🎉 무료배송 이벤트 마감까지</div>
     <div class="countdown-timer">
-      <div class="countdown-block">
-        <div class="countdown-num" id="cd-days">00</div>
-        <div class="countdown-unit">일</div>
-      </div>
+      <div class="countdown-block"><div class="countdown-num" id="cd-days">00</div><div class="countdown-unit">일</div></div>
       <div class="countdown-sep">:</div>
-      <div class="countdown-block">
-        <div class="countdown-num" id="cd-hours">00</div>
-        <div class="countdown-unit">시간</div>
-      </div>
+      <div class="countdown-block"><div class="countdown-num" id="cd-hours">00</div><div class="countdown-unit">시간</div></div>
       <div class="countdown-sep">:</div>
-      <div class="countdown-block">
-        <div class="countdown-num" id="cd-mins">00</div>
-        <div class="countdown-unit">분</div>
-      </div>
+      <div class="countdown-block"><div class="countdown-num" id="cd-mins">00</div><div class="countdown-unit">분</div></div>
       <div class="countdown-sep">:</div>
-      <div class="countdown-block">
-        <div class="countdown-num" id="cd-secs">00</div>
-        <div class="countdown-unit">초</div>
-      </div>
+      <div class="countdown-block"><div class="countdown-num" id="cd-secs">00</div><div class="countdown-unit">초</div></div>
     </div>
     <div class="countdown-desc" id="countdown-desc">4월 27일까지 주문해 주시는 분들께 배송비를 무료로 드립니다. 이후에는 5만원(2KG) 이상 주문 시 무료입니다.</div>
   </div>
@@ -218,15 +211,18 @@
     </div>
     <div class="field" id="field-address">
       <label>배송 주소 *</label>
-      <textarea id="address" placeholder="도로명 주소 및 상세 주소를 입력해 주세요"></textarea>
-      <div class="error-msg">배송 주소를 입력해 주세요.</div>
+      <button class="address-search-btn" onclick="searchAddress()">🔍 주소 검색</button>
+      <input type="text" id="zipcode" placeholder="우편번호" readonly style="margin-bottom:6px;width:140px;">
+      <input type="text" id="address" placeholder="도로명 주소" readonly style="margin-bottom:6px;">
+      <input type="text" id="address-detail" placeholder="상세주소 입력 (동, 호수 등)">
+      <div class="error-msg">주소를 검색해 주세요.</div>
     </div>
   </div>
 
   <div class="form-section">
     <div class="section-title">주문 수량 (1KG 단위)</div>
-    <div style="display: flex; align-items: center;">
-      <div class="qty-row" style="flex: 1;">
+    <div style="display:flex;align-items:center;">
+      <div class="qty-row" style="flex:1;">
         <button class="qty-btn" id="btn-minus">−</button>
         <div class="qty-display" id="qty">1</div>
         <span class="qty-unit">KG</span>
@@ -252,11 +248,11 @@
       <span class="account-label">은행</span>
       <span class="account-value">농협은행</span>
     </div>
-    <div class="account-row" style="margin-bottom: 0;">
+    <div class="account-row" style="margin-bottom:0;">
       <span class="account-label">계좌번호</span>
       <span class="account-number">351-8442-6547-93</span>
     </div>
-    <div class="account-row" style="margin-top: 6px;">
+    <div class="account-row" style="margin-top:6px;">
       <span class="account-label">예금주</span>
       <span class="account-value">이선혜</span>
     </div>
@@ -321,70 +317,54 @@
   var PRICE = 40000;
   var DELIVERY_FEE = 5000;
   var FREE_MIN_AFTER = 50000;
-  // new Date(년, 월-1, 일, 시, 분, 초) — 월은 0부터 시작해서 4월=3
-  var FREE_UNTIL = new Date(2025, 3, 27, 23, 59, 59);
+  var FREE_UNTIL = new Date(2026, 3, 27, 23, 59, 59);
   var qty = 1;
   var kakaoText = '';
 
   function pad(n) { return n < 10 ? '0' + n : '' + n; }
-
   function isEventActive() { return new Date() <= FREE_UNTIL; }
-
-  function getDeliveryFee(productTotal) {
-    if (isEventActive()) return 0;
-    return productTotal >= FREE_MIN_AFTER ? 0 : DELIVERY_FEE;
-  }
+  function getDeliveryFee(t) { if (isEventActive()) return 0; return t >= FREE_MIN_AFTER ? 0 : DELIVERY_FEE; }
 
   function tick() {
     var now = new Date();
     var diff = FREE_UNTIL - now;
     var banner = document.getElementById('countdown-banner');
-
     if (diff <= 0) {
       banner.className = 'countdown-banner expired';
       document.getElementById('countdown-title').textContent = '무료배송 이벤트가 종료되었습니다';
       document.getElementById('countdown-desc').textContent = '5만원(2KG) 이상 주문 시 배송비 무료, 미만 시 5,000원이 추가됩니다.';
-      document.getElementById('cd-days').textContent  = '00';
+      document.getElementById('cd-days').textContent = '00';
       document.getElementById('cd-hours').textContent = '00';
-      document.getElementById('cd-mins').textContent  = '00';
-      document.getElementById('cd-secs').textContent  = '00';
+      document.getElementById('cd-mins').textContent = '00';
+      document.getElementById('cd-secs').textContent = '00';
       document.getElementById('delivery-price-display').textContent = '5,000원';
       document.getElementById('delivery-price-note').textContent = '5만원 이상 무료';
     } else {
-      var days  = Math.floor(diff / 86400000);
-      var hours = Math.floor((diff % 86400000) / 3600000);
-      var mins  = Math.floor((diff % 3600000) / 60000);
-      var secs  = Math.floor((diff % 60000) / 1000);
-      document.getElementById('cd-days').textContent  = pad(days);
-      document.getElementById('cd-hours').textContent = pad(hours);
-      document.getElementById('cd-mins').textContent  = pad(mins);
-      document.getElementById('cd-secs').textContent  = pad(secs);
+      document.getElementById('cd-days').textContent = pad(Math.floor(diff / 86400000));
+      document.getElementById('cd-hours').textContent = pad(Math.floor((diff % 86400000) / 3600000));
+      document.getElementById('cd-mins').textContent = pad(Math.floor((diff % 3600000) / 60000));
+      document.getElementById('cd-secs').textContent = pad(Math.floor((diff % 60000) / 1000));
     }
     updatePrice();
   }
 
   function updatePrice() {
-    var productTotal = qty * PRICE;
-    var delivery = getDeliveryFee(productTotal);
-    var grandTotal = productTotal + delivery;
+    var pt = qty * PRICE;
+    var d = getDeliveryFee(pt);
+    var gt = pt + d;
     var card = document.getElementById('total-card');
-    var breakdown = document.getElementById('total-breakdown');
-
+    var bd = document.getElementById('total-breakdown');
     document.getElementById('qty').textContent = qty;
-    document.getElementById('qty-price').textContent = productTotal.toLocaleString() + '원';
-    document.getElementById('total').textContent = grandTotal.toLocaleString() + '원';
-
-    if (delivery === 0) {
+    document.getElementById('qty-price').textContent = pt.toLocaleString() + '원';
+    document.getElementById('total').textContent = gt.toLocaleString() + '원';
+    if (d === 0) {
       card.className = 'total-card free';
-      breakdown.className = 'total-breakdown free';
-      breakdown.textContent = isEventActive()
-        ? '상품 ' + productTotal.toLocaleString() + '원 + 배송비 무료 (이벤트) 🎉'
-        : '상품 ' + productTotal.toLocaleString() + '원 + 배송비 무료 🎉';
+      bd.className = 'total-breakdown free';
+      bd.textContent = isEventActive() ? '상품 ' + pt.toLocaleString() + '원 + 배송비 무료 (이벤트) 🎉' : '상품 ' + pt.toLocaleString() + '원 + 배송비 무료 🎉';
     } else {
       card.className = 'total-card paid';
-      breakdown.className = 'total-breakdown paid';
-      var remaining = FREE_MIN_AFTER - productTotal;
-      breakdown.textContent = '상품 ' + productTotal.toLocaleString() + '원 + 배송비 5,000원 (무료까지 ' + remaining.toLocaleString() + '원 남음)';
+      bd.className = 'total-breakdown paid';
+      bd.textContent = '상품 ' + pt.toLocaleString() + '원 + 배송비 5,000원 (무료까지 ' + (FREE_MIN_AFTER - pt).toLocaleString() + '원 남음)';
     }
   }
 
@@ -393,6 +373,17 @@
 
   document.getElementById('btn-minus').onclick = function() { if (qty > 1) { qty--; updatePrice(); } };
   document.getElementById('btn-plus').onclick = function() { if (qty < 30) { qty++; updatePrice(); } };
+
+  function searchAddress() {
+    new daum.Postcode({
+      oncomplete: function(data) {
+        document.getElementById('zipcode').value = data.zonecode;
+        document.getElementById('address').value = data.roadAddress || data.jibunAddress;
+        document.getElementById('address-detail').focus();
+        document.getElementById('field-address').classList.remove('error');
+      }
+    }).open();
+  }
 
   document.getElementById('kakao-btn').onclick = function() {
     if (navigator.share) {
@@ -407,54 +398,44 @@
   document.getElementById('submit-btn').onclick = function() {
     var name = document.getElementById('name').value.trim();
     var phone = document.getElementById('phone').value.trim();
+    var zipcode = document.getElementById('zipcode').value.trim();
     var address = document.getElementById('address').value.trim();
+    var detail = document.getElementById('address-detail').value.trim();
+    var fullAddress = detail ? address + ' ' + detail : address;
     var valid = true;
 
-    ['name','phone','address'].forEach(function(id) {
-      var field = document.getElementById('field-' + id);
-      if (!document.getElementById(id).value.trim()) {
-        field.classList.add('error'); valid = false;
-      } else { field.classList.remove('error'); }
-    });
+    if (!name) { document.getElementById('field-name').classList.add('error'); valid = false; }
+    else { document.getElementById('field-name').classList.remove('error'); }
+    if (!phone) { document.getElementById('field-phone').classList.add('error'); valid = false; }
+    else { document.getElementById('field-phone').classList.remove('error'); }
+    if (!zipcode || !address) { document.getElementById('field-address').classList.add('error'); valid = false; }
+    else { document.getElementById('field-address').classList.remove('error'); }
     if (!valid) return;
 
     var btn = document.getElementById('submit-btn');
     btn.disabled = true;
     btn.textContent = '접수 중...';
 
-    var productTotal = qty * PRICE;
-    var delivery = getDeliveryFee(productTotal);
-    var grandTotal = productTotal + delivery;
+    var pt = qty * PRICE;
+    var d = getDeliveryFee(pt);
+    var gt = pt + d;
     var nowStr = new Date().toLocaleString('ko-KR');
 
-    kakaoText =
-      '🌿 화이트 아스파라거스 주문내역\n' +
-      '━━━━━━━━━━━━━━\n' +
-      '📅 주문일시: ' + nowStr + '\n' +
-      '👤 성함: ' + name + '\n' +
-      '📦 수량: ' + qty + 'KG\n' +
-      '🛒 상품금액: ' + productTotal.toLocaleString() + '원\n' +
-      '🚚 배송비: ' + (delivery === 0 ? '무료' : '5,000원') + '\n' +
-      '💰 최종결제: ' + grandTotal.toLocaleString() + '원\n' +
-      '📍 배송지: ' + address + '\n' +
-      '━━━━━━━━━━━━━━\n' +
-      '🏦 입금계좌: 농협 351-8442-6547-93\n' +
-      '예금주: 이선혜\n' +
-      '입금자명을 [' + name + ']으로 해주세요.';
+    kakaoText = '🌿 화이트 아스파라거스 주문내역\n━━━━━━━━━━━━━━\n📅 주문일시: ' + nowStr + '\n👤 성함: ' + name + '\n📦 수량: ' + qty + 'KG\n🛒 상품금액: ' + pt.toLocaleString() + '원\n🚚 배송비: ' + (d === 0 ? '무료' : '5,000원') + '\n💰 최종결제: ' + gt.toLocaleString() + '원\n📍 배송지: [' + zipcode + '] ' + fullAddress + '\n━━━━━━━━━━━━━━\n🏦 입금계좌: 농협 351-8442-6547-93\n예금주: 이선혜\n입금자명을 [' + name + ']으로 해주세요.';
 
     fetch(SCRIPT_URL, {
       method: 'POST', mode: 'no-cors',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ type: 'order', name: name, phone: phone, address: address, qty: qty, total: grandTotal.toLocaleString() + '원' })
+      body: JSON.stringify({ type: 'order', name: name, phone: phone, address: fullAddress, zipcode: zipcode, qty: qty, total: gt.toLocaleString() + '원' })
     }).then(function() {
       document.getElementById('modal-title').textContent = '주문이 접수되었습니다';
       document.getElementById('modal-body').innerHTML =
         '<strong>' + name + '</strong>님, 주문 감사드립니다!<br><br>' +
         '📦 수량: <strong>' + qty + 'KG</strong><br>' +
-        '🛒 상품금액: <strong>' + productTotal.toLocaleString() + '원</strong><br>' +
-        '🚚 배송비: <strong>' + (delivery === 0 ? '무료 🎉' : '5,000원') + '</strong><br>' +
-        '💰 최종결제: <strong>' + grandTotal.toLocaleString() + '원</strong><br>' +
-        '📍 배송지: ' + address + '<br><br>' +
+        '🛒 상품금액: <strong>' + pt.toLocaleString() + '원</strong><br>' +
+        '🚚 배송비: <strong>' + (d === 0 ? '무료 🎉' : '5,000원') + '</strong><br>' +
+        '💰 최종결제: <strong>' + gt.toLocaleString() + '원</strong><br>' +
+        '📍 배송지: [' + zipcode + '] ' + fullAddress + '<br><br>' +
         '아래 계좌로 입금해 주시면 확인 후 발송해 드립니다.' +
         '<div class="modal-account"><div class="bank">농협은행</div><div class="acct">351-8442-6547-93</div><div class="holder">예금주 이선혜 · 입금자명: ' + name + '</div></div>' +
         '<span style="color:#185fa5;font-size:12px;">수확량에 따라 발송까지 대기시간이 생길 수 있습니다. 순서대로 정성껏 보내드리겠습니다 💚</span>';
@@ -470,23 +451,15 @@
     });
   };
 
-  ['name','phone','address'].forEach(function(id) {
-    document.getElementById(id).oninput = function() {
-      if (document.getElementById(id).value.trim())
-        document.getElementById('field-' + id).classList.remove('error');
-    };
-  });
+  document.getElementById('name').oninput = function() { if (this.value.trim()) document.getElementById('field-name').classList.remove('error'); };
+  document.getElementById('phone').oninput = function() { if (this.value.trim()) document.getElementById('field-phone').classList.remove('error'); };
 
   function starsHtml(n) { return '★'.repeat(n) + '☆'.repeat(5 - n); }
 
   function loadReviews() {
-    fetch(SCRIPT_URL).then(function(res) {
-      return res.json();
-    }).then(function(reviews) {
-      renderReviews(reviews);
-    }).catch(function() {
-      var loading = document.getElementById('review-loading');
-      if (loading) loading.textContent = '후기를 불러오지 못했습니다.';
+    fetch(SCRIPT_URL).then(function(r) { return r.json(); }).then(function(reviews) { renderReviews(reviews); }).catch(function() {
+      var l = document.getElementById('review-loading');
+      if (l) l.textContent = '후기를 불러오지 못했습니다.';
     });
   }
 
@@ -495,7 +468,6 @@
     var loading = document.getElementById('review-loading');
     list.querySelectorAll('.review-card').forEach(function(el) { el.remove(); });
     if (loading) loading.remove();
-
     if (!reviews || reviews.length === 0) {
       document.getElementById('avg-score').textContent = '-';
       document.getElementById('avg-stars').textContent = '☆☆☆☆☆';
@@ -506,19 +478,14 @@
       list.appendChild(empty);
       return;
     }
-
     var avg = reviews.reduce(function(s, r) { return s + Number(r.star); }, 0) / reviews.length;
     document.getElementById('avg-score').textContent = avg.toFixed(1);
     document.getElementById('avg-stars').textContent = starsHtml(Math.round(avg));
     document.getElementById('review-count').textContent = '총 ' + reviews.length + '개의 후기';
-
     reviews.slice().reverse().forEach(function(r) {
       var card = document.createElement('div');
       card.className = 'review-card';
-      card.innerHTML =
-        '<div class="review-header"><span class="review-author">' + r.name + '</span><span class="review-date">' + r.date + '</span></div>' +
-        '<div class="review-stars">' + starsHtml(Number(r.star)) + '</div>' +
-        '<div class="review-text">' + r.text + '</div>';
+      card.innerHTML = '<div class="review-header"><span class="review-author">' + r.name + '</span><span class="review-date">' + r.date + '</span></div><div class="review-stars">' + starsHtml(Number(r.star)) + '</div><div class="review-text">' + r.text + '</div>';
       list.appendChild(card);
     });
   }
@@ -528,11 +495,8 @@
     var text = document.getElementById('review-text').value.trim();
     var starEl = document.querySelector('input[name="star"]:checked');
     if (!name || !text || !starEl) { alert('별점, 성함, 후기 내용을 모두 입력해 주세요.'); return; }
-
     var btn = document.getElementById('review-submit-btn');
-    btn.disabled = true;
-    btn.textContent = '등록 중...';
-
+    btn.disabled = true; btn.textContent = '등록 중...';
     fetch(SCRIPT_URL, {
       method: 'POST', mode: 'no-cors',
       headers: { 'Content-Type': 'application/json' },
@@ -544,9 +508,8 @@
       btn.textContent = '등록되었습니다 ✓';
       setTimeout(function() { btn.disabled = false; btn.textContent = '후기 등록'; loadReviews(); }, 1500);
     }).catch(function() {
-      alert('등록 중 오류가 발생했습니다. 다시 시도해 주세요.');
-      btn.disabled = false;
-      btn.textContent = '후기 등록';
+      alert('등록 중 오류가 발생했습니다.');
+      btn.disabled = false; btn.textContent = '후기 등록';
     });
   };
 
