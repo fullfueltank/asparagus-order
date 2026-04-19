@@ -58,7 +58,6 @@
     .field label { display: block; font-size: 13px; color: #666; font-family: 'Noto Sans KR', sans-serif; font-weight: 400; margin-bottom: 5px; }
     .field input, .field textarea { width: 100%; border: 1px solid #ddd; border-radius: 8px; padding: 10px 12px; font-size: 14px; color: #1a1a1a; background: #fff; font-family: 'Noto Sans KR', sans-serif; outline: none; transition: border-color 0.15s; }
     .field input:focus, .field textarea:focus { border-color: #b07d3a; box-shadow: 0 0 0 2px rgba(176,125,58,0.1); }
-    .field textarea { resize: vertical; min-height: 72px; line-height: 1.6; }
     .field input[readonly] { background: #f7f7f5; color: #888; cursor: default; }
 
     .address-search-btn { width: 100%; padding: 10px; background: #f0f7ea; color: #3b6d11; border: 1px solid #c0dd97; border-radius: 8px; font-size: 13px; font-family: 'Noto Sans KR', sans-serif; font-weight: 500; cursor: pointer; margin-bottom: 8px; transition: background 0.15s; }
@@ -141,7 +140,7 @@
     .kakao-btn:hover { background: #f0d800; }
     .modal-close { width: 100%; padding: 11px; background: #f5f5f3; color: #888; border: 1px solid #e5e5e0; border-radius: 8px; font-size: 14px; font-family: 'Noto Sans KR', sans-serif; cursor: pointer; }
     .error-msg { font-size: 11px; color: #e24b4a; margin-top: 4px; display: none; font-family: 'Noto Sans KR', sans-serif; }
-    .field.error input, .field.error textarea { border-color: #e24b4a; }
+    .field.error input { border-color: #e24b4a; }
     .field.error .error-msg { display: block; }
   </style>
 </head>
@@ -206,7 +205,7 @@
     </div>
     <div class="field" id="field-phone">
       <label>연락처 *</label>
-      <input type="tel" id="phone" placeholder="010-0000-0000">
+      <input type="tel" id="phone" placeholder="010-0000-0000" maxlength="13">
       <div class="error-msg">연락처를 입력해 주세요.</div>
     </div>
     <div class="field" id="field-address">
@@ -385,6 +384,18 @@
     }).open();
   }
 
+  document.getElementById('phone').oninput = function() {
+    var v = this.value.replace(/[^0-9]/g, '');
+    if (v.length <= 3) this.value = v;
+    else if (v.length <= 7) this.value = v.slice(0,3) + '-' + v.slice(3);
+    else this.value = v.slice(0,3) + '-' + v.slice(3,7) + '-' + v.slice(7,11);
+    if (this.value.trim()) document.getElementById('field-phone').classList.remove('error');
+  };
+
+  document.getElementById('name').oninput = function() {
+    if (this.value.trim()) document.getElementById('field-name').classList.remove('error');
+  };
+
   document.getElementById('kakao-btn').onclick = function() {
     if (navigator.share) {
       navigator.share({ title: '화이트 아스파라거스 주문내역', text: kakaoText });
@@ -400,8 +411,7 @@
     var phone = document.getElementById('phone').value.trim();
     var zipcode = document.getElementById('zipcode').value.trim();
     var address = document.getElementById('address').value.trim();
-    var detail = document.getElementById('address-detail').value.trim();
-    var fullAddress = detail ? address + ' ' + detail : address;
+    var addressDetail = document.getElementById('address-detail').value.trim();
     var valid = true;
 
     if (!name) { document.getElementById('field-name').classList.add('error'); valid = false; }
@@ -420,13 +430,14 @@
     var d = getDeliveryFee(pt);
     var gt = pt + d;
     var nowStr = new Date().toLocaleString('ko-KR');
+    var fullAddress = addressDetail ? address + ' ' + addressDetail : address;
 
     kakaoText = '🌿 화이트 아스파라거스 주문내역\n━━━━━━━━━━━━━━\n📅 주문일시: ' + nowStr + '\n👤 성함: ' + name + '\n📦 수량: ' + qty + 'KG\n🛒 상품금액: ' + pt.toLocaleString() + '원\n🚚 배송비: ' + (d === 0 ? '무료' : '5,000원') + '\n💰 최종결제: ' + gt.toLocaleString() + '원\n📍 배송지: [' + zipcode + '] ' + fullAddress + '\n━━━━━━━━━━━━━━\n🏦 입금계좌: 농협 351-8442-6547-93\n예금주: 이선혜\n입금자명을 [' + name + ']으로 해주세요.';
 
     fetch(SCRIPT_URL, {
       method: 'POST', mode: 'no-cors',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ type: 'order', name: name, phone: phone, address: fullAddress, zipcode: zipcode, qty: qty, total: gt.toLocaleString() + '원' })
+      body: JSON.stringify({ type: 'order', name: name, phone: phone, address: address, addressDetail: addressDetail, zipcode: zipcode, qty: qty, total: gt.toLocaleString() + '원' })
     }).then(function() {
       document.getElementById('modal-title').textContent = '주문이 접수되었습니다';
       document.getElementById('modal-body').innerHTML =
@@ -451,14 +462,6 @@
     });
   };
 
-  document.getElementById('name').oninput = function() { if (this.value.trim()) document.getElementById('field-name').classList.remove('error'); };
-document.getElementById('phone').oninput = function() {
-    var v = this.value.replace(/[^0-9]/g, '');
-    if (v.length <= 3) this.value = v;
-    else if (v.length <= 7) this.value = v.slice(0,3) + '-' + v.slice(3);
-    else this.value = v.slice(0,3) + '-' + v.slice(3,7) + '-' + v.slice(7,11);
-    if (this.value.trim()) document.getElementById('field-phone').classList.remove('error');
-  };
   function starsHtml(n) { return '★'.repeat(n) + '☆'.repeat(5 - n); }
 
   function loadReviews() {
