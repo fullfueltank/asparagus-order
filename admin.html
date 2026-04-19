@@ -9,7 +9,7 @@
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: #f5f5f3; font-family: 'Noto Sans KR', sans-serif; font-size: 14px; color: #1a1a1a; }
- 
+
     .login-wrap { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 1rem; }
     .login-box { background: #fff; border-radius: 16px; padding: 2.5rem 2rem; max-width: 360px; width: 100%; text-align: center; border: 1px solid #e5e5e0; }
     .login-icon { font-size: 36px; margin-bottom: 1rem; }
@@ -20,19 +20,19 @@
     .login-btn { width: 100%; padding: 12px; background: #3d3424; color: #f5f0e8; border: none; border-radius: 8px; font-size: 14px; font-family: 'Noto Sans KR', sans-serif; font-weight: 500; cursor: pointer; }
     .login-btn:hover { background: #5a4e38; }
     .login-error { font-size: 12px; color: #e24b4a; margin-top: 8px; display: none; }
- 
+
     .admin-wrap { display: none; }
     .topbar { background: #3d3424; color: #f5f0e8; padding: 0.9rem 1.5rem; display: flex; justify-content: space-between; align-items: center; }
     .topbar-title { font-size: 15px; font-weight: 500; }
     .topbar-logout { font-size: 12px; color: rgba(255,255,255,0.6); cursor: pointer; border: none; background: none; font-family: 'Noto Sans KR', sans-serif; }
     .topbar-logout:hover { color: #fff; }
- 
+
     .tab-bar { background: #fff; border-bottom: 1px solid #e5e5e0; display: flex; padding: 0 1rem; }
     .tab { padding: 0.9rem 1.2rem; font-size: 13px; color: #999; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; }
     .tab.active { color: #3d3424; border-bottom-color: #3d3424; font-weight: 500; }
- 
-    .content { padding: 1.5rem 1rem; max-width: 960px; margin: 0 auto; }
- 
+
+    .content { padding: 1.5rem 1rem; max-width: 1100px; margin: 0 auto; }
+
     .dash-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 1.5rem; }
     .dash-card { background: #fff; border: 1px solid #e5e5e0; border-radius: 10px; padding: 1rem 1.1rem; }
     .dash-label { font-size: 11px; color: #999; margin-bottom: 4px; }
@@ -43,7 +43,7 @@
     .dash-card.warning .dash-value { color: #a32d2d; }
     .dash-card.success { background: #f0f7ea; border-color: #c0dd97; }
     .dash-card.success .dash-value { color: #3b6d11; }
- 
+
     .toolbar { display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap; align-items: center; }
     .filter-btn { padding: 6px 14px; border: 1px solid #ddd; border-radius: 20px; font-size: 12px; font-family: 'Noto Sans KR', sans-serif; cursor: pointer; background: #fff; color: #666; }
     .filter-btn.active { background: #3d3424; color: #fff; border-color: #3d3424; }
@@ -51,28 +51,28 @@
     .export-btn:hover { background: #2d5509; }
     .refresh-btn { padding: 6px 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 12px; font-family: 'Noto Sans KR', sans-serif; cursor: pointer; background: #fff; color: #666; }
     .refresh-btn:hover { background: #f5f5f3; }
- 
+
     .order-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; border: 1px solid #e5e5e0; }
     .order-table th { background: #f7f7f5; font-size: 11px; color: #999; font-weight: 400; padding: 10px 12px; text-align: left; border-bottom: 1px solid #e5e5e0; white-space: nowrap; }
     .order-table td { padding: 10px 12px; border-bottom: 1px solid #f0f0ee; font-size: 13px; vertical-align: middle; }
     .order-table tr:last-child td { border-bottom: none; }
     .order-table tr:hover td { background: #fdfcf9; }
- 
+
     .status-select { border: 1px solid #ddd; border-radius: 6px; padding: 4px 8px; font-size: 12px; font-family: 'Noto Sans KR', sans-serif; outline: none; cursor: pointer; }
     .status-select.confirmed { background: #f0f7ea; border-color: #c0dd97; color: #3b6d11; }
     .status-select.unconfirmed { background: #fff5f5; border-color: #f7c1c1; color: #a32d2d; }
     .status-select.sent { background: #f0f7ea; border-color: #c0dd97; color: #3b6d11; }
     .status-select.pending { background: #faf7f0; border-color: #e8dfc8; color: #b07d3a; }
- 
+
     .loading-msg { text-align: center; padding: 3rem; color: #bbb; font-size: 13px; }
     .empty-msg { text-align: center; padding: 3rem; color: #bbb; font-size: 13px; display: none; }
- 
+
     .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%); background: #3d3424; color: #f5f0e8; padding: 10px 20px; border-radius: 20px; font-size: 13px; font-family: 'Noto Sans KR', sans-serif; display: none; z-index: 999; }
     .toast.show { display: block; }
   </style>
 </head>
 <body>
- 
+
 <div class="login-wrap" id="login-wrap">
   <div class="login-box">
     <div class="login-icon">🌿</div>
@@ -83,18 +83,18 @@
     <div class="login-error" id="login-error">비밀번호가 올바르지 않습니다.</div>
   </div>
 </div>
- 
+
 <div class="admin-wrap" id="admin-wrap">
   <div class="topbar">
     <div class="topbar-title">🌿 아스파라거스 판매 관리</div>
     <button class="topbar-logout" onclick="doLogout()">로그아웃</button>
   </div>
- 
+
   <div class="tab-bar">
     <div class="tab active" id="tab-dashboard" onclick="showTab('dashboard')">대시보드</div>
     <div class="tab" id="tab-orders" onclick="showTab('orders')">주문 목록</div>
   </div>
- 
+
   <div class="content" id="content-dashboard">
     <div class="dash-grid">
       <div class="dash-card highlight"><div class="dash-label">총 주문</div><div class="dash-value" id="d-total">-</div></div>
@@ -106,7 +106,7 @@
     </div>
     <div id="dash-loading" class="loading-msg">데이터 불러오는 중...</div>
   </div>
- 
+
   <div class="content" id="content-orders" style="display:none;">
     <div class="toolbar">
       <button class="filter-btn active" onclick="setFilter('all', this)">전체</button>
@@ -125,6 +125,7 @@
           <th>성함</th>
           <th>연락처</th>
           <th>주소</th>
+          <th>상세주소</th>
           <th>수량</th>
           <th>금액</th>
           <th>입금여부</th>
@@ -135,22 +136,34 @@
     </table>
   </div>
 </div>
- 
+
 <div class="toast" id="toast"></div>
- 
+
 <script>
   var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz8R_2cMje2S46wgRBa2Ef7fcThRY-Db6rwk4muKul9MzzEFTnEMNjlB104OpYi3m1xZw/exec';
   var PASSWORD = '@@a13141652';
   var allOrders = [];
   var currentFilter = 'all';
- 
+
+  function getPostalWeight(qty) {
+    qty = Number(qty);
+    if (qty <= 3) return 3;
+    if (qty <= 5) return 5;
+    if (qty <= 7) return 7;
+    if (qty <= 10) return 10;
+    if (qty <= 15) return 15;
+    if (qty <= 20) return 20;
+    if (qty <= 25) return 25;
+    return 30;
+  }
+
   function showToast(msg) {
     var t = document.getElementById('toast');
     t.textContent = msg;
     t.className = 'toast show';
     setTimeout(function() { t.className = 'toast'; }, 2000);
   }
- 
+
   function doLogin() {
     var pw = document.getElementById('pw-input').value;
     if (pw === PASSWORD) {
@@ -162,20 +175,20 @@
       document.getElementById('login-error').style.display = 'block';
     }
   }
- 
+
   function doLogout() {
     document.getElementById('login-wrap').style.display = 'flex';
     document.getElementById('admin-wrap').style.display = 'none';
     document.getElementById('pw-input').value = '';
   }
- 
+
   function showTab(tab) {
     document.getElementById('content-dashboard').style.display = tab === 'dashboard' ? 'block' : 'none';
     document.getElementById('content-orders').style.display = tab === 'orders' ? 'block' : 'none';
     document.getElementById('tab-dashboard').className = 'tab' + (tab === 'dashboard' ? ' active' : '');
     document.getElementById('tab-orders').className = 'tab' + (tab === 'orders' ? ' active' : '');
   }
- 
+
   function loadDashboard() {
     fetch(SCRIPT_URL + '?action=orders')
       .then(function(r) { return r.json(); })
@@ -187,7 +200,7 @@
         var unsent = orders.filter(function(o) { return o.delivery === '발송대기'; }).length;
         var sent = orders.filter(function(o) { return o.delivery === '발송완료'; }).length;
         var avgQty = total > 0 ? (orders.reduce(function(s, o) { return s + Number(o.qty); }, 0) / total).toFixed(1) : 0;
- 
+
         document.getElementById('d-total').textContent = total + '건';
         document.getElementById('d-revenue').textContent = revenue.toLocaleString() + '원';
         document.getElementById('d-unpaid').textContent = unpaid + '건';
@@ -200,12 +213,12 @@
         document.getElementById('dash-loading').textContent = '데이터를 불러오지 못했습니다.';
       });
   }
- 
+
   function loadOrders() {
     document.getElementById('orders-loading').style.display = 'block';
     document.getElementById('order-table').style.display = 'none';
     document.getElementById('orders-empty').style.display = 'none';
- 
+
     fetch(SCRIPT_URL + '?action=orders')
       .then(function(r) { return r.json(); })
       .then(function(data) {
@@ -217,14 +230,14 @@
         document.getElementById('orders-loading').textContent = '주문을 불러오지 못했습니다.';
       });
   }
- 
+
   function setFilter(filter, btn) {
     currentFilter = filter;
     document.querySelectorAll('.filter-btn').forEach(function(b) { b.className = 'filter-btn'; });
     btn.className = 'filter-btn active';
     renderOrders();
   }
- 
+
   function renderOrders() {
     var filtered = allOrders.filter(function(o) {
       if (currentFilter === 'unpaid') return o.payment === '미확인';
@@ -232,26 +245,27 @@
       if (currentFilter === 'sent') return o.delivery === '발송완료';
       return true;
     });
- 
+
     var tbody = document.getElementById('order-tbody');
     tbody.innerHTML = '';
- 
+
     if (filtered.length === 0) {
       document.getElementById('orders-empty').style.display = 'block';
       document.getElementById('order-table').style.display = 'none';
       return;
     }
- 
+
     document.getElementById('orders-empty').style.display = 'none';
     document.getElementById('order-table').style.display = 'table';
- 
+
     filtered.forEach(function(o) {
       var tr = document.createElement('tr');
       tr.innerHTML =
-        '<td style="white-space:nowrap;">' + o.date + '</td>' +
+        '<td style="white-space:nowrap;font-size:12px;">' + o.date + '</td>' +
         '<td><strong>' + o.name + '</strong></td>' +
-        '<td>' + o.phone + '</td>' +
-        '<td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="' + o.address + '">' + o.address + '</td>' +
+        '<td style="white-space:nowrap;">' + o.phone + '</td>' +
+        '<td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="' + o.address + '">' + o.address + '</td>' +
+        '<td style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="' + (o.addressDetail || '') + '">' + (o.addressDetail || '-') + '</td>' +
         '<td>' + o.qty + 'KG</td>' +
         '<td style="white-space:nowrap;">' + o.total + '</td>' +
         '<td>' + makeSelect(o.row, 'payment', o.payment, ['미확인', '입금확인']) + '</td>' +
@@ -259,14 +273,14 @@
       tbody.appendChild(tr);
     });
   }
- 
+
   function makeSelect(row, field, current, options) {
     var cls = '';
     if (current === '입금확인') cls = 'confirmed';
     else if (current === '미확인') cls = 'unconfirmed';
     else if (current === '발송완료') cls = 'sent';
     else if (current === '발송대기') cls = 'pending';
- 
+
     var html = '<select class="status-select ' + cls + '" onchange="updateStatus(' + row + ', \'' + field + '\', this)">';
     options.forEach(function(opt) {
       html += '<option value="' + opt + '"' + (opt === current ? ' selected' : '') + '>' + opt + '</option>';
@@ -274,11 +288,11 @@
     html += '</select>';
     return html;
   }
- 
+
   function updateStatus(row, field, selectEl) {
     var value = selectEl.value;
     selectEl.disabled = true;
- 
+
     fetch(SCRIPT_URL, {
       method: 'POST',
       mode: 'no-cors',
@@ -292,10 +306,10 @@
       else if (value === '발송완료') cls = 'sent';
       else if (value === '발송대기') cls = 'pending';
       selectEl.className = 'status-select ' + cls;
- 
+
       var order = allOrders.find(function(o) { return o.row === row; });
       if (order) order[field === 'payment' ? 'payment' : 'delivery'] = value;
- 
+
       showToast('✓ 상태가 변경되었습니다');
       loadDashboard();
     }).catch(function() {
@@ -303,27 +317,42 @@
       alert('상태 변경에 실패했습니다. 다시 시도해 주세요.');
     });
   }
- 
+
   function exportPostal() {
     var targets = allOrders.filter(function(o) {
       return o.payment === '입금확인' && o.delivery === '발송대기';
     });
- 
+
     if (targets.length === 0) {
       alert('입금확인 + 발송대기 상태인 주문이 없습니다.');
       return;
     }
- 
+
     var rows = [['받는 분','우편번호','주소(시도+시군구+도로명+건물번호)','상세주소(동, 호수, 洞명칭, 아파트, 건물명 등)','일반전화(02-1234-5678)','휴대전화(010-1234-5678)','중량(kg)','부피(cm)=가로+세로+높이','내용품코드','내용물','배달방식','배송시요청사항','분할접수 여부(Y/N)','분할접수 첫번째 중량(kg)','분할접수 첫번째 부피(cm)','분할접수 두번째 중량(kg)','분할접수 두번째 부피(cm)']];
- 
+
     targets.forEach(function(o) {
-      rows.push([o.name, o.zipcode || '', o.address, '', '', o.phone, o.qty, '', '농/수/축산물(일반)', '', '', '', 'N', '', '', '', '']);
+      rows.push([
+        o.name,
+        o.zipcode || '',
+        o.address || '',
+        o.addressDetail || '',
+        '',
+        o.phone,
+        getPostalWeight(o.qty),
+        '',
+        '농/수/축산물(일반)',
+        '',
+        '',
+        '',
+        'N',
+        '', '', '', ''
+      ]);
     });
- 
+
     var csv = rows.map(function(r) {
       return r.map(function(c) { return '"' + String(c).replace(/"/g, '""') + '"'; }).join(',');
     }).join('\n');
- 
+
     var blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
     var url = URL.createObjectURL(blob);
     var a = document.createElement('a');
@@ -331,10 +360,9 @@
     a.download = '우체국발송_' + new Date().toLocaleDateString('ko-KR').replace(/\. /g, '-').replace('.', '') + '.csv';
     a.click();
     URL.revokeObjectURL(url);
- 
+
     showToast(targets.length + '건 다운로드 완료!');
   }
 </script>
 </body>
 </html>
- 
