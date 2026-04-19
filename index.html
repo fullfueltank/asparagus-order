@@ -20,17 +20,31 @@
     .apology-card p { font-size: 14px; line-height: 1.9; color: #5a4e38; font-family: 'Noto Sans KR', sans-serif; font-weight: 300; }
     .apology-card strong { font-weight: 500; color: #3d3424; }
 
-    .premium-card { background: #fff; border: 1px solid #e8dfc8; border-radius: 12px; padding: 1.1rem 1.4rem; margin-bottom: 2rem; }
+    .premium-card { background: #fff; border: 1px solid #e8dfc8; border-radius: 12px; padding: 1.1rem 1.4rem; margin-bottom: 1.25rem; }
     .premium-item { display: flex; gap: 10px; align-items: flex-start; font-size: 13px; color: #4a4a4a; font-family: 'Noto Sans KR', sans-serif; font-weight: 300; line-height: 1.7; margin-bottom: 8px; }
     .premium-item:last-child { margin-bottom: 0; }
     .premium-check { color: #3b6d11; font-weight: 500; flex-shrink: 0; margin-top: 1px; }
+
+    /* 카운트다운 배너 */
+    .countdown-banner { background: #f0f7ea; border: 1px solid #c0dd97; border-radius: 12px; padding: 1rem 1.4rem; margin-bottom: 2rem; font-family: 'Noto Sans KR', sans-serif; }
+    .countdown-banner.expired { background: #f5f5f5; border: 1px solid #ddd; }
+    .countdown-title { font-size: 13px; font-weight: 500; color: #3b6d11; margin-bottom: 0.6rem; }
+    .countdown-banner.expired .countdown-title { color: #999; }
+    .countdown-timer { display: flex; gap: 8px; align-items: center; margin-bottom: 6px; }
+    .countdown-block { text-align: center; background: #3b6d11; border-radius: 6px; padding: 6px 10px; min-width: 48px; }
+    .countdown-banner.expired .countdown-block { background: #ccc; }
+    .countdown-num { font-size: 22px; font-weight: 700; color: #fff; line-height: 1; font-family: 'Noto Sans KR', sans-serif; }
+    .countdown-label { font-size: 10px; color: rgba(255,255,255,0.8); margin-top: 2px; font-family: 'Noto Sans KR', sans-serif; }
+    .countdown-sep { font-size: 20px; font-weight: 700; color: #3b6d11; margin-bottom: 4px; }
+    .countdown-banner.expired .countdown-sep { color: #ccc; }
+    .countdown-desc { font-size: 12px; color: #5a7a3a; line-height: 1.6; }
+    .countdown-banner.expired .countdown-desc { color: #aaa; }
 
     .pricing-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 2rem; }
     .price-card { background: #fff; border: 1px solid #e8e0cc; border-radius: 8px; padding: 1rem 1.1rem; }
     .price-label { font-size: 11px; color: #999; font-family: 'Noto Sans KR', sans-serif; font-weight: 300; letter-spacing: 0.06em; margin-bottom: 4px; }
     .price-value { font-size: 20px; font-weight: 500; color: #1a1a1a; }
     .price-note { font-size: 11px; color: #b07d3a; margin-top: 3px; font-family: 'Noto Sans KR', sans-serif; }
-    .free-badge { display: inline-block; background: #f0f7ea; color: #3b6d11; font-size: 10px; padding: 2px 8px; border-radius: 10px; font-family: 'Noto Sans KR', sans-serif; border: 1px solid #c0dd97; vertical-align: middle; margin-left: 4px; }
 
     .section-title { font-size: 13px; letter-spacing: 0.08em; color: #999; font-family: 'Noto Sans KR', sans-serif; font-weight: 400; margin-bottom: 1rem; padding-bottom: 6px; border-bottom: 1px solid #eee; }
 
@@ -48,10 +62,15 @@
     .qty-unit { font-size: 13px; color: #999; font-family: 'Noto Sans KR', sans-serif; }
     .qty-price { margin-left: auto; font-size: 14px; color: #b07d3a; font-weight: 500; font-family: 'Noto Sans KR', sans-serif; }
 
-    .total-card { background: #faf7f0; border: 1px solid #e8dfc8; border-radius: 12px; padding: 1.1rem 1.5rem; margin-bottom: 1.25rem; display: flex; justify-content: space-between; align-items: center; }
+    .total-card { border-radius: 12px; padding: 1.1rem 1.5rem; margin-bottom: 1.25rem; }
+    .total-card.free { background: #f0f7ea; border: 1px solid #c0dd97; }
+    .total-card.paid { background: #faf7f0; border: 1px solid #e8dfc8; }
+    .total-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
     .total-label { font-size: 14px; color: #5a4e38; font-family: 'Noto Sans KR', sans-serif; }
     .total-amount { font-size: 22px; font-weight: 700; color: #3d3424; }
-    .total-free { font-size: 11px; color: #3b6d11; font-family: 'Noto Sans KR', sans-serif; }
+    .total-breakdown { font-size: 11px; font-family: 'Noto Sans KR', sans-serif; }
+    .total-breakdown.free { color: #3b6d11; }
+    .total-breakdown.paid { color: #b07d3a; }
 
     .submit-btn { width: 100%; padding: 14px; background: #3d3424; color: #f5f0e8; border: none; border-radius: 8px; font-size: 15px; font-family: 'Noto Sans KR', sans-serif; font-weight: 500; cursor: pointer; transition: background 0.15s; letter-spacing: 0.04em; }
     .submit-btn:hover { background: #5a4e38; }
@@ -69,30 +88,25 @@
     .notice-card p { font-size: 12px; color: #185fa5; font-family: 'Noto Sans KR', sans-serif; line-height: 1.8; }
     .notice-card strong { font-weight: 500; }
 
-    /* 리뷰 */
     .review-section { margin-top: 3rem; }
     .review-summary { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
     .review-big-score { font-size: 48px; font-weight: 700; color: #3d3424; line-height: 1; }
     .review-stars-big { font-size: 22px; color: #f0c040; letter-spacing: 2px; }
     .review-count { font-size: 12px; color: #999; font-family: 'Noto Sans KR', sans-serif; margin-top: 2px; }
-
     .review-form-card { background: #faf7f0; border: 1px solid #e8dfc8; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; }
     .review-form-title { font-size: 13px; font-weight: 500; color: #3d3424; font-family: 'Noto Sans KR', sans-serif; margin-bottom: 0.75rem; }
     .star-input { display: flex; flex-direction: row-reverse; justify-content: flex-end; gap: 4px; margin-bottom: 0.75rem; }
     .star-input input { display: none; }
     .star-input label { font-size: 28px; color: #ddd; cursor: pointer; transition: color 0.1s; }
-    .star-input label:hover,
-    .star-input label:hover ~ label,
-    .star-input input:checked ~ label { color: #f0c040; }
+    .star-input label:hover, .star-input label:hover ~ label, .star-input input:checked ~ label { color: #f0c040; }
     .review-name-row { display: flex; gap: 8px; margin-bottom: 8px; }
     .review-name-row input { flex: 1; border: 1px solid #ddd; border-radius: 8px; padding: 9px 12px; font-size: 13px; font-family: 'Noto Sans KR', sans-serif; outline: none; background: #fff; }
     .review-name-row input:focus { border-color: #b07d3a; }
     .review-textarea { width: 100%; border: 1px solid #ddd; border-radius: 8px; padding: 9px 12px; font-size: 13px; font-family: 'Noto Sans KR', sans-serif; outline: none; resize: vertical; min-height: 72px; line-height: 1.6; background: #fff; margin-bottom: 8px; }
     .review-textarea:focus { border-color: #b07d3a; }
-    .review-submit-btn { width: 100%; padding: 10px; background: #3d3424; color: #f5f0e8; border: none; border-radius: 8px; font-size: 13px; font-family: 'Noto Sans KR', sans-serif; font-weight: 500; cursor: pointer; transition: background 0.15s; }
+    .review-submit-btn { width: 100%; padding: 10px; background: #3d3424; color: #f5f0e8; border: none; border-radius: 8px; font-size: 13px; font-family: 'Noto Sans KR', sans-serif; font-weight: 500; cursor: pointer; }
     .review-submit-btn:hover { background: #5a4e38; }
     .review-submit-btn:disabled { background: #999; cursor: not-allowed; }
-
     .review-list { display: flex; flex-direction: column; gap: 12px; }
     .review-card { background: #fff; border: 1px solid #e8e0cc; border-radius: 10px; padding: 1rem 1.25rem; }
     .review-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
@@ -103,7 +117,6 @@
     .review-empty { text-align: center; padding: 2rem; font-size: 13px; color: #bbb; font-family: 'Noto Sans KR', sans-serif; }
     .review-loading { text-align: center; padding: 1.5rem; font-size: 13px; color: #bbb; font-family: 'Noto Sans KR', sans-serif; }
 
-    /* 모달 */
     .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.45); display: none; align-items: center; justify-content: center; z-index: 100; padding: 1rem; }
     .modal-overlay.active { display: flex; }
     .modal { background: #fff; border-radius: 16px; padding: 2rem 1.75rem; max-width: 380px; width: 100%; text-align: center; max-height: 90vh; overflow-y: auto; }
@@ -118,7 +131,6 @@
     .kakao-btn { width: 100%; padding: 12px; background: #FEE500; color: #3C1E1E; border: none; border-radius: 8px; font-size: 14px; font-family: 'Noto Sans KR', sans-serif; font-weight: 500; cursor: pointer; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; gap: 6px; }
     .kakao-btn:hover { background: #f0d800; }
     .modal-close { width: 100%; padding: 11px; background: #f5f5f3; color: #888; border: 1px solid #e5e5e0; border-radius: 8px; font-size: 14px; font-family: 'Noto Sans KR', sans-serif; cursor: pointer; }
-
     .error-msg { font-size: 11px; color: #e24b4a; margin-top: 4px; display: none; font-family: 'Noto Sans KR', sans-serif; }
     .field.error input, .field.error textarea { border-color: #e24b4a; }
     .field.error .error-msg { display: block; }
@@ -149,16 +161,31 @@
     </div>
   </div>
 
+  <!-- 카운트다운 배너 -->
+  <div class="countdown-banner" id="countdown-banner">
+    <div class="countdown-title" id="countdown-title">🎉 무료배송 이벤트 마감까지</div>
+    <div class="countdown-timer" id="countdown-timer">
+      <div class="countdown-block"><div class="countdown-num" id="cd-days">00</div><div class="countdown-label">일</div></div>
+      <div class="countdown-sep">:</div>
+      <div class="countdown-block"><div class="countdown-num" id="cd-hours">00</div><div class="countdown-label">시간</div></div>
+      <div class="countdown-sep">:</div>
+      <div class="countdown-block"><div class="countdown-num" id="cd-mins">00</div><div class="countdown-label">분</div></div>
+      <div class="countdown-sep">:</div>
+      <div class="countdown-block"><div class="countdown-num" id="cd-secs">00</div><div class="countdown-label">초</div></div>
+    </div>
+    <div class="countdown-desc" id="countdown-desc">4월 27일 자정까지 수량 상관없이 배송비 무료예요. 이후에는 5만원 이상 주문 시 무료입니다.</div>
+  </div>
+
   <div class="pricing-row">
     <div class="price-card">
       <div class="price-label">1KG 가격</div>
       <div class="price-value">40,000원</div>
-      <div class="price-note">산지 직거래가</div>
+      <div class="price-note">산지 직거래가 · 1KG 단위</div>
     </div>
     <div class="price-card">
       <div class="price-label">배송비</div>
-      <div class="price-value">무료 <span class="free-badge">직접 주문</span></div>
-      <div class="price-note">일반 5,000원 → 직거래 0원</div>
+      <div class="price-value" id="delivery-price-display">5,000원</div>
+      <div class="price-note" id="delivery-price-note"></div>
     </div>
   </div>
 
@@ -182,7 +209,7 @@
   </div>
 
   <div class="form-section">
-    <div class="section-title">주문 수량</div>
+    <div class="section-title">주문 수량 (1KG 단위)</div>
     <div style="display: flex; align-items: center;">
       <div class="qty-row" style="flex: 1;">
         <button class="qty-btn" id="btn-minus">−</button>
@@ -194,12 +221,12 @@
     </div>
   </div>
 
-  <div class="total-card">
-    <div>
+  <div class="total-card free" id="total-card">
+    <div class="total-top">
       <div class="total-label">최종 결제 금액</div>
-      <div class="total-free">배송비 무료 적용됨</div>
+      <div class="total-amount" id="total">40,000원</div>
     </div>
-    <div class="total-amount" id="total">40,000원</div>
+    <div class="total-breakdown free" id="total-breakdown"></div>
   </div>
 
   <button class="submit-btn" id="submit-btn">주문하기</button>
@@ -228,10 +255,8 @@
     </div>
   </div>
 
-  <!-- 리뷰 섹션 -->
   <div class="review-section">
     <div class="section-title">구매 후기</div>
-
     <div class="review-summary">
       <div class="review-big-score" id="avg-score">-</div>
       <div>
@@ -239,10 +264,9 @@
         <div class="review-count" id="review-count">후기를 불러오는 중...</div>
       </div>
     </div>
-
     <div class="review-form-card">
       <div class="review-form-title">후기를 남겨주세요 🌿</div>
-      <div class="star-input" id="star-input">
+      <div class="star-input">
         <input type="radio" name="star" id="s5" value="5"><label for="s5">★</label>
         <input type="radio" name="star" id="s4" value="4"><label for="s4">★</label>
         <input type="radio" name="star" id="s3" value="3"><label for="s3">★</label>
@@ -255,14 +279,12 @@
       <textarea class="review-textarea" id="review-text" placeholder="아스파라거스는 어떠셨나요? 솔직한 후기가 큰 도움이 됩니다 😊"></textarea>
       <button class="review-submit-btn" id="review-submit-btn">후기 등록</button>
     </div>
-
     <div class="review-list" id="review-list">
       <div class="review-loading" id="review-loading">후기를 불러오는 중...</div>
     </div>
   </div>
 </div>
 
-<!-- 주문 모달 -->
 <div class="modal-overlay" id="modal">
   <div class="modal">
     <div class="modal-icon">🌿</div>
@@ -281,16 +303,85 @@
 
 <script>
   const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz8R_2cMje2S46wgRBa2Ef7fcThRY-Db6rwk4muKul9MzzEFTnEMNjlB104OpYi3m1xZw/exec';
-  let qty = 1;
   const PRICE = 40000;
+  const DELIVERY_FEE = 5000;
+  const FREE_UNTIL = new Date('2025-04-27T23:59:59');
+  const FREE_MIN_AFTER = 50000;
+  let qty = 1;
   let kakaoText = '';
 
-  function updatePrice() {
-    const total = qty * PRICE;
-    document.getElementById('qty').textContent = qty;
-    document.getElementById('qty-price').textContent = total.toLocaleString() + '원';
-    document.getElementById('total').textContent = total.toLocaleString() + '원';
+  // 카운트다운
+  function updateCountdown() {
+    const now = new Date();
+    const diff = FREE_UNTIL - now;
+    const banner = document.getElementById('countdown-banner');
+
+    if (diff <= 0) {
+      banner.className = 'countdown-banner expired';
+      document.getElementById('countdown-title').textContent = '무료배송 이벤트가 종료되었습니다';
+      document.getElementById('countdown-desc').textContent = '5만원(2KG) 이상 주문 시 배송비 무료, 미만 시 5,000원이 추가됩니다.';
+      document.getElementById('cd-days').textContent = '00';
+      document.getElementById('cd-hours').textContent = '00';
+      document.getElementById('cd-mins').textContent = '00';
+      document.getElementById('cd-secs').textContent = '00';
+      document.getElementById('delivery-price-display').textContent = '5,000원';
+      document.getElementById('delivery-price-note').textContent = '5만원 이상 무료';
+      updatePrice();
+      return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+    document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
+    document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+    document.getElementById('cd-mins').textContent = String(mins).padStart(2, '0');
+    document.getElementById('cd-secs').textContent = String(secs).padStart(2, '0');
+
+    document.getElementById('delivery-price-display').textContent = '무료';
+    document.getElementById('delivery-price-note').textContent = '4/27까지 이벤트';
   }
+
+  function isEventActive() {
+    return new Date() <= FREE_UNTIL;
+  }
+
+  function getDeliveryFee(productTotal) {
+    if (isEventActive()) return 0;
+    return productTotal >= FREE_MIN_AFTER ? 0 : DELIVERY_FEE;
+  }
+
+  function updatePrice() {
+    const productTotal = qty * PRICE;
+    const delivery = getDeliveryFee(productTotal);
+    const grandTotal = productTotal + delivery;
+    const card = document.getElementById('total-card');
+    const breakdown = document.getElementById('total-breakdown');
+
+    document.getElementById('qty').textContent = qty;
+    document.getElementById('qty-price').textContent = productTotal.toLocaleString() + '원';
+    document.getElementById('total').textContent = grandTotal.toLocaleString() + '원';
+
+    if (delivery === 0) {
+      card.className = 'total-card free';
+      breakdown.className = 'total-breakdown free';
+      breakdown.textContent = isEventActive()
+        ? '상품 ' + productTotal.toLocaleString() + '원 + 배송비 무료 (이벤트) 🎉'
+        : '상품 ' + productTotal.toLocaleString() + '원 + 배송비 무료 🎉';
+    } else {
+      card.className = 'total-card paid';
+      breakdown.className = 'total-breakdown paid';
+      const remaining = FREE_MIN_AFTER - productTotal;
+      breakdown.textContent = '상품 ' + productTotal.toLocaleString() + '원 + 배송비 5,000원 (무료까지 ' + remaining.toLocaleString() + '원 남음)';
+    }
+  }
+
+  updateCountdown();
+  updatePrice();
+  setInterval(() => { updateCountdown(); updatePrice(); }, 1000);
+
   document.getElementById('btn-minus').onclick = () => { if (qty > 1) { qty--; updatePrice(); } };
   document.getElementById('btn-plus').onclick = () => { if (qty < 30) { qty++; updatePrice(); } };
 
@@ -322,16 +413,20 @@
     btn.disabled = true;
     btn.textContent = '접수 중...';
 
-    const total = qty * PRICE;
-    const now = new Date().toLocaleString('ko-KR');
+    const productTotal = qty * PRICE;
+    const delivery = getDeliveryFee(productTotal);
+    const grandTotal = productTotal + delivery;
+    const nowStr = new Date().toLocaleString('ko-KR');
 
     kakaoText =
       `🌿 화이트 아스파라거스 주문내역\n` +
       `━━━━━━━━━━━━━━\n` +
-      `📅 주문일시: ${now}\n` +
+      `📅 주문일시: ${nowStr}\n` +
       `👤 성함: ${name}\n` +
       `📦 수량: ${qty}KG\n` +
-      `💰 결제금액: ${total.toLocaleString()}원 (배송비 무료)\n` +
+      `🛒 상품금액: ${productTotal.toLocaleString()}원\n` +
+      `🚚 배송비: ${delivery === 0 ? '무료' : '5,000원'}\n` +
+      `💰 최종결제: ${grandTotal.toLocaleString()}원\n` +
       `📍 배송지: ${address}\n` +
       `━━━━━━━━━━━━━━\n` +
       `🏦 입금계좌: 농협 351-8442-6547-93\n` +
@@ -342,14 +437,16 @@
       await fetch(SCRIPT_URL, {
         method: 'POST', mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ type: 'order', name, phone, address, qty, total: total.toLocaleString() + '원' })
+        body: JSON.stringify({ type: 'order', name, phone, address, qty, total: grandTotal.toLocaleString() + '원' })
       });
 
       document.getElementById('modal-title').textContent = '주문이 접수되었습니다';
       document.getElementById('modal-body').innerHTML =
         `<strong>${name}</strong>님, 주문 감사드립니다!<br><br>` +
         `📦 수량: <strong>${qty}KG</strong><br>` +
-        `💰 금액: <strong>${total.toLocaleString()}원</strong> (배송비 무료)<br>` +
+        `🛒 상품금액: <strong>${productTotal.toLocaleString()}원</strong><br>` +
+        `🚚 배송비: <strong>${delivery === 0 ? '무료 🎉' : '5,000원'}</strong><br>` +
+        `💰 최종결제: <strong>${grandTotal.toLocaleString()}원</strong><br>` +
         `📍 배송지: ${address}<br><br>` +
         `아래 계좌로 입금해 주시면 확인 후 발송해 드립니다.` +
         `<div class="modal-account"><div class="bank">농협은행</div><div class="acct">351-8442-6547-93</div><div class="holder">예금주 이선혜 · 입금자명: ${name}</div></div>` +
@@ -371,10 +468,7 @@
     };
   });
 
-  // ── 리뷰 시스템 (구글 시트 연동) ──
-  function starsHtml(n) {
-    return '★'.repeat(n) + '☆'.repeat(5 - n);
-  }
+  function starsHtml(n) { return '★'.repeat(n) + '☆'.repeat(5 - n); }
 
   async function loadReviews() {
     try {
@@ -389,17 +483,13 @@
   function renderReviews(reviews) {
     const list = document.getElementById('review-list');
     const loading = document.getElementById('review-loading');
-    const avgEl = document.getElementById('avg-score');
-    const avgStars = document.getElementById('avg-stars');
-    const countEl = document.getElementById('review-count');
-
     list.querySelectorAll('.review-card').forEach(el => el.remove());
     if (loading) loading.remove();
 
     if (!reviews || reviews.length === 0) {
-      avgEl.textContent = '-';
-      avgStars.textContent = '☆☆☆☆☆';
-      countEl.textContent = '아직 후기가 없어요';
+      document.getElementById('avg-score').textContent = '-';
+      document.getElementById('avg-stars').textContent = '☆☆☆☆☆';
+      document.getElementById('review-count').textContent = '아직 후기가 없어요';
       const empty = document.createElement('div');
       empty.className = 'review-empty';
       empty.textContent = '아직 등록된 후기가 없어요. 첫 번째 후기를 남겨주세요!';
@@ -408,18 +498,15 @@
     }
 
     const avg = reviews.reduce((s, r) => s + Number(r.star), 0) / reviews.length;
-    avgEl.textContent = avg.toFixed(1);
-    avgStars.textContent = starsHtml(Math.round(avg));
-    countEl.textContent = `총 ${reviews.length}개의 후기`;
+    document.getElementById('avg-score').textContent = avg.toFixed(1);
+    document.getElementById('avg-stars').textContent = starsHtml(Math.round(avg));
+    document.getElementById('review-count').textContent = `총 ${reviews.length}개의 후기`;
 
     reviews.slice().reverse().forEach(r => {
       const card = document.createElement('div');
       card.className = 'review-card';
       card.innerHTML =
-        `<div class="review-header">
-          <span class="review-author">${r.name}</span>
-          <span class="review-date">${r.date}</span>
-        </div>
+        `<div class="review-header"><span class="review-author">${r.name}</span><span class="review-date">${r.date}</span></div>
         <div class="review-stars">${starsHtml(Number(r.star))}</div>
         <div class="review-text">${r.text}</div>`;
       list.appendChild(card);
@@ -430,11 +517,7 @@
     const name = document.getElementById('review-name').value.trim();
     const text = document.getElementById('review-text').value.trim();
     const starEl = document.querySelector('input[name="star"]:checked');
-
-    if (!name || !text || !starEl) {
-      alert('별점, 성함, 후기 내용을 모두 입력해 주세요.');
-      return;
-    }
+    if (!name || !text || !starEl) { alert('별점, 성함, 후기 내용을 모두 입력해 주세요.'); return; }
 
     const btn = document.getElementById('review-submit-btn');
     btn.disabled = true;
@@ -446,18 +529,11 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ type: 'review', name, text, star: parseInt(starEl.value) })
       });
-
       document.getElementById('review-name').value = '';
       document.getElementById('review-text').value = '';
       document.querySelectorAll('input[name="star"]').forEach(el => el.checked = false);
-
       btn.textContent = '등록되었습니다 ✓';
-      setTimeout(() => {
-        btn.disabled = false;
-        btn.textContent = '후기 등록';
-        loadReviews();
-      }, 1500);
-
+      setTimeout(() => { btn.disabled = false; btn.textContent = '후기 등록'; loadReviews(); }, 1500);
     } catch(err) {
       alert('등록 중 오류가 발생했습니다. 다시 시도해 주세요.');
       btn.disabled = false;
