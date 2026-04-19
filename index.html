@@ -25,19 +25,23 @@
     .premium-item:last-child { margin-bottom: 0; }
     .premium-check { color: #3b6d11; font-weight: 500; flex-shrink: 0; margin-top: 1px; }
 
-    /* 카운트다운 배너 */
-    .countdown-banner { background: #f0f7ea; border: 1px solid #c0dd97; border-radius: 12px; padding: 1rem 1.4rem; margin-bottom: 2rem; font-family: 'Noto Sans KR', sans-serif; }
+    .countdown-banner { border-radius: 12px; padding: 1rem 1.4rem; margin-bottom: 2rem; font-family: 'Noto Sans KR', sans-serif; }
+    .countdown-banner.active { background: #f0f7ea; border: 1px solid #c0dd97; }
     .countdown-banner.expired { background: #f5f5f5; border: 1px solid #ddd; }
-    .countdown-title { font-size: 13px; font-weight: 500; color: #3b6d11; margin-bottom: 0.6rem; }
+    .countdown-title { font-size: 13px; font-weight: 500; margin-bottom: 0.6rem; }
+    .countdown-banner.active .countdown-title { color: #3b6d11; }
     .countdown-banner.expired .countdown-title { color: #999; }
-    .countdown-timer { display: flex; gap: 8px; align-items: center; margin-bottom: 6px; }
-    .countdown-block { text-align: center; background: #3b6d11; border-radius: 6px; padding: 6px 10px; min-width: 48px; }
+    .countdown-timer { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; }
+    .countdown-block { text-align: center; border-radius: 6px; padding: 6px 10px; min-width: 52px; }
+    .countdown-banner.active .countdown-block { background: #3b6d11; }
     .countdown-banner.expired .countdown-block { background: #ccc; }
     .countdown-num { font-size: 22px; font-weight: 700; color: #fff; line-height: 1; font-family: 'Noto Sans KR', sans-serif; }
-    .countdown-label { font-size: 10px; color: rgba(255,255,255,0.8); margin-top: 2px; font-family: 'Noto Sans KR', sans-serif; }
-    .countdown-sep { font-size: 20px; font-weight: 700; color: #3b6d11; margin-bottom: 4px; }
+    .countdown-unit { font-size: 10px; color: rgba(255,255,255,0.85); margin-top: 2px; font-family: 'Noto Sans KR', sans-serif; }
+    .countdown-sep { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+    .countdown-banner.active .countdown-sep { color: #3b6d11; }
     .countdown-banner.expired .countdown-sep { color: #ccc; }
-    .countdown-desc { font-size: 12px; color: #5a7a3a; line-height: 1.6; }
+    .countdown-desc { font-size: 12px; line-height: 1.7; }
+    .countdown-banner.active .countdown-desc { color: #5a7a3a; }
     .countdown-banner.expired .countdown-desc { color: #aaa; }
 
     .pricing-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 2rem; }
@@ -147,7 +151,7 @@
   <div class="apology-card">
     <p>작년에 주문해 주신 분들, 다시 찾아와 주셔서 진심으로 감사드립니다.<br><br>
     올해는 전쟁으로 인한 물가 상승으로 인해 <strong>작년보다 가격이 조금 오르게 되었습니다.</strong> 저희도 최대한 부담을 줄이려 했지만 어쩔 수 없는 부분이 있어 정말 죄송한 마음입니다.<br><br>
-    그래도 <strong>직접 주문해 주시는 분께는 배송비를 무료</strong>로 드리며, 정성껏 수확한 아스파라거스를 보내드리겠습니다. 감사합니다 🌿</p>
+    그래도 <strong>4월 27일까지 주문해 주시는 분들께 배송비를 무료</strong>로 드리며, 정성껏 수확한 아스파라거스를 보내드리겠습니다. 감사합니다 🌿</p>
   </div>
 
   <div class="premium-card">
@@ -161,19 +165,30 @@
     </div>
   </div>
 
-  <!-- 카운트다운 배너 -->
-  <div class="countdown-banner" id="countdown-banner">
+  <div class="countdown-banner active" id="countdown-banner">
     <div class="countdown-title" id="countdown-title">🎉 무료배송 이벤트 마감까지</div>
     <div class="countdown-timer" id="countdown-timer">
-      <div class="countdown-block"><div class="countdown-num" id="cd-days">00</div><div class="countdown-label">일</div></div>
+      <div class="countdown-block">
+        <div class="countdown-num" id="cd-days">00</div>
+        <div class="countdown-unit">일</div>
+      </div>
       <div class="countdown-sep">:</div>
-      <div class="countdown-block"><div class="countdown-num" id="cd-hours">00</div><div class="countdown-label">시간</div></div>
+      <div class="countdown-block">
+        <div class="countdown-num" id="cd-hours">00</div>
+        <div class="countdown-unit">시간</div>
+      </div>
       <div class="countdown-sep">:</div>
-      <div class="countdown-block"><div class="countdown-num" id="cd-mins">00</div><div class="countdown-label">분</div></div>
+      <div class="countdown-block">
+        <div class="countdown-num" id="cd-mins">00</div>
+        <div class="countdown-unit">분</div>
+      </div>
       <div class="countdown-sep">:</div>
-      <div class="countdown-block"><div class="countdown-num" id="cd-secs">00</div><div class="countdown-label">초</div></div>
+      <div class="countdown-block">
+        <div class="countdown-num" id="cd-secs">00</div>
+        <div class="countdown-unit">초</div>
+      </div>
     </div>
-    <div class="countdown-desc" id="countdown-desc">4월 27일 자정까지 수량 상관없이 배송비 무료예요. 이후에는 5만원 이상 주문 시 무료입니다.</div>
+    <div class="countdown-desc" id="countdown-desc">4월 27일까지 주문해 주시는 분들께 배송비를 무료로 드립니다. 이후에는 5만원(2KG) 이상 주문 시 무료입니다.</div>
   </div>
 
   <div class="pricing-row">
@@ -184,8 +199,8 @@
     </div>
     <div class="price-card">
       <div class="price-label">배송비</div>
-      <div class="price-value" id="delivery-price-display">5,000원</div>
-      <div class="price-note" id="delivery-price-note"></div>
+      <div class="price-value" id="delivery-price-display">무료</div>
+      <div class="price-note" id="delivery-price-note">4/27까지 이벤트</div>
     </div>
   </div>
 
@@ -226,7 +241,7 @@
       <div class="total-label">최종 결제 금액</div>
       <div class="total-amount" id="total">40,000원</div>
     </div>
-    <div class="total-breakdown free" id="total-breakdown"></div>
+    <div class="total-breakdown free" id="total-breakdown">상품 40,000원 + 배송비 무료 (이벤트) 🎉</div>
   </div>
 
   <button class="submit-btn" id="submit-btn">주문하기</button>
@@ -305,12 +320,23 @@
   const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz8R_2cMje2S46wgRBa2Ef7fcThRY-Db6rwk4muKul9MzzEFTnEMNjlB104OpYi3m1xZw/exec';
   const PRICE = 40000;
   const DELIVERY_FEE = 5000;
-  const FREE_UNTIL = new Date('2025-04-27T23:59:59');
   const FREE_MIN_AFTER = 50000;
+  // 4월 27일 자정 (한국시간 기준)
+  const FREE_UNTIL = new Date('2025-04-27T23:59:59+09:00');
   let qty = 1;
   let kakaoText = '';
 
-  // 카운트다운
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  function isEventActive() {
+    return new Date() <= FREE_UNTIL;
+  }
+
+  function getDeliveryFee(productTotal) {
+    if (isEventActive()) return 0;
+    return productTotal >= FREE_MIN_AFTER ? 0 : DELIVERY_FEE;
+  }
+
   function updateCountdown() {
     const now = new Date();
     const diff = FREE_UNTIL - now;
@@ -326,31 +352,16 @@
       document.getElementById('cd-secs').textContent = '00';
       document.getElementById('delivery-price-display').textContent = '5,000원';
       document.getElementById('delivery-price-note').textContent = '5만원 이상 무료';
-      updatePrice();
-      return;
+    } else {
+      const days  = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const mins  = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const secs  = Math.floor((diff % (1000 * 60)) / 1000);
+      document.getElementById('cd-days').textContent  = pad(days);
+      document.getElementById('cd-hours').textContent = pad(hours);
+      document.getElementById('cd-mins').textContent  = pad(mins);
+      document.getElementById('cd-secs').textContent  = pad(secs);
     }
-
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const secs = Math.floor((diff % (1000 * 60)) / 1000);
-
-    document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
-    document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
-    document.getElementById('cd-mins').textContent = String(mins).padStart(2, '0');
-    document.getElementById('cd-secs').textContent = String(secs).padStart(2, '0');
-
-    document.getElementById('delivery-price-display').textContent = '무료';
-    document.getElementById('delivery-price-note').textContent = '4/27까지 이벤트';
-  }
-
-  function isEventActive() {
-    return new Date() <= FREE_UNTIL;
-  }
-
-  function getDeliveryFee(productTotal) {
-    if (isEventActive()) return 0;
-    return productTotal >= FREE_MIN_AFTER ? 0 : DELIVERY_FEE;
   }
 
   function updatePrice() {
@@ -378,79 +389,83 @@
     }
   }
 
+  // 1초마다 업데이트
   updateCountdown();
   updatePrice();
-  setInterval(() => { updateCountdown(); updatePrice(); }, 1000);
+  setInterval(function() {
+    updateCountdown();
+    updatePrice();
+  }, 1000);
 
-  document.getElementById('btn-minus').onclick = () => { if (qty > 1) { qty--; updatePrice(); } };
-  document.getElementById('btn-plus').onclick = () => { if (qty < 30) { qty++; updatePrice(); } };
+  document.getElementById('btn-minus').onclick = function() { if (qty > 1) { qty--; updatePrice(); } };
+  document.getElementById('btn-plus').onclick = function() { if (qty < 30) { qty++; updatePrice(); } };
 
-  document.getElementById('kakao-btn').onclick = () => {
+  document.getElementById('kakao-btn').onclick = function() {
     if (navigator.share) {
       navigator.share({ title: '화이트 아스파라거스 주문내역', text: kakaoText });
     } else {
-      navigator.clipboard.writeText(kakaoText).then(() => {
+      navigator.clipboard.writeText(kakaoText).then(function() {
         alert('주문내역이 복사되었습니다!\n카카오톡 나에게 보내기에 붙여넣기 해주세요.');
       });
     }
   };
 
-  document.getElementById('submit-btn').onclick = async () => {
-    const name = document.getElementById('name').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const address = document.getElementById('address').value.trim();
-    let valid = true;
+  document.getElementById('submit-btn').onclick = async function() {
+    var name = document.getElementById('name').value.trim();
+    var phone = document.getElementById('phone').value.trim();
+    var address = document.getElementById('address').value.trim();
+    var valid = true;
 
-    ['name','phone','address'].forEach(id => {
-      const field = document.getElementById('field-' + id);
+    ['name','phone','address'].forEach(function(id) {
+      var field = document.getElementById('field-' + id);
       if (!document.getElementById(id).value.trim()) {
         field.classList.add('error'); valid = false;
       } else { field.classList.remove('error'); }
     });
     if (!valid) return;
 
-    const btn = document.getElementById('submit-btn');
+    var btn = document.getElementById('submit-btn');
     btn.disabled = true;
     btn.textContent = '접수 중...';
 
-    const productTotal = qty * PRICE;
-    const delivery = getDeliveryFee(productTotal);
-    const grandTotal = productTotal + delivery;
-    const nowStr = new Date().toLocaleString('ko-KR');
+    var productTotal = qty * PRICE;
+    var delivery = getDeliveryFee(productTotal);
+    var grandTotal = productTotal + delivery;
+    var nowStr = new Date().toLocaleString('ko-KR');
 
     kakaoText =
-      `🌿 화이트 아스파라거스 주문내역\n` +
-      `━━━━━━━━━━━━━━\n` +
-      `📅 주문일시: ${nowStr}\n` +
-      `👤 성함: ${name}\n` +
-      `📦 수량: ${qty}KG\n` +
-      `🛒 상품금액: ${productTotal.toLocaleString()}원\n` +
-      `🚚 배송비: ${delivery === 0 ? '무료' : '5,000원'}\n` +
-      `💰 최종결제: ${grandTotal.toLocaleString()}원\n` +
-      `📍 배송지: ${address}\n` +
-      `━━━━━━━━━━━━━━\n` +
-      `🏦 입금계좌: 농협 351-8442-6547-93\n` +
-      `예금주: 이선혜\n` +
-      `입금자명을 [${name}]으로 해주세요.`;
+      '🌿 화이트 아스파라거스 주문내역\n' +
+      '━━━━━━━━━━━━━━\n' +
+      '📅 주문일시: ' + nowStr + '\n' +
+      '👤 성함: ' + name + '\n' +
+      '📦 수량: ' + qty + 'KG\n' +
+      '🛒 상품금액: ' + productTotal.toLocaleString() + '원\n' +
+      '🚚 배송비: ' + (delivery === 0 ? '무료' : '5,000원') + '\n' +
+      '💰 최종결제: ' + grandTotal.toLocaleString() + '원\n' +
+      '📍 배송지: ' + address + '\n' +
+      '━━━━━━━━━━━━━━\n' +
+      '🏦 입금계좌: 농협 351-8442-6547-93\n' +
+      '예금주: 이선혜\n' +
+      '입금자명을 [' + name + ']으로 해주세요.';
 
     try {
       await fetch(SCRIPT_URL, {
         method: 'POST', mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ type: 'order', name, phone, address, qty, total: grandTotal.toLocaleString() + '원' })
+        body: JSON.stringify({ type: 'order', name: name, phone: phone, address: address, qty: qty, total: grandTotal.toLocaleString() + '원' })
       });
 
       document.getElementById('modal-title').textContent = '주문이 접수되었습니다';
       document.getElementById('modal-body').innerHTML =
-        `<strong>${name}</strong>님, 주문 감사드립니다!<br><br>` +
-        `📦 수량: <strong>${qty}KG</strong><br>` +
-        `🛒 상품금액: <strong>${productTotal.toLocaleString()}원</strong><br>` +
-        `🚚 배송비: <strong>${delivery === 0 ? '무료 🎉' : '5,000원'}</strong><br>` +
-        `💰 최종결제: <strong>${grandTotal.toLocaleString()}원</strong><br>` +
-        `📍 배송지: ${address}<br><br>` +
-        `아래 계좌로 입금해 주시면 확인 후 발송해 드립니다.` +
-        `<div class="modal-account"><div class="bank">농협은행</div><div class="acct">351-8442-6547-93</div><div class="holder">예금주 이선혜 · 입금자명: ${name}</div></div>` +
-        `<span style="color:#185fa5;font-size:12px;">수확량에 따라 발송까지 대기시간이 생길 수 있습니다. 순서대로 정성껏 보내드리겠습니다 💚</span>`;
+        '<strong>' + name + '</strong>님, 주문 감사드립니다!<br><br>' +
+        '📦 수량: <strong>' + qty + 'KG</strong><br>' +
+        '🛒 상품금액: <strong>' + productTotal.toLocaleString() + '원</strong><br>' +
+        '🚚 배송비: <strong>' + (delivery === 0 ? '무료 🎉' : '5,000원') + '</strong><br>' +
+        '💰 최종결제: <strong>' + grandTotal.toLocaleString() + '원</strong><br>' +
+        '📍 배송지: ' + address + '<br><br>' +
+        '아래 계좌로 입금해 주시면 확인 후 발송해 드립니다.' +
+        '<div class="modal-account"><div class="bank">농협은행</div><div class="acct">351-8442-6547-93</div><div class="holder">예금주 이선혜 · 입금자명: ' + name + '</div></div>' +
+        '<span style="color:#185fa5;font-size:12px;">수확량에 따라 발송까지 대기시간이 생길 수 있습니다. 순서대로 정성껏 보내드리겠습니다 💚</span>';
     } catch(err) {
       document.getElementById('modal-title').textContent = '오류가 발생했습니다';
       document.getElementById('modal-body').innerHTML = '잠시 후 다시 시도해 주세요.';
@@ -461,8 +476,8 @@
     btn.textContent = '주문하기';
   };
 
-  ['name','phone','address'].forEach(id => {
-    document.getElementById(id).oninput = () => {
+  ['name','phone','address'].forEach(function(id) {
+    document.getElementById(id).oninput = function() {
       if (document.getElementById(id).value.trim())
         document.getElementById('field-' + id).classList.remove('error');
     };
@@ -472,54 +487,55 @@
 
   async function loadReviews() {
     try {
-      const res = await fetch(SCRIPT_URL);
-      const reviews = await res.json();
+      var res = await fetch(SCRIPT_URL);
+      var reviews = await res.json();
       renderReviews(reviews);
     } catch(err) {
-      document.getElementById('review-loading').textContent = '후기를 불러오지 못했습니다.';
+      var loading = document.getElementById('review-loading');
+      if (loading) loading.textContent = '후기를 불러오지 못했습니다.';
     }
   }
 
   function renderReviews(reviews) {
-    const list = document.getElementById('review-list');
-    const loading = document.getElementById('review-loading');
-    list.querySelectorAll('.review-card').forEach(el => el.remove());
+    var list = document.getElementById('review-list');
+    var loading = document.getElementById('review-loading');
+    list.querySelectorAll('.review-card').forEach(function(el) { el.remove(); });
     if (loading) loading.remove();
 
     if (!reviews || reviews.length === 0) {
       document.getElementById('avg-score').textContent = '-';
       document.getElementById('avg-stars').textContent = '☆☆☆☆☆';
       document.getElementById('review-count').textContent = '아직 후기가 없어요';
-      const empty = document.createElement('div');
+      var empty = document.createElement('div');
       empty.className = 'review-empty';
       empty.textContent = '아직 등록된 후기가 없어요. 첫 번째 후기를 남겨주세요!';
       list.appendChild(empty);
       return;
     }
 
-    const avg = reviews.reduce((s, r) => s + Number(r.star), 0) / reviews.length;
+    var avg = reviews.reduce(function(s, r) { return s + Number(r.star); }, 0) / reviews.length;
     document.getElementById('avg-score').textContent = avg.toFixed(1);
     document.getElementById('avg-stars').textContent = starsHtml(Math.round(avg));
-    document.getElementById('review-count').textContent = `총 ${reviews.length}개의 후기`;
+    document.getElementById('review-count').textContent = '총 ' + reviews.length + '개의 후기';
 
-    reviews.slice().reverse().forEach(r => {
-      const card = document.createElement('div');
+    reviews.slice().reverse().forEach(function(r) {
+      var card = document.createElement('div');
       card.className = 'review-card';
       card.innerHTML =
-        `<div class="review-header"><span class="review-author">${r.name}</span><span class="review-date">${r.date}</span></div>
-        <div class="review-stars">${starsHtml(Number(r.star))}</div>
-        <div class="review-text">${r.text}</div>`;
+        '<div class="review-header"><span class="review-author">' + r.name + '</span><span class="review-date">' + r.date + '</span></div>' +
+        '<div class="review-stars">' + starsHtml(Number(r.star)) + '</div>' +
+        '<div class="review-text">' + r.text + '</div>';
       list.appendChild(card);
     });
   }
 
-  document.getElementById('review-submit-btn').onclick = async () => {
-    const name = document.getElementById('review-name').value.trim();
-    const text = document.getElementById('review-text').value.trim();
-    const starEl = document.querySelector('input[name="star"]:checked');
+  document.getElementById('review-submit-btn').onclick = async function() {
+    var name = document.getElementById('review-name').value.trim();
+    var text = document.getElementById('review-text').value.trim();
+    var starEl = document.querySelector('input[name="star"]:checked');
     if (!name || !text || !starEl) { alert('별점, 성함, 후기 내용을 모두 입력해 주세요.'); return; }
 
-    const btn = document.getElementById('review-submit-btn');
+    var btn = document.getElementById('review-submit-btn');
     btn.disabled = true;
     btn.textContent = '등록 중...';
 
@@ -527,13 +543,13 @@
       await fetch(SCRIPT_URL, {
         method: 'POST', mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ type: 'review', name, text, star: parseInt(starEl.value) })
+        body: JSON.stringify({ type: 'review', name: name, text: text, star: parseInt(starEl.value) })
       });
       document.getElementById('review-name').value = '';
       document.getElementById('review-text').value = '';
-      document.querySelectorAll('input[name="star"]').forEach(el => el.checked = false);
+      document.querySelectorAll('input[name="star"]').forEach(function(el) { el.checked = false; });
       btn.textContent = '등록되었습니다 ✓';
-      setTimeout(() => { btn.disabled = false; btn.textContent = '후기 등록'; loadReviews(); }, 1500);
+      setTimeout(function() { btn.disabled = false; btn.textContent = '후기 등록'; loadReviews(); }, 1500);
     } catch(err) {
       alert('등록 중 오류가 발생했습니다. 다시 시도해 주세요.');
       btn.disabled = false;
