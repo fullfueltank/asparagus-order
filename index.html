@@ -384,6 +384,9 @@
         // 가격 표시 업데이트
         document.getElementById('price-display').textContent = PRICE.toLocaleString() + '원';
 
+        // FREE_UNTIL 바뀌었으니 tick 즉시 재실행
+        tick();
+
         // 발송 일정 렌더링
         renderSchedule(c);
 
@@ -486,12 +489,10 @@
     }
   }
 
-  // 설정 먼저 로드, 이후 tick 시작
+  // tick은 loadConfig 완료 후 시작 (config 로드 전에 FREE_UNTIL 덮어쓰기 방지)
+  tick();
+  setInterval(tick, 1000);
   loadConfig();
-  setTimeout(function() {
-    tick();
-    setInterval(tick, 1000);
-  }, 100);
 
   document.getElementById('btn-minus').onclick = function() { if (qty > 1) { qty--; updatePrice(); } };
   document.getElementById('btn-plus').onclick  = function() { if (qty < 30) { qty++; updatePrice(); } };
