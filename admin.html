@@ -179,6 +179,7 @@
         <div class="editor-nav-item" onclick="switchPanel('date')" id="nav-date"><span class="nav-dot"></span> 무료배송 마감일</div>
         <div class="editor-nav-item" onclick="switchPanel('account')" id="nav-account"><span class="nav-dot"></span> 계좌 정보</div>
         <div class="editor-nav-item" onclick="switchPanel('text')" id="nav-text"><span class="nav-dot"></span> 헤더 · 본문 텍스트</div>
+        <div class="editor-nav-item" onclick="switchPanel('schedule')" id="nav-schedule"><span class="nav-dot"></span> 📦 발송 일정 공지</div>
       </div>
 
       <div>
@@ -304,6 +305,48 @@
             <span class="save-status" id="save-status-text"></span>
           </div>
         </div>
+        <!-- 발송 일정 공지 -->
+        <div class="editor-panel" id="panel-schedule">
+          <div class="edit-card">
+            <div class="edit-card-title">발송 일정 행 (최대 4개)</div>
+            <div class="edit-field">
+              <div class="edit-label">행 1 — 날짜 <span class="badge">초록</span></div>
+              <input class="edit-input" id="e-sch1-date" type="text" value="~ 4/29 (화)" style="margin-bottom:6px;">
+              <input class="edit-input" id="e-sch1-desc" type="text" value="입금 확인 순서대로 수확 후 순차 발송">
+            </div>
+            <div class="edit-field">
+              <div class="edit-label">행 2 — 날짜 <span class="badge warn">회색</span></div>
+              <input class="edit-input" id="e-sch2-date" type="text" value="4/30 – 5/5" style="margin-bottom:6px;">
+              <input class="edit-input" id="e-sch2-desc" type="text" value="택배사 휴일 구간 · 신선도 유지를 위해 발송 중단">
+            </div>
+            <div class="edit-field">
+              <div class="edit-label">행 3 — 날짜 <span class="badge" style="background:#fff3e0;color:#a05c00;border-color:#f0c878;">주황</span></div>
+              <input class="edit-input" id="e-sch3-date" type="text" value="5/6 (월) ~" style="margin-bottom:6px;">
+              <input class="edit-input" id="e-sch3-desc" type="text" value="발송 재개 · 순차 발송 진행">
+            </div>
+            <div class="edit-field">
+              <div class="edit-label">행 4 — 날짜 <span class="badge">초록</span> <span style="font-size:11px;color:#bbb;">(비워두면 숨김)</span></div>
+              <input class="edit-input" id="e-sch4-date" type="text" placeholder="예: 5/12 ~" style="margin-bottom:6px;">
+              <input class="edit-input" id="e-sch4-desc" type="text" placeholder="설명">
+            </div>
+          </div>
+          <div class="edit-card">
+            <div class="edit-card-title">하단 안내 문구</div>
+            <div class="edit-field">
+              <textarea class="edit-textarea" id="e-sch-bottom" style="min-height:90px;">수확 후 바로 발송해도 택배사 휴일이 끼면 신선도가 떨어질 수 있어, 가장 신선한 상태로 받아보실 수 있도록 휴일 전후 발송을 조정하고 있습니다.
+
+수확량에 따라 대기시간이 발생할 수 있으며, 주문 순서대로 처리되오니 양해 부탁드립니다.</textarea>
+              <div class="edit-hint"><strong>굵게</strong>는 *텍스트* 형식으로 입력 (예: *가장 신선한 상태로*)</div>
+            </div>
+          </div>
+          <div class="save-bar">
+            <button class="save-btn" id="save-btn-schedule" onclick="saveSection('schedule')">
+              <span class="save-spinner" id="spinner-schedule"></span>저장
+            </button>
+            <span class="save-status" id="save-status-schedule"></span>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -378,6 +421,15 @@
         if (c.apology)        document.getElementById('e-apology').value = c.apology;
         if (c.premium1)       document.getElementById('e-premium1').value = c.premium1;
         if (c.premium2)       document.getElementById('e-premium2').value = c.premium2;
+        if (c.sch1Date)       document.getElementById('e-sch1-date').value = c.sch1Date;
+        if (c.sch1Desc)       document.getElementById('e-sch1-desc').value = c.sch1Desc;
+        if (c.sch2Date)       document.getElementById('e-sch2-date').value = c.sch2Date;
+        if (c.sch2Desc)       document.getElementById('e-sch2-desc').value = c.sch2Desc;
+        if (c.sch3Date)       document.getElementById('e-sch3-date').value = c.sch3Date;
+        if (c.sch3Desc)       document.getElementById('e-sch3-desc').value = c.sch3Desc;
+        if (c.sch4Date)       document.getElementById('e-sch4-date').value = c.sch4Date;
+        if (c.sch4Desc)       document.getElementById('e-sch4-desc').value = c.sch4Desc;
+        if (c.schBottom)      document.getElementById('e-sch-bottom').value = c.schBottom;
       })
       .catch(function() { /* 실패해도 기본값 유지 */ });
   }
@@ -405,9 +457,17 @@
       config.apology    = document.getElementById('e-apology').value;
       config.premium1   = document.getElementById('e-premium1').value;
       config.premium2   = document.getElementById('e-premium2').value;
+    } else if (section === 'schedule') {
+      config.sch1Date   = document.getElementById('e-sch1-date').value;
+      config.sch1Desc   = document.getElementById('e-sch1-desc').value;
+      config.sch2Date   = document.getElementById('e-sch2-date').value;
+      config.sch2Desc   = document.getElementById('e-sch2-desc').value;
+      config.sch3Date   = document.getElementById('e-sch3-date').value;
+      config.sch3Desc   = document.getElementById('e-sch3-desc').value;
+      config.sch4Date   = document.getElementById('e-sch4-date').value;
+      config.sch4Desc   = document.getElementById('e-sch4-desc').value;
+      config.schBottom  = document.getElementById('e-sch-bottom').value;
     }
-
-    var btn     = document.getElementById('save-btn-' + section);
     var spinner = document.getElementById('spinner-' + section);
     var status  = document.getElementById('save-status-' + section);
 
