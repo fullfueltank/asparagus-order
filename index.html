@@ -12,6 +12,15 @@
     body { background: #fdfcf9; font-family: 'Noto Serif KR', Georgia, serif; }
     .page { max-width: 640px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
 
+    /* 로딩 스켈레톤 */
+    .skeleton { background: linear-gradient(90deg, #f0f0ee 25%, #e8e8e5 50%, #f0f0ee 75%); background-size: 200% 100%; animation: shimmer 1.2s infinite; border-radius: 6px; }
+    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+    .skeleton-line { height: 16px; margin-bottom: 8px; }
+    .skeleton-title { height: 36px; width: 60%; margin: 0 auto 10px; }
+    .skeleton-sub { height: 14px; width: 40%; margin: 0 auto; }
+    .page-loading { opacity: 0; transition: opacity 0.3s; }
+    .page-loaded { opacity: 1; }
+
     .hero { text-align: center; padding: 2.5rem 1rem 2rem; border-bottom: 1px solid #e8e0cc; margin-bottom: 2rem; }
     .hero-badge { display: inline-block; font-size: 11px; letter-spacing: 0.12em; color: #888; border: 1px solid #ddd; padding: 4px 14px; border-radius: 20px; margin-bottom: 1.2rem; font-family: 'Noto Sans KR', sans-serif; font-weight: 300; }
     .hero-title { font-size: 28px; font-weight: 700; color: #1a1a1a; line-height: 1.4; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
@@ -145,15 +154,15 @@
   </style>
 </head>
 <body>
-<div class="page">
+<div class="page page-loading" id="main-page">
   <div class="hero">
-    <div class="hero-badge">화이트 아스파라거스 직거래</div>
-    <div class="hero-title">올해도 찾아주셔서<br>감사합니다</div>
-    <div class="hero-sub">직접 재배한 화이트 아스파라거스를 선보입니다</div>
+    <div class="hero-badge" id="hero-badge">화이트 아스파라거스 직거래</div>
+    <div class="hero-title" id="hero-title">올해도 찾아주셔서<br>감사합니다</div>
+    <div class="hero-sub" id="hero-sub">직접 재배한 화이트 아스파라거스를 선보입니다</div>
   </div>
 
   <div class="apology-card">
-    <p>작년에 주문해 주신 분들, 다시 찾아와 주셔서 진심으로 감사드립니다.<br><br>
+    <p id="apology-text">작년에 주문해 주신 분들, 다시 찾아와 주셔서 진심으로 감사드립니다.<br><br>
     올해는 전쟁으로 인한 물가 상승으로 인해 <strong>작년보다 가격이 조금 오르게 되었습니다.</strong> 저희도 최대한 부담을 줄이려 했지만 어쩔 수 없는 부분이 있어 정말 죄송한 마음입니다.<br><br>
     그래도 <strong>4월 27일까지 주문해 주시는 분들께 배송비를 무료</strong>로 드리며, 정성껏 수확한 아스파라거스를 보내드리겠습니다. 감사합니다 🌿</p>
   </div>
@@ -161,11 +170,11 @@
   <div class="premium-card">
     <div class="premium-item">
       <span class="premium-check">✔</span>
-      <span>저희 아스파라거스는 <strong>미슐랭 파인다이닝 레스토랑에서도 선택한 프리미엄 국내산 품종</strong>이에요.</span>
+      <span id="premium1-text">저희 아스파라거스는 <strong>미슐랭 파인다이닝 레스토랑에서도 선택한 프리미엄 국내산 품종</strong>이에요.</span>
     </div>
     <div class="premium-item">
       <span class="premium-check">✔</span>
-      <span>수확량보다 주문량이 많아 주문 후 대기 기간이 발생할 수 있습니다. 조금만 여유 있게 기다려주시면 신선한 상태로 보내드릴게요 💚</span>
+      <span id="premium2-text">수확량보다 주문량이 많아 주문 후 대기 기간이 발생할 수 있습니다. 조금만 여유 있게 기다려주시면 신선한 상태로 보내드릴게요 💚</span>
     </div>
   </div>
 
@@ -186,7 +195,7 @@
   <div class="pricing-row">
     <div class="price-card">
       <div class="price-label">1KG 가격</div>
-      <div class="price-value">40,000원</div>
+      <div class="price-value" id="price-display">40,000원</div>
       <div class="price-note">산지 직거래가 · 1KG 단위</div>
     </div>
     <div class="price-card">
@@ -245,15 +254,15 @@
     <div class="account-title">계좌이체 안내</div>
     <div class="account-row">
       <span class="account-label">은행</span>
-      <span class="account-value">농협은행</span>
+      <span class="account-value" id="account-bank">농협은행</span>
     </div>
     <div class="account-row" style="margin-bottom:0;">
       <span class="account-label">계좌번호</span>
-      <span class="account-number">351-8442-6547-93</span>
+      <span class="account-number" id="account-number">351-8442-6547-93</span>
     </div>
     <div class="account-row" style="margin-top:6px;">
       <span class="account-label">예금주</span>
-      <span class="account-value">이선혜</span>
+      <span class="account-value" id="account-holder">이선혜</span>
     </div>
     <div class="account-notice">
       입금자명을 <strong>주문 시 작성하신 성함</strong>으로 해주세요.<br>
@@ -313,12 +322,59 @@
 
 <script>
   var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz8R_2cMje2S46wgRBa2Ef7fcThRY-Db6rwk4muKul9MzzEFTnEMNjlB104OpYi3m1xZw/exec';
+
+  // 기본값 (설정 로드 실패 시 fallback)
   var PRICE = 40000;
   var DELIVERY_FEE = 5000;
   var FREE_MIN_AFTER = 50000;
   var FREE_UNTIL = new Date(2026, 3, 27, 23, 59, 59);
+
   var qty = 1;
   var kakaoText = '';
+  var configLoaded = false;
+
+  // ─── 설정 로드 ───
+  function loadConfig() {
+    fetch(SCRIPT_URL + '?action=config')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        var c = data.config || {};
+
+        if (c.price)    PRICE         = parseInt(c.price);
+        if (c.delivery) DELIVERY_FEE  = parseInt(c.delivery);
+        if (c.freeMin)  FREE_MIN_AFTER = parseInt(c.freeMin);
+
+        if (c.freeUntil) {
+          var d = c.freeUntil.split('-');
+          FREE_UNTIL = new Date(parseInt(d[0]), parseInt(d[1]) - 1, parseInt(d[2]), 23, 59, 59);
+        }
+
+        // 텍스트 반영
+        if (c.badge)          document.getElementById('hero-badge').textContent = c.badge;
+        if (c.heroTitle)      document.getElementById('hero-title').innerHTML = c.heroTitle.replace(/\n/g, '<br>');
+        if (c.heroSub)        document.getElementById('hero-sub').textContent = c.heroSub;
+        if (c.apology)        document.getElementById('apology-text').innerHTML = c.apology;
+        if (c.premium1)       document.getElementById('premium1-text').innerHTML = c.premium1;
+        if (c.premium2)       document.getElementById('premium2-text').innerHTML = c.premium2;
+        if (c.countdownTitle) document.getElementById('countdown-title').textContent = c.countdownTitle;
+        if (c.countdownDesc)  document.getElementById('countdown-desc').textContent = c.countdownDesc;
+        if (c.bank)           document.getElementById('account-bank').textContent = c.bank;
+        if (c.account)        document.getElementById('account-number').textContent = c.account;
+        if (c.holder)         document.getElementById('account-holder').textContent = c.holder;
+
+        // 가격 표시 업데이트
+        document.getElementById('price-display').textContent = PRICE.toLocaleString() + '원';
+
+        configLoaded = true;
+        updatePrice();
+        document.getElementById('main-page').classList.add('page-loaded');
+      })
+      .catch(function() {
+        // 설정 로드 실패해도 기본값으로 정상 동작
+        configLoaded = true;
+        document.getElementById('main-page').classList.add('page-loaded');
+      });
+  }
 
   function pad(n) { return n < 10 ? '0' + n : '' + n; }
   function isEventActive() { return new Date() <= FREE_UNTIL; }
@@ -330,48 +386,52 @@
     var banner = document.getElementById('countdown-banner');
     if (diff <= 0) {
       banner.className = 'countdown-banner expired';
-      document.getElementById('countdown-title').textContent = '무료배송 이벤트가 종료되었습니다';
-      document.getElementById('countdown-desc').textContent = '5만원(2KG) 이상 주문 시 배송비 무료, 미만 시 5,000원이 추가됩니다.';
       document.getElementById('cd-days').textContent = '00';
       document.getElementById('cd-hours').textContent = '00';
       document.getElementById('cd-mins').textContent = '00';
       document.getElementById('cd-secs').textContent = '00';
-      document.getElementById('delivery-price-display').textContent = '5,000원';
-      document.getElementById('delivery-price-note').textContent = '5만원 이상 무료';
+      document.getElementById('delivery-price-display').textContent = DELIVERY_FEE.toLocaleString() + '원';
+      document.getElementById('delivery-price-note').textContent = FREE_MIN_AFTER.toLocaleString() + '원 이상 무료';
     } else {
-      document.getElementById('cd-days').textContent = pad(Math.floor(diff / 86400000));
+      document.getElementById('cd-days').textContent  = pad(Math.floor(diff / 86400000));
       document.getElementById('cd-hours').textContent = pad(Math.floor((diff % 86400000) / 3600000));
-      document.getElementById('cd-mins').textContent = pad(Math.floor((diff % 3600000) / 60000));
-      document.getElementById('cd-secs').textContent = pad(Math.floor((diff % 60000) / 1000));
+      document.getElementById('cd-mins').textContent  = pad(Math.floor((diff % 3600000) / 60000));
+      document.getElementById('cd-secs').textContent  = pad(Math.floor((diff % 60000) / 1000));
     }
     updatePrice();
   }
 
   function updatePrice() {
     var pt = qty * PRICE;
-    var d = getDeliveryFee(pt);
+    var d  = getDeliveryFee(pt);
     var gt = pt + d;
     var card = document.getElementById('total-card');
-    var bd = document.getElementById('total-breakdown');
-    document.getElementById('qty').textContent = qty;
+    var bd   = document.getElementById('total-breakdown');
+    document.getElementById('qty').textContent      = qty;
     document.getElementById('qty-price').textContent = pt.toLocaleString() + '원';
-    document.getElementById('total').textContent = gt.toLocaleString() + '원';
+    document.getElementById('total').textContent     = gt.toLocaleString() + '원';
     if (d === 0) {
       card.className = 'total-card free';
-      bd.className = 'total-breakdown free';
-      bd.textContent = isEventActive() ? '상품 ' + pt.toLocaleString() + '원 + 배송비 무료 (이벤트) 🎉' : '상품 ' + pt.toLocaleString() + '원 + 배송비 무료 🎉';
+      bd.className   = 'total-breakdown free';
+      bd.textContent = isEventActive()
+        ? '상품 ' + pt.toLocaleString() + '원 + 배송비 무료 (이벤트) 🎉'
+        : '상품 ' + pt.toLocaleString() + '원 + 배송비 무료 🎉';
     } else {
       card.className = 'total-card paid';
-      bd.className = 'total-breakdown paid';
-      bd.textContent = '상품 ' + pt.toLocaleString() + '원 + 배송비 5,000원 (무료까지 ' + (FREE_MIN_AFTER - pt).toLocaleString() + '원 남음)';
+      bd.className   = 'total-breakdown paid';
+      bd.textContent = '상품 ' + pt.toLocaleString() + '원 + 배송비 ' + DELIVERY_FEE.toLocaleString() + '원 (무료까지 ' + (FREE_MIN_AFTER - pt).toLocaleString() + '원 남음)';
     }
   }
 
-  tick();
-  setInterval(tick, 1000);
+  // 설정 먼저 로드, 이후 tick 시작
+  loadConfig();
+  setTimeout(function() {
+    tick();
+    setInterval(tick, 1000);
+  }, 100);
 
   document.getElementById('btn-minus').onclick = function() { if (qty > 1) { qty--; updatePrice(); } };
-  document.getElementById('btn-plus').onclick = function() { if (qty < 30) { qty++; updatePrice(); } };
+  document.getElementById('btn-plus').onclick  = function() { if (qty < 30) { qty++; updatePrice(); } };
 
   function searchAddress() {
     new daum.Postcode({
@@ -407,32 +467,35 @@
   };
 
   document.getElementById('submit-btn').onclick = function() {
-    var name = document.getElementById('name').value.trim();
-    var phone = document.getElementById('phone').value.trim();
-    var zipcode = document.getElementById('zipcode').value.trim();
-    var address = document.getElementById('address').value.trim();
+    var name          = document.getElementById('name').value.trim();
+    var phone         = document.getElementById('phone').value.trim();
+    var zipcode       = document.getElementById('zipcode').value.trim();
+    var address       = document.getElementById('address').value.trim();
     var addressDetail = document.getElementById('address-detail').value.trim();
     var valid = true;
 
-    if (!name) { document.getElementById('field-name').classList.add('error'); valid = false; }
-    else { document.getElementById('field-name').classList.remove('error'); }
-    if (!phone) { document.getElementById('field-phone').classList.add('error'); valid = false; }
-    else { document.getElementById('field-phone').classList.remove('error'); }
+    if (!name)            { document.getElementById('field-name').classList.add('error'); valid = false; }
+    else                  { document.getElementById('field-name').classList.remove('error'); }
+    if (!phone)           { document.getElementById('field-phone').classList.add('error'); valid = false; }
+    else                  { document.getElementById('field-phone').classList.remove('error'); }
     if (!zipcode || !address) { document.getElementById('field-address').classList.add('error'); valid = false; }
-    else { document.getElementById('field-address').classList.remove('error'); }
+    else                  { document.getElementById('field-address').classList.remove('error'); }
     if (!valid) return;
 
     var btn = document.getElementById('submit-btn');
     btn.disabled = true;
     btn.textContent = '접수 중...';
 
-    var pt = qty * PRICE;
-    var d = getDeliveryFee(pt);
-    var gt = pt + d;
-    var nowStr = new Date().toLocaleString('ko-KR');
+    var pt          = qty * PRICE;
+    var d           = getDeliveryFee(pt);
+    var gt          = pt + d;
+    var nowStr      = new Date().toLocaleString('ko-KR');
     var fullAddress = addressDetail ? address + ' ' + addressDetail : address;
+    var bankName    = document.getElementById('account-bank').textContent;
+    var accountNum  = document.getElementById('account-number').textContent;
+    var holderName  = document.getElementById('account-holder').textContent;
 
-    kakaoText = '🌿 화이트 아스파라거스 주문내역\n━━━━━━━━━━━━━━\n📅 주문일시: ' + nowStr + '\n👤 성함: ' + name + '\n📦 수량: ' + qty + 'KG\n🛒 상품금액: ' + pt.toLocaleString() + '원\n🚚 배송비: ' + (d === 0 ? '무료' : '5,000원') + '\n💰 최종결제: ' + gt.toLocaleString() + '원\n📍 배송지: [' + zipcode + '] ' + fullAddress + '\n━━━━━━━━━━━━━━\n🏦 입금계좌: 농협 351-8442-6547-93\n예금주: 이선혜\n입금자명을 [' + name + ']으로 해주세요.';
+    kakaoText = '🌿 화이트 아스파라거스 주문내역\n━━━━━━━━━━━━━━\n📅 주문일시: ' + nowStr + '\n👤 성함: ' + name + '\n📦 수량: ' + qty + 'KG\n🛒 상품금액: ' + pt.toLocaleString() + '원\n🚚 배송비: ' + (d === 0 ? '무료' : DELIVERY_FEE.toLocaleString() + '원') + '\n💰 최종결제: ' + gt.toLocaleString() + '원\n📍 배송지: [' + zipcode + '] ' + fullAddress + '\n━━━━━━━━━━━━━━\n🏦 입금계좌: ' + bankName + ' ' + accountNum + '\n예금주: ' + holderName + '\n입금자명을 [' + name + ']으로 해주세요.';
 
     fetch(SCRIPT_URL, {
       method: 'POST', mode: 'no-cors',
@@ -444,11 +507,11 @@
         '<strong>' + name + '</strong>님, 주문 감사드립니다!<br><br>' +
         '📦 수량: <strong>' + qty + 'KG</strong><br>' +
         '🛒 상품금액: <strong>' + pt.toLocaleString() + '원</strong><br>' +
-        '🚚 배송비: <strong>' + (d === 0 ? '무료 🎉' : '5,000원') + '</strong><br>' +
+        '🚚 배송비: <strong>' + (d === 0 ? '무료 🎉' : DELIVERY_FEE.toLocaleString() + '원') + '</strong><br>' +
         '💰 최종결제: <strong>' + gt.toLocaleString() + '원</strong><br>' +
         '📍 배송지: [' + zipcode + '] ' + fullAddress + '<br><br>' +
         '아래 계좌로 입금해 주시면 확인 후 발송해 드립니다.' +
-        '<div class="modal-account"><div class="bank">농협은행</div><div class="acct">351-8442-6547-93</div><div class="holder">예금주 이선혜 · 입금자명: ' + name + '</div></div>' +
+        '<div class="modal-account"><div class="bank">' + bankName + '</div><div class="acct">' + accountNum + '</div><div class="holder">예금주 ' + holderName + ' · 입금자명: ' + name + '</div></div>' +
         '<span style="color:#185fa5;font-size:12px;">수확량에 따라 발송까지 대기시간이 생길 수 있습니다. 순서대로 정성껏 보내드리겠습니다 💚</span>';
       document.getElementById('modal').classList.add('active');
       btn.disabled = false;
@@ -472,7 +535,7 @@
   }
 
   function renderReviews(reviews) {
-    var list = document.getElementById('review-list');
+    var list    = document.getElementById('review-list');
     var loading = document.getElementById('review-loading');
     list.querySelectorAll('.review-card').forEach(function(el) { el.remove(); });
     if (loading) loading.remove();
@@ -499,8 +562,8 @@
   }
 
   document.getElementById('review-submit-btn').onclick = function() {
-    var name = document.getElementById('review-name').value.trim();
-    var text = document.getElementById('review-text').value.trim();
+    var name   = document.getElementById('review-name').value.trim();
+    var text   = document.getElementById('review-text').value.trim();
     var starEl = document.querySelector('input[name="star"]:checked');
     if (!name || !text || !starEl) { alert('별점, 성함, 후기 내용을 모두 입력해 주세요.'); return; }
     var btn = document.getElementById('review-submit-btn');
