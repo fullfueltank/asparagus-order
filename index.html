@@ -346,7 +346,7 @@
   var PRICE = 40000;
   var DELIVERY_FEE = 5000;
   var FREE_MIN_AFTER = 50000;
-  var FREE_UNTIL = new Date(2026, 3, 27, 23, 59, 59);
+  var FREE_UNTIL = new Date('2026-04-27T23:59:59+09:00'); // KST 명시
 
   var qty = 1;
   var kakaoText = '';
@@ -364,8 +364,7 @@
         if (c.freeMin)  FREE_MIN_AFTER = parseInt(c.freeMin);
 
         if (c.freeUntil) {
-          var d = c.freeUntil.split('-');
-          FREE_UNTIL = new Date(parseInt(d[0]), parseInt(d[1]) - 1, parseInt(d[2]), 23, 59, 59);
+          FREE_UNTIL = new Date(c.freeUntil + 'T23:59:59+09:00'); // KST 명시
         }
 
         // 텍스트 반영
