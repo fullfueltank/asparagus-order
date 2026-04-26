@@ -27,8 +27,8 @@
     .topbar-logout { font-size: 12px; color: rgba(255,255,255,0.6); cursor: pointer; border: none; background: none; font-family: 'Noto Sans KR', sans-serif; }
     .topbar-logout:hover { color: #fff; }
 
-    .tab-bar { background: #fff; border-bottom: 1px solid #e5e5e0; display: flex; padding: 0 1rem; }
-    .tab { padding: 0.9rem 1.2rem; font-size: 13px; color: #999; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; }
+    .tab-bar { background: #fff; border-bottom: 1px solid #e5e5e0; display: flex; padding: 0 1rem; overflow-x: auto; }
+    .tab { padding: 0.9rem 1.2rem; font-size: 13px; color: #999; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; white-space: nowrap; }
     .tab.active { color: #3d3424; border-bottom-color: #3d3424; font-weight: 500; }
 
     .content { padding: 1.5rem 1rem; max-width: 1100px; margin: 0 auto; }
@@ -67,7 +67,45 @@
     .loading-msg { text-align: center; padding: 3rem; color: #bbb; font-size: 13px; }
     .empty-msg { text-align: center; padding: 3rem; color: #bbb; font-size: 13px; display: none; }
 
-    .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%); background: #3d3424; color: #f5f0e8; padding: 10px 20px; border-radius: 20px; font-size: 13px; font-family: 'Noto Sans KR', sans-serif; display: none; z-index: 999; }
+    /* ───── 에디터 ───── */
+    .editor-layout { display: grid; grid-template-columns: 210px 1fr; gap: 16px; align-items: start; }
+    @media (max-width: 680px) { .editor-layout { grid-template-columns: 1fr; } }
+
+    .editor-nav { background: #fff; border: 1px solid #e5e5e0; border-radius: 10px; overflow: hidden; position: sticky; top: 1rem; }
+    .editor-nav-item { padding: 12px 16px; font-size: 13px; color: #666; cursor: pointer; border-bottom: 1px solid #f0f0ee; display: flex; align-items: center; gap: 8px; transition: background 0.1s; }
+    .editor-nav-item:last-child { border-bottom: none; }
+    .editor-nav-item:hover { background: #fdfcf9; }
+    .editor-nav-item.active { background: #faf7f0; color: #3d3424; font-weight: 500; }
+    .editor-nav-item .nav-dot { width: 6px; height: 6px; border-radius: 50%; background: #ddd; flex-shrink: 0; transition: background 0.2s; }
+    .editor-nav-item.active .nav-dot { background: #3b6d11; }
+
+    .editor-panel { display: none; }
+    .editor-panel.active { display: block; }
+
+    .edit-card { background: #fff; border: 1px solid #e5e5e0; border-radius: 10px; padding: 1.4rem 1.5rem; margin-bottom: 12px; }
+    .edit-card-title { font-size: 12px; font-weight: 500; color: #999; letter-spacing: 0.06em; margin-bottom: 1rem; padding-bottom: 8px; border-bottom: 1px solid #f0f0ee; }
+    .edit-field { margin-bottom: 14px; }
+    .edit-field:last-child { margin-bottom: 0; }
+    .edit-label { font-size: 12px; color: #666; margin-bottom: 5px; display: flex; align-items: center; gap: 6px; }
+    .edit-label .badge { font-size: 10px; background: #f0f7ea; color: #3b6d11; border: 1px solid #c0dd97; border-radius: 10px; padding: 1px 7px; }
+    .edit-label .badge.warn { background: #fff5f5; color: #a32d2d; border-color: #f7c1c1; }
+    .edit-input { width: 100%; border: 1px solid #ddd; border-radius: 8px; padding: 9px 12px; font-size: 13px; font-family: 'Noto Sans KR', sans-serif; outline: none; color: #1a1a1a; transition: border-color 0.15s; }
+    .edit-input:focus { border-color: #b07d3a; box-shadow: 0 0 0 2px rgba(176,125,58,0.1); }
+    .edit-textarea { width: 100%; border: 1px solid #ddd; border-radius: 8px; padding: 9px 12px; font-size: 13px; font-family: 'Noto Sans KR', sans-serif; outline: none; resize: vertical; min-height: 80px; line-height: 1.7; color: #1a1a1a; transition: border-color 0.15s; }
+    .edit-textarea:focus { border-color: #b07d3a; box-shadow: 0 0 0 2px rgba(176,125,58,0.1); }
+    .edit-hint { font-size: 11px; color: #bbb; margin-top: 4px; line-height: 1.5; }
+
+    .save-bar { display: flex; align-items: center; gap: 10px; margin-top: 4px; }
+    .save-btn { padding: 9px 24px; background: #3d3424; color: #f5f0e8; border: none; border-radius: 8px; font-size: 13px; font-family: 'Noto Sans KR', sans-serif; font-weight: 500; cursor: pointer; transition: background 0.15s; display: flex; align-items: center; gap: 6px; }
+    .save-btn:hover { background: #5a4e38; }
+    .save-btn:disabled { background: #bbb; cursor: not-allowed; }
+    .save-spinner { width: 13px; height: 13px; border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 0.6s linear infinite; display: none; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .save-status { font-size: 12px; }
+    .save-status.ok { color: #3b6d11; }
+    .save-status.err { color: #e24b4a; }
+
+    .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%); background: #3d3424; color: #f5f0e8; padding: 10px 20px; border-radius: 20px; font-size: 13px; font-family: 'Noto Sans KR', sans-serif; display: none; z-index: 999; white-space: nowrap; }
     .toast.show { display: block; }
   </style>
 </head>
@@ -93,8 +131,10 @@
   <div class="tab-bar">
     <div class="tab active" id="tab-dashboard" onclick="showTab('dashboard')">대시보드</div>
     <div class="tab" id="tab-orders" onclick="showTab('orders')">주문 목록</div>
+    <div class="tab" id="tab-editor" onclick="showTab('editor')">✏️ 페이지 편집</div>
   </div>
 
+  <!-- 대시보드 -->
   <div class="content" id="content-dashboard">
     <div class="dash-grid">
       <div class="dash-card highlight"><div class="dash-label">총 주문</div><div class="dash-value" id="d-total">-</div></div>
@@ -107,6 +147,7 @@
     <div id="dash-loading" class="loading-msg">데이터 불러오는 중...</div>
   </div>
 
+  <!-- 주문 목록 -->
   <div class="content" id="content-orders" style="display:none;">
     <div class="toolbar">
       <button class="filter-btn active" onclick="setFilter('all', this)">전체</button>
@@ -121,19 +162,150 @@
     <table class="order-table" id="order-table" style="display:none;">
       <thead>
         <tr>
-          <th>주문일시</th>
-          <th>성함</th>
-          <th>연락처</th>
-          <th>주소</th>
-          <th>상세주소</th>
-          <th>수량</th>
-          <th>금액</th>
-          <th>입금여부</th>
-          <th>발송여부</th>
+          <th>주문일시</th><th>성함</th><th>연락처</th><th>주소</th><th>상세주소</th>
+          <th>수량</th><th>금액</th><th>입금여부</th><th>발송여부</th>
         </tr>
       </thead>
       <tbody id="order-tbody"></tbody>
     </table>
+  </div>
+
+  <!-- 페이지 편집 -->
+  <div class="content" id="content-editor" style="display:none;">
+    <div class="editor-layout">
+
+      <div class="editor-nav">
+        <div class="editor-nav-item active" onclick="switchPanel('price')" id="nav-price"><span class="nav-dot"></span> 가격 · 배송비</div>
+        <div class="editor-nav-item" onclick="switchPanel('date')" id="nav-date"><span class="nav-dot"></span> 무료배송 마감일</div>
+        <div class="editor-nav-item" onclick="switchPanel('account')" id="nav-account"><span class="nav-dot"></span> 계좌 정보</div>
+        <div class="editor-nav-item" onclick="switchPanel('text')" id="nav-text"><span class="nav-dot"></span> 헤더 · 본문 텍스트</div>
+      </div>
+
+      <div>
+        <!-- 가격 -->
+        <div class="editor-panel active" id="panel-price">
+          <div class="edit-card">
+            <div class="edit-card-title">가격 설정</div>
+            <div class="edit-field">
+              <div class="edit-label">1KG 가격 (원)</div>
+              <input class="edit-input" id="e-price" type="number" value="40000" min="0" step="1000">
+            </div>
+            <div class="edit-field">
+              <div class="edit-label">기본 배송비 (원)</div>
+              <input class="edit-input" id="e-delivery" type="number" value="5000" min="0" step="1000">
+              <div class="edit-hint">이벤트 기간 외, 기준금액 미달 시 부과</div>
+            </div>
+            <div class="edit-field">
+              <div class="edit-label">무료배송 최소 금액 (원)</div>
+              <input class="edit-input" id="e-freemin" type="number" value="50000" min="0" step="5000">
+              <div class="edit-hint">이 금액 이상이면 이벤트 종료 후에도 배송비 무료</div>
+            </div>
+          </div>
+          <div class="save-bar">
+            <button class="save-btn" id="save-btn-price" onclick="saveSection('price')">
+              <span class="save-spinner" id="spinner-price"></span>저장
+            </button>
+            <span class="save-status" id="save-status-price"></span>
+          </div>
+        </div>
+
+        <!-- 날짜 -->
+        <div class="editor-panel" id="panel-date">
+          <div class="edit-card">
+            <div class="edit-card-title">무료배송 이벤트 마감일</div>
+            <div class="edit-field">
+              <div class="edit-label">마감 날짜</div>
+              <input class="edit-input" id="e-freeuntil" type="date" value="2026-04-27">
+              <div class="edit-hint">이 날짜 23:59:59까지 주문하면 배송비 무료</div>
+            </div>
+            <div class="edit-field">
+              <div class="edit-label">카운트다운 배너 제목</div>
+              <input class="edit-input" id="e-countdown-title" type="text" value="🎉 무료배송 이벤트 마감까지">
+            </div>
+            <div class="edit-field">
+              <div class="edit-label">카운트다운 안내 문구</div>
+              <textarea class="edit-textarea" id="e-countdown-desc">4월 27일까지 주문해 주시는 분들께 배송비를 무료로 드립니다. 이후에는 5만원(2KG) 이상 주문 시 무료입니다.</textarea>
+            </div>
+          </div>
+          <div class="save-bar">
+            <button class="save-btn" id="save-btn-date" onclick="saveSection('date')">
+              <span class="save-spinner" id="spinner-date"></span>저장
+            </button>
+            <span class="save-status" id="save-status-date"></span>
+          </div>
+        </div>
+
+        <!-- 계좌 -->
+        <div class="editor-panel" id="panel-account">
+          <div class="edit-card">
+            <div class="edit-card-title">계좌 정보</div>
+            <div class="edit-field">
+              <div class="edit-label">은행명</div>
+              <input class="edit-input" id="e-bank" type="text" value="농협은행">
+            </div>
+            <div class="edit-field">
+              <div class="edit-label">계좌번호</div>
+              <input class="edit-input" id="e-account" type="text" value="351-8442-6547-93">
+            </div>
+            <div class="edit-field">
+              <div class="edit-label">예금주</div>
+              <input class="edit-input" id="e-holder" type="text" value="이선혜">
+            </div>
+          </div>
+          <div class="save-bar">
+            <button class="save-btn" id="save-btn-account" onclick="saveSection('account')">
+              <span class="save-spinner" id="spinner-account"></span>저장
+            </button>
+            <span class="save-status" id="save-status-account"></span>
+          </div>
+        </div>
+
+        <!-- 텍스트 -->
+        <div class="editor-panel" id="panel-text">
+          <div class="edit-card">
+            <div class="edit-card-title">헤더</div>
+            <div class="edit-field">
+              <div class="edit-label">뱃지 텍스트</div>
+              <input class="edit-input" id="e-badge" type="text" value="화이트 아스파라거스 직거래">
+            </div>
+            <div class="edit-field">
+              <div class="edit-label">메인 제목</div>
+              <textarea class="edit-textarea" id="e-title" style="min-height:60px;">올해도 찾아주셔서
+감사합니다</textarea>
+              <div class="edit-hint">줄바꿈은 엔터로 입력</div>
+            </div>
+            <div class="edit-field">
+              <div class="edit-label">서브 텍스트</div>
+              <input class="edit-input" id="e-sub" type="text" value="직접 재배한 화이트 아스파라거스를 선보입니다">
+            </div>
+          </div>
+          <div class="edit-card">
+            <div class="edit-card-title">안내 카드 본문</div>
+            <div class="edit-field">
+              <textarea class="edit-textarea" id="e-apology" style="min-height:140px;">작년에 주문해 주신 분들, 다시 찾아와 주셔서 진심으로 감사드립니다.<br><br>올해는 전쟁으로 인한 물가 상승으로 인해 <strong>작년보다 가격이 조금 오르게 되었습니다.</strong> 저희도 최대한 부담을 줄이려 했지만 어쩔 수 없는 부분이 있어 정말 죄송한 마음입니다.<br><br>그래도 <strong>4월 27일까지 주문해 주시는 분들께 배송비를 무료</strong>로 드리며, 정성껏 수확한 아스파라거스를 보내드리겠습니다. 감사합니다 🌿</textarea>
+              <div class="edit-hint">&lt;strong&gt;텍스트&lt;/strong&gt; 로 굵게, &lt;br&gt; 로 줄바꿈</div>
+            </div>
+          </div>
+          <div class="edit-card">
+            <div class="edit-card-title">✔ 프리미엄 항목</div>
+            <div class="edit-field">
+              <div class="edit-label">항목 1</div>
+              <textarea class="edit-textarea" id="e-premium1" style="min-height:60px;">저희 아스파라거스는 <strong>미슐랭 파인다이닝 레스토랑에서도 선택한 프리미엄 국내산 품종</strong>이에요.</textarea>
+            </div>
+            <div class="edit-field">
+              <div class="edit-label">항목 2</div>
+              <textarea class="edit-textarea" id="e-premium2" style="min-height:60px;">수확량보다 주문량이 많아 주문 후 대기 기간이 발생할 수 있습니다. 조금만 여유 있게 기다려주시면 신선한 상태로 보내드릴게요 💚</textarea>
+            </div>
+          </div>
+          <div class="save-bar">
+            <button class="save-btn" id="save-btn-text" onclick="saveSection('text')">
+              <span class="save-spinner" id="spinner-text"></span>저장
+            </button>
+            <span class="save-status" id="save-status-text"></span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -145,23 +317,11 @@
   var allOrders = [];
   var currentFilter = 'all';
 
-  function getPostalWeight(qty) {
-    qty = Number(qty);
-    if (qty <= 3) return 3;
-    if (qty <= 5) return 5;
-    if (qty <= 7) return 7;
-    if (qty <= 10) return 10;
-    if (qty <= 15) return 15;
-    if (qty <= 20) return 20;
-    if (qty <= 25) return 25;
-    return 30;
-  }
-
   function showToast(msg) {
     var t = document.getElementById('toast');
     t.textContent = msg;
     t.className = 'toast show';
-    setTimeout(function() { t.className = 'toast'; }, 2000);
+    setTimeout(function() { t.className = 'toast'; }, 2500);
   }
 
   function doLogin() {
@@ -171,6 +331,7 @@
       document.getElementById('admin-wrap').style.display = 'block';
       loadDashboard();
       loadOrders();
+      loadConfig(); // 설정값 불러오기
     } else {
       document.getElementById('login-error').style.display = 'block';
     }
@@ -183,12 +344,98 @@
   }
 
   function showTab(tab) {
-    document.getElementById('content-dashboard').style.display = tab === 'dashboard' ? 'block' : 'none';
-    document.getElementById('content-orders').style.display = tab === 'orders' ? 'block' : 'none';
-    document.getElementById('tab-dashboard').className = 'tab' + (tab === 'dashboard' ? ' active' : '');
-    document.getElementById('tab-orders').className = 'tab' + (tab === 'orders' ? ' active' : '');
+    ['dashboard','orders','editor'].forEach(function(t) {
+      document.getElementById('content-' + t).style.display = t === tab ? 'block' : 'none';
+      document.getElementById('tab-' + t).className = 'tab' + (t === tab ? ' active' : '');
+    });
   }
 
+  function switchPanel(name) {
+    document.querySelectorAll('.editor-panel').forEach(function(p) { p.classList.remove('active'); });
+    document.querySelectorAll('.editor-nav-item').forEach(function(n) { n.classList.remove('active'); });
+    document.getElementById('panel-' + name).classList.add('active');
+    document.getElementById('nav-' + name).classList.add('active');
+  }
+
+  // ─── 설정 불러오기 (Sheets → 폼 채우기) ───
+  function loadConfig() {
+    fetch(SCRIPT_URL + '?action=config')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        var c = data.config || {};
+        if (c.price)          document.getElementById('e-price').value = c.price;
+        if (c.delivery)       document.getElementById('e-delivery').value = c.delivery;
+        if (c.freeMin)        document.getElementById('e-freemin').value = c.freeMin;
+        if (c.freeUntil)      document.getElementById('e-freeuntil').value = c.freeUntil;
+        if (c.countdownTitle) document.getElementById('e-countdown-title').value = c.countdownTitle;
+        if (c.countdownDesc)  document.getElementById('e-countdown-desc').value = c.countdownDesc;
+        if (c.bank)           document.getElementById('e-bank').value = c.bank;
+        if (c.account)        document.getElementById('e-account').value = c.account;
+        if (c.holder)         document.getElementById('e-holder').value = c.holder;
+        if (c.badge)          document.getElementById('e-badge').value = c.badge;
+        if (c.heroTitle)      document.getElementById('e-title').value = c.heroTitle;
+        if (c.heroSub)        document.getElementById('e-sub').value = c.heroSub;
+        if (c.apology)        document.getElementById('e-apology').value = c.apology;
+        if (c.premium1)       document.getElementById('e-premium1').value = c.premium1;
+        if (c.premium2)       document.getElementById('e-premium2').value = c.premium2;
+      })
+      .catch(function() { /* 실패해도 기본값 유지 */ });
+  }
+
+  // ─── 설정 저장 (폼 → Sheets) ───
+  function saveSection(section) {
+    var config = {};
+
+    if (section === 'price') {
+      config.price    = document.getElementById('e-price').value;
+      config.delivery = document.getElementById('e-delivery').value;
+      config.freeMin  = document.getElementById('e-freemin').value;
+    } else if (section === 'date') {
+      config.freeUntil      = document.getElementById('e-freeuntil').value;
+      config.countdownTitle = document.getElementById('e-countdown-title').value;
+      config.countdownDesc  = document.getElementById('e-countdown-desc').value;
+    } else if (section === 'account') {
+      config.bank    = document.getElementById('e-bank').value;
+      config.account = document.getElementById('e-account').value;
+      config.holder  = document.getElementById('e-holder').value;
+    } else if (section === 'text') {
+      config.badge      = document.getElementById('e-badge').value;
+      config.heroTitle  = document.getElementById('e-title').value;
+      config.heroSub    = document.getElementById('e-sub').value;
+      config.apology    = document.getElementById('e-apology').value;
+      config.premium1   = document.getElementById('e-premium1').value;
+      config.premium2   = document.getElementById('e-premium2').value;
+    }
+
+    var btn     = document.getElementById('save-btn-' + section);
+    var spinner = document.getElementById('spinner-' + section);
+    var status  = document.getElementById('save-status-' + section);
+
+    btn.disabled = true;
+    spinner.style.display = 'inline-block';
+    status.textContent = '';
+
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ type: 'saveConfig', config: config })
+    }).then(function() {
+      btn.disabled = false;
+      spinner.style.display = 'none';
+      status.textContent = '✓ 저장됨 — index에 바로 반영돼요';
+      status.className = 'save-status ok';
+      showToast('✓ 저장되었습니다. 주문 페이지에 즉시 반영됩니다!');
+      setTimeout(function() { status.textContent = ''; }, 4000);
+    }).catch(function() {
+      btn.disabled = false;
+      spinner.style.display = 'none';
+      status.textContent = '❌ 저장 실패. 다시 시도해 주세요.';
+      status.className = 'save-status err';
+    });
+  }
+
+  // ─── 대시보드 ───
   function loadDashboard() {
     fetch(SCRIPT_URL + '?action=orders')
       .then(function(r) { return r.json(); })
@@ -196,17 +443,16 @@
         var orders = data.orders || [];
         var total = orders.length;
         var revenue = orders.reduce(function(s, o) { return s + (Number(o.qty) * 40000); }, 0);
-        var unpaid = orders.filter(function(o) { return o.payment === '미확인'; }).length;
-        var unsent = orders.filter(function(o) { return o.delivery === '발송대기'; }).length;
-        var sent = orders.filter(function(o) { return o.delivery === '발송완료'; }).length;
-        var avgQty = total > 0 ? (orders.reduce(function(s, o) { return s + Number(o.qty); }, 0) / total).toFixed(1) : 0;
-
-        document.getElementById('d-total').textContent = total + '건';
+        var unpaid  = orders.filter(function(o) { return o.payment === '미확인'; }).length;
+        var unsent  = orders.filter(function(o) { return o.delivery === '발송대기'; }).length;
+        var sent    = orders.filter(function(o) { return o.delivery === '발송완료'; }).length;
+        var avgQty  = total > 0 ? (orders.reduce(function(s, o) { return s + Number(o.qty); }, 0) / total).toFixed(1) : 0;
+        document.getElementById('d-total').textContent   = total + '건';
         document.getElementById('d-revenue').textContent = revenue.toLocaleString() + '원';
-        document.getElementById('d-unpaid').textContent = unpaid + '건';
-        document.getElementById('d-unsent').textContent = unsent + '건';
-        document.getElementById('d-sent').textContent = sent + '건';
-        document.getElementById('d-avg').textContent = avgQty + 'KG';
+        document.getElementById('d-unpaid').textContent  = unpaid + '건';
+        document.getElementById('d-unsent').textContent  = unsent + '건';
+        document.getElementById('d-sent').textContent    = sent + '건';
+        document.getElementById('d-avg').textContent     = avgQty + 'KG';
         document.getElementById('dash-loading').style.display = 'none';
       })
       .catch(function() {
@@ -214,11 +460,11 @@
       });
   }
 
+  // ─── 주문 목록 ───
   function loadOrders() {
     document.getElementById('orders-loading').style.display = 'block';
     document.getElementById('order-table').style.display = 'none';
     document.getElementById('orders-empty').style.display = 'none';
-
     fetch(SCRIPT_URL + '?action=orders')
       .then(function(r) { return r.json(); })
       .then(function(data) {
@@ -245,19 +491,15 @@
       if (currentFilter === 'sent') return o.delivery === '발송완료';
       return true;
     });
-
     var tbody = document.getElementById('order-tbody');
     tbody.innerHTML = '';
-
     if (filtered.length === 0) {
       document.getElementById('orders-empty').style.display = 'block';
       document.getElementById('order-table').style.display = 'none';
       return;
     }
-
     document.getElementById('orders-empty').style.display = 'none';
     document.getElementById('order-table').style.display = 'table';
-
     filtered.forEach(function(o) {
       var tr = document.createElement('tr');
       tr.innerHTML =
@@ -275,41 +517,27 @@
   }
 
   function makeSelect(row, field, current, options) {
-    var cls = '';
-    if (current === '입금확인') cls = 'confirmed';
-    else if (current === '미확인') cls = 'unconfirmed';
-    else if (current === '발송완료') cls = 'sent';
-    else if (current === '발송대기') cls = 'pending';
-
+    var cls = current === '입금확인' ? 'confirmed' : current === '미확인' ? 'unconfirmed' : current === '발송완료' ? 'sent' : 'pending';
     var html = '<select class="status-select ' + cls + '" onchange="updateStatus(' + row + ', \'' + field + '\', this)">';
     options.forEach(function(opt) {
       html += '<option value="' + opt + '"' + (opt === current ? ' selected' : '') + '>' + opt + '</option>';
     });
-    html += '</select>';
-    return html;
+    return html + '</select>';
   }
 
   function updateStatus(row, field, selectEl) {
     var value = selectEl.value;
     selectEl.disabled = true;
-
     fetch(SCRIPT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
+      method: 'POST', mode: 'no-cors',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ type: 'update', row: row, field: field, value: value })
     }).then(function() {
       selectEl.disabled = false;
-      var cls = '';
-      if (value === '입금확인') cls = 'confirmed';
-      else if (value === '미확인') cls = 'unconfirmed';
-      else if (value === '발송완료') cls = 'sent';
-      else if (value === '발송대기') cls = 'pending';
+      var cls = value === '입금확인' ? 'confirmed' : value === '미확인' ? 'unconfirmed' : value === '발송완료' ? 'sent' : 'pending';
       selectEl.className = 'status-select ' + cls;
-
       var order = allOrders.find(function(o) { return o.row === row; });
       if (order) order[field === 'payment' ? 'payment' : 'delivery'] = value;
-
       showToast('✓ 상태가 변경되었습니다');
       loadDashboard();
     }).catch(function() {
@@ -318,49 +546,26 @@
     });
   }
 
+  function getPostalWeight(qty) {
+    qty = Number(qty);
+    if (qty <= 3) return 3; if (qty <= 5) return 5; if (qty <= 7) return 7;
+    if (qty <= 10) return 10; if (qty <= 15) return 15; if (qty <= 20) return 20;
+    if (qty <= 25) return 25; return 30;
+  }
+
   function exportPostal() {
-    var targets = allOrders.filter(function(o) {
-      return o.payment === '입금확인' && o.delivery === '발송대기';
-    });
-
-    if (targets.length === 0) {
-      alert('입금확인 + 발송대기 상태인 주문이 없습니다.');
-      return;
-    }
-
+    var targets = allOrders.filter(function(o) { return o.payment === '입금확인' && o.delivery === '발송대기'; });
+    if (targets.length === 0) { alert('입금확인 + 발송대기 상태인 주문이 없습니다.'); return; }
     var rows = [['받는 분','우편번호','주소(시도+시군구+도로명+건물번호)','상세주소(동, 호수, 洞명칭, 아파트, 건물명 등)','일반전화(02-1234-5678)','휴대전화(010-1234-5678)','중량(kg)','부피(cm)=가로+세로+높이','내용품코드','내용물','배달방식','배송시요청사항','분할접수 여부(Y/N)','분할접수 첫번째 중량(kg)','분할접수 첫번째 부피(cm)','분할접수 두번째 중량(kg)','분할접수 두번째 부피(cm)']];
-
     targets.forEach(function(o) {
-      rows.push([
-        o.name,
-        o.zipcode || '',
-        o.address || '',
-        o.addressDetail || '',
-        '',
-        o.phone,
-        getPostalWeight(o.qty),
-        '',
-        '농/수/축산물(일반)',
-        '',
-        '',
-        '',
-        'N',
-        '', '', '', ''
-      ]);
+      rows.push([o.name, o.zipcode||'', o.address||'', o.addressDetail||'', '', o.phone, getPostalWeight(o.qty), '', '농/수/축산물(일반)', '', '', '', 'N', '', '', '', '']);
     });
-
-    var csv = rows.map(function(r) {
-      return r.map(function(c) { return '"' + String(c).replace(/"/g, '""') + '"'; }).join(',');
-    }).join('\n');
-
+    var csv = rows.map(function(r) { return r.map(function(c) { return '"' + String(c).replace(/"/g,'""') + '"'; }).join(','); }).join('\n');
     var blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
-    var url = URL.createObjectURL(blob);
     var a = document.createElement('a');
-    a.href = url;
-    a.download = '우체국발송_' + new Date().toLocaleDateString('ko-KR').replace(/\. /g, '-').replace('.', '') + '.csv';
+    a.href = URL.createObjectURL(blob);
+    a.download = '우체국발송_' + new Date().toLocaleDateString('ko-KR').replace(/\. /g,'-').replace('.','') + '.csv';
     a.click();
-    URL.revokeObjectURL(url);
-
     showToast(targets.length + '건 다운로드 완료!');
   }
 </script>
