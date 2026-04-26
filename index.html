@@ -101,9 +101,23 @@
     .account-number { font-size: 16px; font-weight: 500; color: #3d3424; letter-spacing: 0.04em; font-family: 'Noto Sans KR', sans-serif; }
     .account-notice { font-size: 12px; color: #888; font-family: 'Noto Sans KR', sans-serif; line-height: 1.8; margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid #e5e5e0; }
     .account-notice strong { color: #1a1a1a; font-weight: 500; }
-    .notice-card { background: #f0f5ff; border: 1px solid #b5d4f4; border-radius: 8px; padding: 0.9rem 1.1rem; margin-top: 0.75rem; }
-    .notice-card p { font-size: 12px; color: #185fa5; font-family: 'Noto Sans KR', sans-serif; line-height: 1.8; }
-    .notice-card strong { font-weight: 500; }
+    .notice-card { background: #f0f5ff; border: 1px solid #b5d4f4; border-radius: 12px; padding: 1rem 1.25rem; margin-top: 0.75rem; }
+    .notice-card-title { font-size: 12px; font-weight: 500; color: #185fa5; font-family: 'Noto Sans KR', sans-serif; margin-bottom: 0.75rem; letter-spacing: 0.04em; }
+    .notice-schedule { display: flex; flex-direction: column; gap: 6px; margin-bottom: 0.75rem; }
+    .schedule-row { display: flex; align-items: flex-start; gap: 10px; padding: 7px 10px; border-radius: 8px; font-family: 'Noto Sans KR', sans-serif; }
+    .schedule-row.s-active  { background: #e8f4e8; border: 1px solid #b8ddb8; }
+    .schedule-row.s-off     { background: #f5f5f5; border: 1px solid #e5e5e0; }
+    .schedule-row.s-resume  { background: #fff3e0; border: 1px solid #f0c878; }
+    .schedule-date { font-size: 12px; font-weight: 500; min-width: 88px; flex-shrink: 0; padding-top: 1px; }
+    .schedule-row.s-active .schedule-date  { color: #2d6b2d; }
+    .schedule-row.s-off .schedule-date     { color: #999; }
+    .schedule-row.s-resume .schedule-date  { color: #a05c00; }
+    .schedule-desc { font-size: 12px; line-height: 1.6; }
+    .schedule-row.s-active .schedule-desc  { color: #3a6b3a; }
+    .schedule-row.s-off .schedule-desc     { color: #aaa; }
+    .schedule-row.s-resume .schedule-desc  { color: #a05c00; }
+    .notice-bottom { font-size: 12px; color: #185fa5; font-family: 'Noto Sans KR', sans-serif; line-height: 1.8; padding-top: 0.6rem; border-top: 1px solid #c5daf5; }
+    .notice-bottom strong { font-weight: 500; color: #185fa5; }
 
     .review-section { margin-top: 3rem; }
     .review-summary { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
@@ -268,9 +282,14 @@
       입금자명을 <strong>주문 시 작성하신 성함</strong>으로 해주세요.<br>
       입금 확인 후 수확하여 <strong>가장 신선한 상태</strong>로 보내드립니다.
     </div>
-    <div class="notice-card">
-      <p>수확량에 따라 발송까지 <strong>대기시간이 발생할 수 있습니다.</strong><br>
-      주문이 많이 몰릴 경우 순서대로 처리되오니 양해 부탁드립니다.</p>
+    <div class="notice-card" id="notice-card">
+      <div class="notice-card-title">📦 발송 일정 안내</div>
+      <div class="notice-schedule" id="notice-schedule"></div>
+      <div class="notice-bottom" id="notice-bottom">
+        수확 후 바로 발송해도 택배사 휴일이 끼면 신선도가 떨어질 수 있어,<br>
+        <strong>가장 신선한 상태로 받아보실 수 있도록</strong> 휴일 전후 발송을 조정하고 있습니다.<br><br>
+        수확량에 따라 대기시간이 발생할 수 있으며, 주문 순서대로 처리되오니 양해 부탁드립니다.
+      </div>
     </div>
   </div>
 
@@ -365,6 +384,9 @@
         // 가격 표시 업데이트
         document.getElementById('price-display').textContent = PRICE.toLocaleString() + '원';
 
+        // 발송 일정 렌더링
+        renderSchedule(c);
+
         configLoaded = true;
         updatePrice();
         document.getElementById('main-page').classList.add('page-loaded');
@@ -377,6 +399,47 @@
   }
 
   function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+  // ─── 발송 일정 렌더링 ───
+  // 행 순서: 1=초록(active), 2=회색(off), 3=주황(resume), 4=초록(active)
+  var SCH_TYPES = ['s-active', 's-off', 's-resume', 's-active'];
+
+  function renderSchedule(c) {
+    // 기본값 (설정 없을 때 fallback)
+    var defaults = [
+      { date: '~ 4/29 (화)', desc: '입금 확인 순서대로 수확 후 순차 발송' },
+      { date: '4/30 – 5/5',  desc: '택배사 휴일 구간 · 신선도 유지를 위해 발송 중단' },
+      { date: '5/6 (월) ~',  desc: '발송 재개 · 순차 발송 진행' },
+      { date: '',             desc: '' }
+    ];
+    var rows = [
+      { date: (c && c.sch1Date) || defaults[0].date, desc: (c && c.sch1Desc) || defaults[0].desc },
+      { date: (c && c.sch2Date) || defaults[1].date, desc: (c && c.sch2Desc) || defaults[1].desc },
+      { date: (c && c.sch3Date) || defaults[2].date, desc: (c && c.sch3Desc) || defaults[2].desc },
+      { date: (c && c.sch4Date) || defaults[3].date, desc: (c && c.sch4Desc) || defaults[3].desc }
+    ];
+
+    var html = '';
+    rows.forEach(function(row, i) {
+      if (!row.date.trim()) return; // 날짜 비어있으면 숨김
+      html += '<div class="schedule-row ' + SCH_TYPES[i] + '">' +
+        '<div class="schedule-date">' + row.date + '</div>' +
+        '<div class="schedule-desc">' + row.desc + '</div>' +
+        '</div>';
+    });
+    document.getElementById('notice-schedule').innerHTML = html;
+
+    // 하단 문구 (*텍스트* → <strong> 변환)
+    if (c && c.schBottom) {
+      var bottom = c.schBottom
+        .replace(/\*(.*?)\*/g, '<strong>$1</strong>')
+        .replace(/\n/g, '<br>');
+      document.getElementById('notice-bottom').innerHTML = bottom;
+    }
+  }
+
+  // 설정 없을 때 기본 발송일정 표시
+  renderSchedule(null);
   function isEventActive() { return new Date() <= FREE_UNTIL; }
   function getDeliveryFee(t) { if (isEventActive()) return 0; return t >= FREE_MIN_AFTER ? 0 : DELIVERY_FEE; }
 
