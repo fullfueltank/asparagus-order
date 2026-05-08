@@ -14,16 +14,16 @@
     .login-box { background: #fff; border-radius: 16px; padding: 2.5rem 2rem; max-width: 360px; width: 100%; text-align: center; border: 1px solid #e5e5e0; }
     .login-icon { font-size: 36px; margin-bottom: 1rem; }
     .login-title { font-size: 18px; font-weight: 500; margin-bottom: 0.4rem; }
-    .login-sub { font-size: 12px; color: #999; margin-bottom: 1.5rem; }
+    .login-sub   { font-size: 12px; color: #999; margin-bottom: 1.5rem; }
     .login-input { width: 100%; border: 1px solid #ddd; border-radius: 8px; padding: 11px 14px; font-size: 14px; font-family: 'Noto Sans KR', sans-serif; outline: none; margin-bottom: 10px; }
     .login-input:focus { border-color: #3d3424; }
-    .login-btn { width: 100%; padding: 12px; background: #3d3424; color: #f5f0e8; border: none; border-radius: 8px; font-size: 14px; font-family: 'Noto Sans KR', sans-serif; font-weight: 500; cursor: pointer; }
+    .login-btn   { width: 100%; padding: 12px; background: #3d3424; color: #f5f0e8; border: none; border-radius: 8px; font-size: 14px; font-family: 'Noto Sans KR', sans-serif; font-weight: 500; cursor: pointer; }
     .login-btn:hover { background: #5a4e38; }
     .login-error { font-size: 12px; color: #e24b4a; margin-top: 8px; display: none; }
 
     .admin-wrap { display: none; }
     .topbar { background: #3d3424; color: #f5f0e8; padding: 0.9rem 1.5rem; display: flex; justify-content: space-between; align-items: center; }
-    .topbar-title { font-size: 15px; font-weight: 500; }
+    .topbar-title  { font-size: 15px; font-weight: 500; }
     .topbar-logout { font-size: 12px; color: rgba(255,255,255,0.6); cursor: pointer; border: none; background: none; font-family: 'Noto Sans KR', sans-serif; }
     .topbar-logout:hover { color: #fff; }
 
@@ -39,10 +39,10 @@
     .dash-value { font-size: 22px; font-weight: 500; color: #1a1a1a; }
     .dash-card.highlight { background: #faf7f0; border-color: #e8dfc8; }
     .dash-card.highlight .dash-value { color: #3d3424; }
-    .dash-card.warning { background: #fff5f5; border-color: #f7c1c1; }
-    .dash-card.warning .dash-value { color: #a32d2d; }
-    .dash-card.success { background: #f0f7ea; border-color: #c0dd97; }
-    .dash-card.success .dash-value { color: #3b6d11; }
+    .dash-card.warning   { background: #fff5f5; border-color: #f7c1c1; }
+    .dash-card.warning .dash-value   { color: #a32d2d; }
+    .dash-card.success   { background: #f0f7ea; border-color: #c0dd97; }
+    .dash-card.success .dash-value   { color: #3b6d11; }
 
     .toolbar { display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap; align-items: center; }
     .filter-btn { padding: 6px 14px; border: 1px solid #ddd; border-radius: 20px; font-size: 12px; font-family: 'Noto Sans KR', sans-serif; cursor: pointer; background: #fff; color: #666; }
@@ -59,18 +59,21 @@
     .order-table tr:hover td { background: #fdfcf9; }
 
     .status-select { border: 1px solid #ddd; border-radius: 6px; padding: 4px 8px; font-size: 12px; font-family: 'Noto Sans KR', sans-serif; outline: none; cursor: pointer; }
-    .status-select.confirmed { background: #f0f7ea; border-color: #c0dd97; color: #3b6d11; }
+    .status-select.confirmed   { background: #f0f7ea; border-color: #c0dd97; color: #3b6d11; }
     .status-select.unconfirmed { background: #fff5f5; border-color: #f7c1c1; color: #a32d2d; }
-    .status-select.sent { background: #f0f7ea; border-color: #c0dd97; color: #3b6d11; }
-    .status-select.pending { background: #faf7f0; border-color: #e8dfc8; color: #b07d3a; }
+    .status-select.sent        { background: #f0f7ea; border-color: #c0dd97; color: #3b6d11; }
+    .status-select.pending     { background: #faf7f0; border-color: #e8dfc8; color: #b07d3a; }
+
+    .opt-badge { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 10px; white-space: nowrap; }
+    .opt-badge.a { background: #faf7f0; color: #b07d3a; border: 1px solid #e8dfc8; }
+    .opt-badge.b { background: #f0f7ea; color: #3b6d11; border: 1px solid #c0dd97; }
 
     .loading-msg { text-align: center; padding: 3rem; color: #bbb; font-size: 13px; }
-    .empty-msg { text-align: center; padding: 3rem; color: #bbb; font-size: 13px; display: none; }
+    .empty-msg   { text-align: center; padding: 3rem; color: #bbb; font-size: 13px; display: none; }
 
-    /* ───── 에디터 ───── */
+    /* ── 에디터 ── */
     .editor-layout { display: grid; grid-template-columns: 210px 1fr; gap: 16px; align-items: start; }
     @media (max-width: 680px) { .editor-layout { grid-template-columns: 1fr; } }
-
     .editor-nav { background: #fff; border: 1px solid #e5e5e0; border-radius: 10px; overflow: hidden; position: sticky; top: 1rem; }
     .editor-nav-item { padding: 12px 16px; font-size: 13px; color: #666; cursor: pointer; border-bottom: 1px solid #f0f0ee; display: flex; align-items: center; gap: 8px; transition: background 0.1s; }
     .editor-nav-item:last-child { border-bottom: none; }
@@ -89,11 +92,25 @@
     .edit-label { font-size: 12px; color: #666; margin-bottom: 5px; display: flex; align-items: center; gap: 6px; }
     .edit-label .badge { font-size: 10px; background: #f0f7ea; color: #3b6d11; border: 1px solid #c0dd97; border-radius: 10px; padding: 1px 7px; }
     .edit-label .badge.warn { background: #fff5f5; color: #a32d2d; border-color: #f7c1c1; }
-    .edit-input { width: 100%; border: 1px solid #ddd; border-radius: 8px; padding: 9px 12px; font-size: 13px; font-family: 'Noto Sans KR', sans-serif; outline: none; color: #1a1a1a; transition: border-color 0.15s; }
+    .edit-input    { width: 100%; border: 1px solid #ddd; border-radius: 8px; padding: 9px 12px; font-size: 13px; font-family: 'Noto Sans KR', sans-serif; outline: none; color: #1a1a1a; transition: border-color 0.15s; }
     .edit-input:focus { border-color: #b07d3a; box-shadow: 0 0 0 2px rgba(176,125,58,0.1); }
     .edit-textarea { width: 100%; border: 1px solid #ddd; border-radius: 8px; padding: 9px 12px; font-size: 13px; font-family: 'Noto Sans KR', sans-serif; outline: none; resize: vertical; min-height: 80px; line-height: 1.7; color: #1a1a1a; transition: border-color 0.15s; }
     .edit-textarea:focus { border-color: #b07d3a; box-shadow: 0 0 0 2px rgba(176,125,58,0.1); }
     .edit-hint { font-size: 11px; color: #bbb; margin-top: 4px; line-height: 1.5; }
+
+    /* 토글 스위치 */
+    .toggle-row { display: flex; align-items: center; gap: 12px; }
+    .toggle-label-text { font-size: 13px; color: #1a1a1a; }
+    .toggle-sublabel { font-size: 11px; color: #bbb; margin-top: 2px; }
+    .toggle { position: relative; display: inline-block; width: 44px; height: 24px; flex-shrink: 0; }
+    .toggle input { opacity: 0; width: 0; height: 0; }
+    .toggle-slider { position: absolute; cursor: pointer; inset: 0; background: #ccc; border-radius: 24px; transition: background 0.2s; }
+    .toggle-slider:before { content:''; position: absolute; height: 18px; width: 18px; left: 3px; bottom: 3px; background: #fff; border-radius: 50%; transition: transform 0.2s; }
+    .toggle input:checked + .toggle-slider { background: #3b6d11; }
+    .toggle input:checked + .toggle-slider:before { transform: translateX(20px); }
+    .toggle-state { font-size: 12px; font-weight: 500; }
+    .toggle-state.on  { color: #3b6d11; }
+    .toggle-state.off { color: #aaa; }
 
     .save-bar { display: flex; align-items: center; gap: 10px; margin-top: 4px; }
     .save-btn { padding: 9px 24px; background: #3d3424; color: #f5f0e8; border: none; border-radius: 8px; font-size: 13px; font-family: 'Noto Sans KR', sans-serif; font-weight: 500; cursor: pointer; transition: background 0.15s; display: flex; align-items: center; gap: 6px; }
@@ -102,7 +119,7 @@
     .save-spinner { width: 13px; height: 13px; border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 0.6s linear infinite; display: none; }
     @keyframes spin { to { transform: rotate(360deg); } }
     .save-status { font-size: 12px; }
-    .save-status.ok { color: #3b6d11; }
+    .save-status.ok  { color: #3b6d11; }
     .save-status.err { color: #e24b4a; }
 
     .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%); background: #3d3424; color: #f5f0e8; padding: 10px 20px; border-radius: 20px; font-size: 13px; font-family: 'Noto Sans KR', sans-serif; display: none; z-index: 999; white-space: nowrap; }
@@ -127,11 +144,10 @@
     <div class="topbar-title">🌿 아스파라거스 판매 관리</div>
     <button class="topbar-logout" onclick="doLogout()">로그아웃</button>
   </div>
-
   <div class="tab-bar">
     <div class="tab active" id="tab-dashboard" onclick="showTab('dashboard')">대시보드</div>
-    <div class="tab" id="tab-orders" onclick="showTab('orders')">주문 목록</div>
-    <div class="tab" id="tab-editor" onclick="showTab('editor')">✏️ 페이지 편집</div>
+    <div class="tab" id="tab-orders"    onclick="showTab('orders')">주문 목록</div>
+    <div class="tab" id="tab-editor"    onclick="showTab('editor')">✏️ 페이지 편집</div>
   </div>
 
   <!-- 대시보드 -->
@@ -150,20 +166,20 @@
   <!-- 주문 목록 -->
   <div class="content" id="content-orders" style="display:none;">
     <div class="toolbar">
-      <button class="filter-btn active" onclick="setFilter('all', this)">전체</button>
-      <button class="filter-btn" onclick="setFilter('unpaid', this)">입금 미확인</button>
-      <button class="filter-btn" onclick="setFilter('pending', this)">발송 대기</button>
-      <button class="filter-btn" onclick="setFilter('sent', this)">발송 완료</button>
+      <button class="filter-btn active" onclick="setFilter('all',this)">전체</button>
+      <button class="filter-btn" onclick="setFilter('unpaid',this)">입금 미확인</button>
+      <button class="filter-btn" onclick="setFilter('pending',this)">발송 대기</button>
+      <button class="filter-btn" onclick="setFilter('sent',this)">발송 완료</button>
       <button class="refresh-btn" onclick="loadOrders()">↻ 새로고침</button>
       <button class="export-btn" onclick="exportPostal()">우체국 명단 다운로드</button>
     </div>
     <div id="orders-loading" class="loading-msg">주문 목록 불러오는 중...</div>
-    <div id="orders-empty" class="empty-msg">조건에 맞는 주문이 없어요.</div>
+    <div id="orders-empty"   class="empty-msg">조건에 맞는 주문이 없어요.</div>
     <table class="order-table" id="order-table" style="display:none;">
       <thead>
         <tr>
           <th>주문일시</th><th>성함</th><th>연락처</th><th>주소</th><th>상세주소</th>
-          <th>수량</th><th>금액</th><th>입금여부</th><th>발송여부</th>
+          <th>옵션</th><th>수량</th><th>금액</th><th>입금여부</th><th>발송여부</th>
         </tr>
       </thead>
       <tbody id="order-tbody"></tbody>
@@ -173,24 +189,49 @@
   <!-- 페이지 편집 -->
   <div class="content" id="content-editor" style="display:none;">
     <div class="editor-layout">
-
       <div class="editor-nav">
-        <div class="editor-nav-item active" onclick="switchPanel('price')" id="nav-price"><span class="nav-dot"></span> 가격 · 배송비</div>
-        <div class="editor-nav-item" onclick="switchPanel('date')" id="nav-date"><span class="nav-dot"></span> 무료배송 마감일</div>
-        <div class="editor-nav-item" onclick="switchPanel('account')" id="nav-account"><span class="nav-dot"></span> 계좌 정보</div>
-        <div class="editor-nav-item" onclick="switchPanel('text')" id="nav-text"><span class="nav-dot"></span> 헤더 · 본문 텍스트</div>
-        <div class="editor-nav-item" onclick="switchPanel('schedule')" id="nav-schedule"><span class="nav-dot"></span> 📦 발송 일정 공지</div>
+        <div class="editor-nav-item active" onclick="switchPanel('price')"    id="nav-price">   <span class="nav-dot"></span> 가격 · 옵션</div>
+        <div class="editor-nav-item"        onclick="switchPanel('date')"     id="nav-date">    <span class="nav-dot"></span> 무료배송 설정</div>
+        <div class="editor-nav-item"        onclick="switchPanel('account')"  id="nav-account"> <span class="nav-dot"></span> 계좌 정보</div>
+        <div class="editor-nav-item"        onclick="switchPanel('text')"     id="nav-text">    <span class="nav-dot"></span> 헤더 · 본문 텍스트</div>
+        <div class="editor-nav-item"        onclick="switchPanel('schedule')" id="nav-schedule"><span class="nav-dot"></span> 📦 발송 일정 공지</div>
       </div>
 
       <div>
-        <!-- 가격 -->
+        <!-- ── 가격·옵션 패널 ── -->
         <div class="editor-panel active" id="panel-price">
           <div class="edit-card">
-            <div class="edit-card-title">가격 설정</div>
+            <div class="edit-card-title">옵션 A — A급 (프리미엄)</div>
+            <div class="edit-field">
+              <div class="edit-label">옵션 이름</div>
+              <input class="edit-input" id="e-opt-a-name" type="text" value="A급 (프리미엄)">
+            </div>
             <div class="edit-field">
               <div class="edit-label">1KG 가격 (원)</div>
-              <input class="edit-input" id="e-price" type="number" value="40000" min="0" step="1000">
+              <input class="edit-input" id="e-price-a" type="number" value="50000" min="0" step="1000">
             </div>
+            <div class="edit-field">
+              <div class="edit-label">옵션 설명 (주문 페이지에 표시)</div>
+              <input class="edit-input" id="e-opt-a-desc" type="text" value="미슐랭 레스토랑에서 선택한 최상급 · 굵고 균일한 대">
+            </div>
+          </div>
+          <div class="edit-card">
+            <div class="edit-card-title">옵션 B — 실속 (B급)</div>
+            <div class="edit-field">
+              <div class="edit-label">옵션 이름</div>
+              <input class="edit-input" id="e-opt-b-name" type="text" value="실속 (B급)">
+            </div>
+            <div class="edit-field">
+              <div class="edit-label">1KG 가격 (원)</div>
+              <input class="edit-input" id="e-price-b" type="number" value="30000" min="0" step="1000">
+            </div>
+            <div class="edit-field">
+              <div class="edit-label">옵션 설명</div>
+              <input class="edit-input" id="e-opt-b-desc" type="text" value="굵기·외관은 조금 다르지만 맛과 신선도는 동일">
+            </div>
+          </div>
+          <div class="edit-card">
+            <div class="edit-card-title">배송비</div>
             <div class="edit-field">
               <div class="edit-label">기본 배송비 (원)</div>
               <input class="edit-input" id="e-delivery" type="number" value="5000" min="0" step="1000">
@@ -210,14 +251,30 @@
           </div>
         </div>
 
-        <!-- 날짜 -->
+        <!-- ── 무료배송 설정 패널 ── -->
         <div class="editor-panel" id="panel-date">
+          <div class="edit-card">
+            <div class="edit-card-title">무료배송 이벤트 ON / OFF</div>
+            <div class="edit-field">
+              <div class="toggle-row">
+                <label class="toggle">
+                  <input type="checkbox" id="e-freeship-toggle" checked onchange="updateToggleLabel()">
+                  <span class="toggle-slider"></span>
+                </label>
+                <div>
+                  <div class="toggle-label-text">카운트다운 배너 표시</div>
+                  <div class="toggle-sublabel">OFF 시 배너 숨김 + 평소 배송비 규칙 적용</div>
+                </div>
+                <span class="toggle-state on" id="toggle-state-label">ON</span>
+              </div>
+            </div>
+          </div>
           <div class="edit-card">
             <div class="edit-card-title">무료배송 이벤트 마감일</div>
             <div class="edit-field">
               <div class="edit-label">마감 날짜</div>
               <input class="edit-input" id="e-freeuntil" type="date" value="2026-04-27">
-              <div class="edit-hint">이 날짜 23:59:59까지 주문하면 배송비 무료</div>
+              <div class="edit-hint">이 날짜 23:59:59까지 주문하면 배송비 무료 (토글이 ON일 때만 적용)</div>
             </div>
             <div class="edit-field">
               <div class="edit-label">카운트다운 배너 제목</div>
@@ -225,7 +282,7 @@
             </div>
             <div class="edit-field">
               <div class="edit-label">카운트다운 안내 문구</div>
-              <textarea class="edit-textarea" id="e-countdown-desc">4월 27일까지 주문해 주시는 분들께 배송비를 무료로 드립니다. 이후에는 5만원(2KG) 이상 주문 시 무료입니다.</textarea>
+              <textarea class="edit-textarea" id="e-countdown-desc">4월 27일까지 주문해 주시는 분들께 배송비를 무료로 드립니다.</textarea>
             </div>
           </div>
           <div class="save-bar">
@@ -236,7 +293,7 @@
           </div>
         </div>
 
-        <!-- 계좌 -->
+        <!-- ── 계좌 패널 ── -->
         <div class="editor-panel" id="panel-account">
           <div class="edit-card">
             <div class="edit-card-title">계좌 정보</div>
@@ -261,7 +318,7 @@
           </div>
         </div>
 
-        <!-- 텍스트 -->
+        <!-- ── 텍스트 패널 ── -->
         <div class="editor-panel" id="panel-text">
           <div class="edit-card">
             <div class="edit-card-title">헤더</div>
@@ -305,7 +362,8 @@
             <span class="save-status" id="save-status-text"></span>
           </div>
         </div>
-        <!-- 발송 일정 공지 -->
+
+        <!-- ── 발송 일정 패널 ── -->
         <div class="editor-panel" id="panel-schedule">
           <div class="edit-card">
             <div class="edit-card-title">발송 일정 행 (최대 4개)</div>
@@ -347,10 +405,10 @@
           </div>
         </div>
 
-      </div>
-    </div>
-  </div>
-</div>
+      </div><!-- /editor right -->
+    </div><!-- /editor-layout -->
+  </div><!-- /content-editor -->
+</div><!-- /admin-wrap -->
 
 <div class="toast" id="toast"></div>
 
@@ -362,56 +420,70 @@
 
   function showToast(msg) {
     var t = document.getElementById('toast');
-    t.textContent = msg;
-    t.className = 'toast show';
-    setTimeout(function() { t.className = 'toast'; }, 2500);
+    t.textContent = msg; t.className = 'toast show';
+    setTimeout(function(){ t.className='toast'; }, 2500);
   }
-
   function doLogin() {
     var pw = document.getElementById('pw-input').value;
     if (pw === PASSWORD) {
       document.getElementById('login-wrap').style.display = 'none';
       document.getElementById('admin-wrap').style.display = 'block';
-      loadDashboard();
-      loadOrders();
-      loadConfig(); // 설정값 불러오기
+      loadDashboard(); loadOrders(); loadConfig();
     } else {
       document.getElementById('login-error').style.display = 'block';
     }
   }
-
   function doLogout() {
     document.getElementById('login-wrap').style.display = 'flex';
     document.getElementById('admin-wrap').style.display = 'none';
     document.getElementById('pw-input').value = '';
   }
-
   function showTab(tab) {
-    ['dashboard','orders','editor'].forEach(function(t) {
-      document.getElementById('content-' + t).style.display = t === tab ? 'block' : 'none';
-      document.getElementById('tab-' + t).className = 'tab' + (t === tab ? ' active' : '');
+    ['dashboard','orders','editor'].forEach(function(t){
+      document.getElementById('content-'+t).style.display = t===tab?'block':'none';
+      document.getElementById('tab-'+t).className = 'tab'+(t===tab?' active':'');
     });
   }
-
   function switchPanel(name) {
-    document.querySelectorAll('.editor-panel').forEach(function(p) { p.classList.remove('active'); });
-    document.querySelectorAll('.editor-nav-item').forEach(function(n) { n.classList.remove('active'); });
-    document.getElementById('panel-' + name).classList.add('active');
-    document.getElementById('nav-' + name).classList.add('active');
+    document.querySelectorAll('.editor-panel').forEach(function(p){ p.classList.remove('active'); });
+    document.querySelectorAll('.editor-nav-item').forEach(function(n){ n.classList.remove('active'); });
+    document.getElementById('panel-'+name).classList.add('active');
+    document.getElementById('nav-'+name).classList.add('active');
   }
 
-  // ─── 설정 불러오기 (Sheets → 폼 채우기) ───
+  // ── 토글 라벨 ──
+  function updateToggleLabel() {
+    var on = document.getElementById('e-freeship-toggle').checked;
+    var lbl = document.getElementById('toggle-state-label');
+    lbl.textContent = on ? 'ON' : 'OFF';
+    lbl.className = 'toggle-state ' + (on ? 'on' : 'off');
+  }
+
+  // ── 설정 불러오기 ──
   function loadConfig() {
     fetch(SCRIPT_URL + '?action=config')
-      .then(function(r) { return r.json(); })
-      .then(function(data) {
+      .then(function(r){ return r.json(); })
+      .then(function(data){
         var c = data.config || {};
-        if (c.price)          document.getElementById('e-price').value = c.price;
+        if (c.priceA)         document.getElementById('e-price-a').value = c.priceA;
+        else if (c.price)     document.getElementById('e-price-a').value = c.price;
+        if (c.priceB)         document.getElementById('e-price-b').value = c.priceB;
+        if (c.optAName)       document.getElementById('e-opt-a-name').value = c.optAName;
+        if (c.optBName)       document.getElementById('e-opt-b-name').value = c.optBName;
+        if (c.optADesc)       document.getElementById('e-opt-a-desc').value = c.optADesc;
+        if (c.optBDesc)       document.getElementById('e-opt-b-desc').value = c.optBDesc;
         if (c.delivery)       document.getElementById('e-delivery').value = c.delivery;
         if (c.freeMin)        document.getElementById('e-freemin').value = c.freeMin;
         if (c.freeUntil)      document.getElementById('e-freeuntil').value = c.freeUntil;
         if (c.countdownTitle) document.getElementById('e-countdown-title').value = c.countdownTitle;
         if (c.countdownDesc)  document.getElementById('e-countdown-desc').value = c.countdownDesc;
+        // 토글
+        if (c.freeShipEnabled !== undefined && c.freeShipEnabled !== '') {
+          var v = String(c.freeShipEnabled).toLowerCase();
+          var isOn = (v==='on'||v==='true'||v==='1'||v==='y');
+          document.getElementById('e-freeship-toggle').checked = isOn;
+          updateToggleLabel();
+        }
         if (c.bank)           document.getElementById('e-bank').value = c.bank;
         if (c.account)        document.getElementById('e-account').value = c.account;
         if (c.holder)         document.getElementById('e-holder').value = c.holder;
@@ -431,203 +503,192 @@
         if (c.sch4Desc)       document.getElementById('e-sch4-desc').value = c.sch4Desc;
         if (c.schBottom)      document.getElementById('e-sch-bottom').value = c.schBottom;
       })
-      .catch(function() { /* 실패해도 기본값 유지 */ });
+      .catch(function(){});
   }
 
-  // ─── 설정 저장 (폼 → Sheets) ───
+  // ── 설정 저장 ──
   function saveSection(section) {
     var config = {};
-
     if (section === 'price') {
-      config.price    = document.getElementById('e-price').value;
-      config.delivery = document.getElementById('e-delivery').value;
-      config.freeMin  = document.getElementById('e-freemin').value;
+      config.priceA    = document.getElementById('e-price-a').value;
+      config.priceB    = document.getElementById('e-price-b').value;
+      config.optAName  = document.getElementById('e-opt-a-name').value;
+      config.optBName  = document.getElementById('e-opt-b-name').value;
+      config.optADesc  = document.getElementById('e-opt-a-desc').value;
+      config.optBDesc  = document.getElementById('e-opt-b-desc').value;
+      config.delivery  = document.getElementById('e-delivery').value;
+      config.freeMin   = document.getElementById('e-freemin').value;
     } else if (section === 'date') {
-      config.freeUntil      = document.getElementById('e-freeuntil').value;
-      config.countdownTitle = document.getElementById('e-countdown-title').value;
-      config.countdownDesc  = document.getElementById('e-countdown-desc').value;
+      config.freeShipEnabled = document.getElementById('e-freeship-toggle').checked ? 'on' : 'off';
+      config.freeUntil       = document.getElementById('e-freeuntil').value;
+      config.countdownTitle  = document.getElementById('e-countdown-title').value;
+      config.countdownDesc   = document.getElementById('e-countdown-desc').value;
     } else if (section === 'account') {
       config.bank    = document.getElementById('e-bank').value;
       config.account = document.getElementById('e-account').value;
       config.holder  = document.getElementById('e-holder').value;
     } else if (section === 'text') {
-      config.badge      = document.getElementById('e-badge').value;
-      config.heroTitle  = document.getElementById('e-title').value;
-      config.heroSub    = document.getElementById('e-sub').value;
-      config.apology    = document.getElementById('e-apology').value;
-      config.premium1   = document.getElementById('e-premium1').value;
-      config.premium2   = document.getElementById('e-premium2').value;
+      config.badge     = document.getElementById('e-badge').value;
+      config.heroTitle = document.getElementById('e-title').value;
+      config.heroSub   = document.getElementById('e-sub').value;
+      config.apology   = document.getElementById('e-apology').value;
+      config.premium1  = document.getElementById('e-premium1').value;
+      config.premium2  = document.getElementById('e-premium2').value;
     } else if (section === 'schedule') {
-      config.sch1Date   = document.getElementById('e-sch1-date').value;
-      config.sch1Desc   = document.getElementById('e-sch1-desc').value;
-      config.sch2Date   = document.getElementById('e-sch2-date').value;
-      config.sch2Desc   = document.getElementById('e-sch2-desc').value;
-      config.sch3Date   = document.getElementById('e-sch3-date').value;
-      config.sch3Desc   = document.getElementById('e-sch3-desc').value;
-      config.sch4Date   = document.getElementById('e-sch4-date').value;
-      config.sch4Desc   = document.getElementById('e-sch4-desc').value;
-      config.schBottom  = document.getElementById('e-sch-bottom').value;
+      config.sch1Date  = document.getElementById('e-sch1-date').value;
+      config.sch1Desc  = document.getElementById('e-sch1-desc').value;
+      config.sch2Date  = document.getElementById('e-sch2-date').value;
+      config.sch2Desc  = document.getElementById('e-sch2-desc').value;
+      config.sch3Date  = document.getElementById('e-sch3-date').value;
+      config.sch3Desc  = document.getElementById('e-sch3-desc').value;
+      config.sch4Date  = document.getElementById('e-sch4-date').value;
+      config.sch4Desc  = document.getElementById('e-sch4-desc').value;
+      config.schBottom = document.getElementById('e-sch-bottom').value;
     }
-    var btn     = document.getElementById('save-btn-' + section);
-    var spinner = document.getElementById('spinner-' + section);
-    var status  = document.getElementById('save-status-' + section);
 
-    btn.disabled = true;
-    spinner.style.display = 'inline-block';
-    status.textContent = '';
+    var btn     = document.getElementById('save-btn-'+section);
+    var spinner = document.getElementById('spinner-'+section);
+    var status  = document.getElementById('save-status-'+section);
+    btn.disabled = true; spinner.style.display='inline-block'; status.textContent='';
 
     fetch(SCRIPT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ type: 'saveConfig', config: config })
-    }).then(function() {
-      btn.disabled = false;
-      spinner.style.display = 'none';
-      status.textContent = '✓ 저장됨 — index에 바로 반영돼요';
-      status.className = 'save-status ok';
+      method:'POST', mode:'no-cors',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ type:'saveConfig', config:config })
+    }).then(function(){
+      btn.disabled=false; spinner.style.display='none';
+      status.textContent='✓ 저장됨 — 주문 페이지에 즉시 반영돼요';
+      status.className='save-status ok';
       showToast('✓ 저장되었습니다. 주문 페이지에 즉시 반영됩니다!');
-      setTimeout(function() { status.textContent = ''; }, 4000);
-    }).catch(function() {
-      btn.disabled = false;
-      spinner.style.display = 'none';
-      status.textContent = '❌ 저장 실패. 다시 시도해 주세요.';
-      status.className = 'save-status err';
+      setTimeout(function(){ status.textContent=''; }, 4000);
+    }).catch(function(){
+      btn.disabled=false; spinner.style.display='none';
+      status.textContent='❌ 저장 실패. 다시 시도해 주세요.';
+      status.className='save-status err';
     });
   }
 
-  // ─── 대시보드 ───
+  // ── 대시보드 ──
   function loadDashboard() {
     fetch(SCRIPT_URL + '?action=orders')
-      .then(function(r) { return r.json(); })
-      .then(function(data) {
+      .then(function(r){ return r.json(); })
+      .then(function(data){
         var orders = data.orders || [];
-        var total = orders.length;
-        var revenue = orders.reduce(function(s, o) { return s + (Number(o.qty) * 40000); }, 0);
-        var unpaid  = orders.filter(function(o) { return o.payment === '미확인'; }).length;
-        var unsent  = orders.filter(function(o) { return o.delivery === '발송대기'; }).length;
-        var sent    = orders.filter(function(o) { return o.delivery === '발송완료'; }).length;
-        var avgQty  = total > 0 ? (orders.reduce(function(s, o) { return s + Number(o.qty); }, 0) / total).toFixed(1) : 0;
-        document.getElementById('d-total').textContent   = total + '건';
-        document.getElementById('d-revenue').textContent = revenue.toLocaleString() + '원';
-        document.getElementById('d-unpaid').textContent  = unpaid + '건';
-        document.getElementById('d-unsent').textContent  = unsent + '건';
-        document.getElementById('d-sent').textContent    = sent + '건';
-        document.getElementById('d-avg').textContent     = avgQty + 'KG';
-        document.getElementById('dash-loading').style.display = 'none';
+        var total   = orders.length;
+        // 옵션별 단가로 매출 계산 (qtyA/qtyB/priceA/priceB 있으면 사용, 없으면 qty*40000 fallback)
+        var revenue = orders.reduce(function(s,o){
+          if (o.qtyA !== undefined && o.priceA !== undefined)
+            return s + (Number(o.qtyA)*Number(o.priceA)) + (Number(o.qtyB||0)*Number(o.priceB||30000));
+          return s + Number(o.qty)*40000;
+        }, 0);
+        var unpaid  = orders.filter(function(o){ return o.payment==='미확인'; }).length;
+        var unsent  = orders.filter(function(o){ return o.delivery==='발송대기'; }).length;
+        var sent    = orders.filter(function(o){ return o.delivery==='발송완료'; }).length;
+        var avgQty  = total > 0 ? (orders.reduce(function(s,o){ return s+Number(o.qty); },0)/total).toFixed(1) : 0;
+        document.getElementById('d-total').textContent   = total+'건';
+        document.getElementById('d-revenue').textContent = revenue.toLocaleString()+'원';
+        document.getElementById('d-unpaid').textContent  = unpaid+'건';
+        document.getElementById('d-unsent').textContent  = unsent+'건';
+        document.getElementById('d-sent').textContent    = sent+'건';
+        document.getElementById('d-avg').textContent     = avgQty+'KG';
+        document.getElementById('dash-loading').style.display='none';
       })
-      .catch(function() {
-        document.getElementById('dash-loading').textContent = '데이터를 불러오지 못했습니다.';
-      });
+      .catch(function(){ document.getElementById('dash-loading').textContent='데이터를 불러오지 못했습니다.'; });
   }
 
-  // ─── 주문 목록 ───
+  // ── 주문 목록 ──
   function loadOrders() {
-    document.getElementById('orders-loading').style.display = 'block';
-    document.getElementById('order-table').style.display = 'none';
-    document.getElementById('orders-empty').style.display = 'none';
+    document.getElementById('orders-loading').style.display='block';
+    document.getElementById('order-table').style.display='none';
+    document.getElementById('orders-empty').style.display='none';
     fetch(SCRIPT_URL + '?action=orders')
-      .then(function(r) { return r.json(); })
-      .then(function(data) {
-        allOrders = data.orders || [];
-        document.getElementById('orders-loading').style.display = 'none';
-        renderOrders();
-      })
-      .catch(function() {
-        document.getElementById('orders-loading').textContent = '주문을 불러오지 못했습니다.';
-      });
+      .then(function(r){ return r.json(); })
+      .then(function(data){ allOrders=data.orders||[]; document.getElementById('orders-loading').style.display='none'; renderOrders(); })
+      .catch(function(){ document.getElementById('orders-loading').textContent='주문을 불러오지 못했습니다.'; });
   }
-
   function setFilter(filter, btn) {
-    currentFilter = filter;
-    document.querySelectorAll('.filter-btn').forEach(function(b) { b.className = 'filter-btn'; });
-    btn.className = 'filter-btn active';
-    renderOrders();
+    currentFilter=filter;
+    document.querySelectorAll('.filter-btn').forEach(function(b){ b.className='filter-btn'; });
+    btn.className='filter-btn active'; renderOrders();
   }
-
   function renderOrders() {
-    var filtered = allOrders.filter(function(o) {
-      if (currentFilter === 'unpaid') return o.payment === '미확인';
-      if (currentFilter === 'pending') return o.delivery === '발송대기';
-      if (currentFilter === 'sent') return o.delivery === '발송완료';
+    var filtered = allOrders.filter(function(o){
+      if (currentFilter==='unpaid')  return o.payment==='미확인';
+      if (currentFilter==='pending') return o.delivery==='발송대기';
+      if (currentFilter==='sent')    return o.delivery==='발송완료';
       return true;
     });
     var tbody = document.getElementById('order-tbody');
-    tbody.innerHTML = '';
-    if (filtered.length === 0) {
-      document.getElementById('orders-empty').style.display = 'block';
-      document.getElementById('order-table').style.display = 'none';
-      return;
+    tbody.innerHTML='';
+    if (filtered.length===0){
+      document.getElementById('orders-empty').style.display='block';
+      document.getElementById('order-table').style.display='none'; return;
     }
-    document.getElementById('orders-empty').style.display = 'none';
-    document.getElementById('order-table').style.display = 'table';
-    filtered.forEach(function(o) {
+    document.getElementById('orders-empty').style.display='none';
+    document.getElementById('order-table').style.display='table';
+    filtered.forEach(function(o){
+      // 옵션 뱃지
+      var optBadges = '';
+      if (o.qtyA > 0) optBadges += '<span class="opt-badge a">'+(o.optAName||'A급')+' '+o.qtyA+'KG</span> ';
+      if (o.qtyB > 0) optBadges += '<span class="opt-badge b">'+(o.optBName||'실속')+' '+o.qtyB+'KG</span>';
+      if (!optBadges) optBadges = o.qty+'KG'; // 구버전 주문 fallback
+
       var tr = document.createElement('tr');
       tr.innerHTML =
-        '<td style="white-space:nowrap;font-size:12px;">' + o.date + '</td>' +
-        '<td><strong>' + o.name + '</strong></td>' +
-        '<td style="white-space:nowrap;">' + o.phone + '</td>' +
-        '<td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="' + o.address + '">' + o.address + '</td>' +
-        '<td style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="' + (o.addressDetail || '') + '">' + (o.addressDetail || '-') + '</td>' +
-        '<td>' + o.qty + 'KG</td>' +
-        '<td style="white-space:nowrap;">' + o.total + '</td>' +
-        '<td>' + makeSelect(o.row, 'payment', o.payment, ['미확인', '입금확인']) + '</td>' +
-        '<td>' + makeSelect(o.row, 'delivery', o.delivery, ['발송대기', '발송완료']) + '</td>';
+        '<td style="white-space:nowrap;font-size:12px;">'+o.date+'</td>'+
+        '<td><strong>'+o.name+'</strong></td>'+
+        '<td style="white-space:nowrap;">'+o.phone+'</td>'+
+        '<td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="'+o.address+'">'+o.address+'</td>'+
+        '<td style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="'+(o.addressDetail||'')+'">'+( o.addressDetail||'-')+'</td>'+
+        '<td style="white-space:nowrap;">'+optBadges+'</td>'+
+        '<td>'+o.qty+'KG</td>'+
+        '<td style="white-space:nowrap;">'+o.total+'</td>'+
+        '<td>'+makeSelect(o.row,'payment',o.payment,['미확인','입금확인'])+'</td>'+
+        '<td>'+makeSelect(o.row,'delivery',o.delivery,['발송대기','발송완료'])+'</td>';
       tbody.appendChild(tr);
     });
   }
-
   function makeSelect(row, field, current, options) {
-    var cls = current === '입금확인' ? 'confirmed' : current === '미확인' ? 'unconfirmed' : current === '발송완료' ? 'sent' : 'pending';
-    var html = '<select class="status-select ' + cls + '" onchange="updateStatus(' + row + ', \'' + field + '\', this)">';
-    options.forEach(function(opt) {
-      html += '<option value="' + opt + '"' + (opt === current ? ' selected' : '') + '>' + opt + '</option>';
-    });
-    return html + '</select>';
+    var cls = current==='입금확인'?'confirmed':current==='미확인'?'unconfirmed':current==='발송완료'?'sent':'pending';
+    var html = '<select class="status-select '+cls+'" onchange="updateStatus('+row+',\''+field+'\',this)">';
+    options.forEach(function(opt){ html+='<option value="'+opt+'"'+(opt===current?' selected':'')+'>'+opt+'</option>'; });
+    return html+'</select>';
   }
-
   function updateStatus(row, field, selectEl) {
     var value = selectEl.value;
-    selectEl.disabled = true;
-    fetch(SCRIPT_URL, {
-      method: 'POST', mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ type: 'update', row: row, field: field, value: value })
-    }).then(function() {
-      selectEl.disabled = false;
-      var cls = value === '입금확인' ? 'confirmed' : value === '미확인' ? 'unconfirmed' : value === '발송완료' ? 'sent' : 'pending';
-      selectEl.className = 'status-select ' + cls;
-      var order = allOrders.find(function(o) { return o.row === row; });
-      if (order) order[field === 'payment' ? 'payment' : 'delivery'] = value;
-      showToast('✓ 상태가 변경되었습니다');
-      loadDashboard();
-    }).catch(function() {
-      selectEl.disabled = false;
-      alert('상태 변경에 실패했습니다. 다시 시도해 주세요.');
-    });
+    selectEl.disabled=true;
+    fetch(SCRIPT_URL,{ method:'POST', mode:'no-cors', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({type:'update', row:row, field:field, value:value})
+    }).then(function(){
+      selectEl.disabled=false;
+      var cls=value==='입금확인'?'confirmed':value==='미확인'?'unconfirmed':value==='발송완료'?'sent':'pending';
+      selectEl.className='status-select '+cls;
+      var order=allOrders.find(function(o){ return o.row===row; });
+      if (order) order[field==='payment'?'payment':'delivery']=value;
+      showToast('✓ 상태가 변경되었습니다'); loadDashboard();
+    }).catch(function(){ selectEl.disabled=false; alert('상태 변경에 실패했습니다.'); });
   }
 
+  // ── 우체국 CSV ──
   function getPostalWeight(qty) {
-    qty = Number(qty);
-    if (qty <= 3) return 3; if (qty <= 5) return 5; if (qty <= 7) return 7;
-    if (qty <= 10) return 10; if (qty <= 15) return 15; if (qty <= 20) return 20;
-    if (qty <= 25) return 25; return 30;
+    qty=Number(qty);
+    if(qty<=3)return 3; if(qty<=5)return 5; if(qty<=7)return 7;
+    if(qty<=10)return 10; if(qty<=15)return 15; if(qty<=20)return 20;
+    if(qty<=25)return 25; return 30;
   }
-
   function exportPostal() {
-    var targets = allOrders.filter(function(o) { return o.payment === '입금확인' && o.delivery === '발송대기'; });
-    if (targets.length === 0) { alert('입금확인 + 발송대기 상태인 주문이 없습니다.'); return; }
-    var rows = [['받는 분','우편번호','주소(시도+시군구+도로명+건물번호)','상세주소(동, 호수, 洞명칭, 아파트, 건물명 등)','일반전화(02-1234-5678)','휴대전화(010-1234-5678)','중량(kg)','부피(cm)=가로+세로+높이','내용품코드','내용물','배달방식','배송시요청사항','분할접수 여부(Y/N)','분할접수 첫번째 중량(kg)','분할접수 첫번째 부피(cm)','분할접수 두번째 중량(kg)','분할접수 두번째 부피(cm)']];
-    targets.forEach(function(o) {
-      rows.push([o.name, o.zipcode||'', o.address||'', o.addressDetail||'', '', o.phone, getPostalWeight(o.qty), '', '농/수/축산물(일반)', '', '', '', 'N', '', '', '', '']);
+    var targets=allOrders.filter(function(o){ return o.payment==='입금확인'&&o.delivery==='발송대기'; });
+    if(targets.length===0){alert('입금확인 + 발송대기 상태인 주문이 없습니다.');return;}
+    var rows=[['받는 분','우편번호','주소(시도+시군구+도로명+건물번호)','상세주소(동, 호수, 洞명칭, 아파트, 건물명 등)','일반전화(02-1234-5678)','휴대전화(010-1234-5678)','중량(kg)','부피(cm)=가로+세로+높이','내용품코드','내용물','배달방식','배송시요청사항','분할접수 여부(Y/N)','분할접수 첫번째 중량(kg)','분할접수 첫번째 부피(cm)','분할접수 두번째 중량(kg)','분할접수 두번째 부피(cm)']];
+    targets.forEach(function(o){
+      var totalQty = (Number(o.qtyA||0)+Number(o.qtyB||0)) || Number(o.qty);
+      rows.push([o.name,o.zipcode||'',o.address||'',o.addressDetail||'','',o.phone,getPostalWeight(totalQty),'','농/수/축산물(일반)','','','','N','','','','']);
     });
-    var csv = rows.map(function(r) { return r.map(function(c) { return '"' + String(c).replace(/"/g,'""') + '"'; }).join(','); }).join('\n');
-    var blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
-    var a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = '우체국발송_' + new Date().toLocaleDateString('ko-KR').replace(/\. /g,'-').replace('.','') + '.csv';
-    a.click();
-    showToast(targets.length + '건 다운로드 완료!');
+    var csv=rows.map(function(r){return r.map(function(c){return '"'+String(c).replace(/"/g,'""')+'"';}).join(',');}).join('\n');
+    var blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'});
+    var a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+    a.download='우체국발송_'+new Date().toLocaleDateString('ko-KR').replace(/\. /g,'-').replace('.','')+ '.csv';
+    a.click(); showToast(targets.length+'건 다운로드 완료!');
   }
 </script>
 </body>
