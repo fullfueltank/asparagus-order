@@ -11,13 +11,6 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: #fdfcf9; font-family: 'Noto Serif KR', Georgia, serif; }
     .page { max-width: 640px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
-
-    /* 로딩 스켈레톤 */
-    .skeleton { background: linear-gradient(90deg, #f0f0ee 25%, #e8e8e5 50%, #f0f0ee 75%); background-size: 200% 100%; animation: shimmer 1.2s infinite; border-radius: 6px; }
-    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-    .skeleton-line { height: 16px; margin-bottom: 8px; }
-    .skeleton-title { height: 36px; width: 60%; margin: 0 auto 10px; }
-    .skeleton-sub { height: 14px; width: 40%; margin: 0 auto; }
     .page-loading { opacity: 0; transition: opacity 0.3s; }
     .page-loaded { opacity: 1; }
 
@@ -35,57 +28,66 @@
     .premium-item:last-child { margin-bottom: 0; }
     .premium-check { color: #3b6d11; font-weight: 500; flex-shrink: 0; margin-top: 1px; }
 
+    /* 카운트다운 배너 */
     .countdown-banner { border-radius: 12px; padding: 1rem 1.4rem; margin-bottom: 2rem; font-family: 'Noto Sans KR', sans-serif; }
-    .countdown-banner.active { background: #f0f7ea; border: 1px solid #c0dd97; }
+    .countdown-banner.active  { background: #f0f7ea; border: 1px solid #c0dd97; }
     .countdown-banner.expired { background: #f5f5f5; border: 1px solid #ddd; }
+    .countdown-banner.hidden  { display: none; }
     .countdown-title { font-size: 13px; font-weight: 500; margin-bottom: 0.6rem; }
-    .countdown-banner.active .countdown-title { color: #3b6d11; }
+    .countdown-banner.active  .countdown-title { color: #3b6d11; }
     .countdown-banner.expired .countdown-title { color: #999; }
     .countdown-timer { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; }
     .countdown-block { text-align: center; border-radius: 6px; padding: 6px 10px; min-width: 52px; }
-    .countdown-banner.active .countdown-block { background: #3b6d11; }
+    .countdown-banner.active  .countdown-block { background: #3b6d11; }
     .countdown-banner.expired .countdown-block { background: #ccc; }
-    .countdown-num { font-size: 22px; font-weight: 700; color: #fff; line-height: 1; font-family: 'Noto Sans KR', sans-serif; }
+    .countdown-num  { font-size: 22px; font-weight: 700; color: #fff; line-height: 1; font-family: 'Noto Sans KR', sans-serif; }
     .countdown-unit { font-size: 10px; color: rgba(255,255,255,0.85); margin-top: 2px; font-family: 'Noto Sans KR', sans-serif; }
-    .countdown-sep { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
-    .countdown-banner.active .countdown-sep { color: #3b6d11; }
+    .countdown-sep  { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+    .countdown-banner.active  .countdown-sep { color: #3b6d11; }
     .countdown-banner.expired .countdown-sep { color: #ccc; }
     .countdown-desc { font-size: 12px; line-height: 1.7; }
-    .countdown-banner.active .countdown-desc { color: #5a7a3a; }
+    .countdown-banner.active  .countdown-desc { color: #5a7a3a; }
     .countdown-banner.expired .countdown-desc { color: #aaa; }
 
-    .pricing-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 2rem; }
-    .price-card { background: #fff; border: 1px solid #e8e0cc; border-radius: 8px; padding: 1rem 1.1rem; }
-    .price-label { font-size: 11px; color: #999; font-family: 'Noto Sans KR', sans-serif; font-weight: 300; letter-spacing: 0.06em; margin-bottom: 4px; }
-    .price-value { font-size: 20px; font-weight: 500; color: #1a1a1a; }
-    .price-note { font-size: 11px; color: #b07d3a; margin-top: 3px; font-family: 'Noto Sans KR', sans-serif; }
+    /* 옵션 카드 */
+    .option-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 1.5rem; }
+    .option-card { background: #fff; border: 1.5px solid #e8e0cc; border-radius: 12px; padding: 1.1rem 1.3rem; transition: all 0.15s; }
+    .option-card.selected { border-color: #3b6d11; background: #f7faf2; box-shadow: 0 0 0 3px rgba(59,109,17,0.08); }
+    .option-header { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 0.85rem; cursor: pointer; user-select: none; }
+    .option-radio { width: 18px; height: 18px; border: 2px solid #ccc; border-radius: 50%; flex-shrink: 0; margin-top: 3px; position: relative; transition: all 0.15s; }
+    .option-card.selected .option-radio { border-color: #3b6d11; }
+    .option-card.selected .option-radio::after { content: ''; position: absolute; top: 3px; left: 3px; width: 8px; height: 8px; background: #3b6d11; border-radius: 50%; }
+    .option-info { flex: 1; }
+    .option-name  { font-size: 15px; font-weight: 700; color: #1a1a1a; margin-bottom: 3px; }
+    .option-price { font-size: 13px; color: #b07d3a; font-family: 'Noto Sans KR', sans-serif; font-weight: 500; }
+    .option-desc  { font-size: 12px; color: #888; font-family: 'Noto Sans KR', sans-serif; line-height: 1.6; margin-top: 4px; }
+    .option-qty-row { display: flex; align-items: center; gap: 12px; padding-top: 0.75rem; border-top: 1px dashed #e8e0cc; }
+    .option-qty-row.disabled { opacity: 0.38; pointer-events: none; }
+    .option-qty-label  { font-size: 12px; color: #888; font-family: 'Noto Sans KR', sans-serif; }
+    .option-subtotal   { margin-left: auto; font-size: 13px; color: #b07d3a; font-weight: 500; font-family: 'Noto Sans KR', sans-serif; }
 
-    .section-title { font-size: 13px; letter-spacing: 0.08em; color: #999; font-family: 'Noto Sans KR', sans-serif; font-weight: 400; margin-bottom: 1rem; padding-bottom: 6px; border-bottom: 1px solid #eee; }
-
-    .form-section { margin-bottom: 2rem; }
-    .field { margin-bottom: 1rem; }
-    .field label { display: block; font-size: 13px; color: #666; font-family: 'Noto Sans KR', sans-serif; font-weight: 400; margin-bottom: 5px; }
-    .field input, .field textarea { width: 100%; border: 1px solid #ddd; border-radius: 8px; padding: 10px 12px; font-size: 14px; color: #1a1a1a; background: #fff; font-family: 'Noto Sans KR', sans-serif; outline: none; transition: border-color 0.15s; }
-    .field input:focus, .field textarea:focus { border-color: #b07d3a; box-shadow: 0 0 0 2px rgba(176,125,58,0.1); }
-    .field input[readonly] { background: #f7f7f5; color: #888; cursor: default; }
-
-    .address-search-btn { width: 100%; padding: 10px; background: #f0f7ea; color: #3b6d11; border: 1px solid #c0dd97; border-radius: 8px; font-size: 13px; font-family: 'Noto Sans KR', sans-serif; font-weight: 500; cursor: pointer; margin-bottom: 8px; transition: background 0.15s; }
-    .address-search-btn:hover { background: #e0f0d0; }
-
-    .qty-row { display: flex; align-items: center; gap: 12px; }
     .qty-btn { width: 36px; height: 36px; border: 1px solid #ddd; border-radius: 50%; background: #fff; cursor: pointer; font-size: 18px; color: #1a1a1a; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 0.1s; user-select: none; }
     .qty-btn:hover { background: #f5f5f5; }
     .qty-display { font-size: 20px; font-weight: 500; min-width: 32px; text-align: center; color: #1a1a1a; }
     .qty-unit { font-size: 13px; color: #999; font-family: 'Noto Sans KR', sans-serif; }
-    .qty-price { margin-left: auto; font-size: 14px; color: #b07d3a; font-weight: 500; font-family: 'Noto Sans KR', sans-serif; }
+
+    .section-title { font-size: 13px; letter-spacing: 0.08em; color: #999; font-family: 'Noto Sans KR', sans-serif; font-weight: 400; margin-bottom: 1rem; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+    .form-section { margin-bottom: 2rem; }
+    .field { margin-bottom: 1rem; }
+    .field label { display: block; font-size: 13px; color: #666; font-family: 'Noto Sans KR', sans-serif; font-weight: 400; margin-bottom: 5px; }
+    .field input { width: 100%; border: 1px solid #ddd; border-radius: 8px; padding: 10px 12px; font-size: 14px; color: #1a1a1a; background: #fff; font-family: 'Noto Sans KR', sans-serif; outline: none; transition: border-color 0.15s; }
+    .field input:focus { border-color: #b07d3a; box-shadow: 0 0 0 2px rgba(176,125,58,0.1); }
+    .field input[readonly] { background: #f7f7f5; color: #888; cursor: default; }
+    .address-search-btn { width: 100%; padding: 10px; background: #f0f7ea; color: #3b6d11; border: 1px solid #c0dd97; border-radius: 8px; font-size: 13px; font-family: 'Noto Sans KR', sans-serif; font-weight: 500; cursor: pointer; margin-bottom: 8px; transition: background 0.15s; }
+    .address-search-btn:hover { background: #e0f0d0; }
 
     .total-card { border-radius: 12px; padding: 1.1rem 1.5rem; margin-bottom: 1.25rem; }
     .total-card.free { background: #f0f7ea; border: 1px solid #c0dd97; }
     .total-card.paid { background: #faf7f0; border: 1px solid #e8dfc8; }
     .total-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
-    .total-label { font-size: 14px; color: #5a4e38; font-family: 'Noto Sans KR', sans-serif; }
+    .total-label  { font-size: 14px; color: #5a4e38; font-family: 'Noto Sans KR', sans-serif; }
     .total-amount { font-size: 22px; font-weight: 700; color: #3d3424; }
-    .total-breakdown { font-size: 11px; font-family: 'Noto Sans KR', sans-serif; }
+    .total-breakdown { font-size: 11px; font-family: 'Noto Sans KR', sans-serif; line-height: 1.6; }
     .total-breakdown.free { color: #3b6d11; }
     .total-breakdown.paid { color: #b07d3a; }
 
@@ -94,70 +96,70 @@
     .submit-btn:disabled { background: #999; cursor: not-allowed; }
 
     .account-card { background: #f7f7f5; border: 1px solid #e5e5e0; border-radius: 12px; padding: 1.2rem 1.5rem; margin-top: 1rem; }
-    .account-title { font-size: 12px; letter-spacing: 0.08em; color: #999; font-family: 'Noto Sans KR', sans-serif; margin-bottom: 0.75rem; }
-    .account-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
-    .account-label { font-size: 12px; color: #999; font-family: 'Noto Sans KR', sans-serif; }
-    .account-value { font-size: 14px; font-weight: 500; color: #1a1a1a; font-family: 'Noto Sans KR', sans-serif; }
+    .account-title  { font-size: 12px; letter-spacing: 0.08em; color: #999; font-family: 'Noto Sans KR', sans-serif; margin-bottom: 0.75rem; }
+    .account-row    { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+    .account-label  { font-size: 12px; color: #999; font-family: 'Noto Sans KR', sans-serif; }
+    .account-value  { font-size: 14px; font-weight: 500; color: #1a1a1a; font-family: 'Noto Sans KR', sans-serif; }
     .account-number { font-size: 16px; font-weight: 500; color: #3d3424; letter-spacing: 0.04em; font-family: 'Noto Sans KR', sans-serif; }
     .account-notice { font-size: 12px; color: #888; font-family: 'Noto Sans KR', sans-serif; line-height: 1.8; margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid #e5e5e0; }
     .account-notice strong { color: #1a1a1a; font-weight: 500; }
-    .notice-card { background: #f0f5ff; border: 1px solid #b5d4f4; border-radius: 12px; padding: 1rem 1.25rem; margin-top: 0.75rem; }
+
+    .notice-card       { background: #f0f5ff; border: 1px solid #b5d4f4; border-radius: 12px; padding: 1rem 1.25rem; margin-top: 0.75rem; }
     .notice-card-title { font-size: 12px; font-weight: 500; color: #185fa5; font-family: 'Noto Sans KR', sans-serif; margin-bottom: 0.75rem; letter-spacing: 0.04em; }
-    .notice-schedule { display: flex; flex-direction: column; gap: 6px; margin-bottom: 0.75rem; }
-    .schedule-row { display: flex; align-items: flex-start; gap: 10px; padding: 7px 10px; border-radius: 8px; font-family: 'Noto Sans KR', sans-serif; }
+    .notice-schedule   { display: flex; flex-direction: column; gap: 6px; margin-bottom: 0.75rem; }
+    .schedule-row      { display: flex; align-items: flex-start; gap: 10px; padding: 7px 10px; border-radius: 8px; font-family: 'Noto Sans KR', sans-serif; }
     .schedule-row.s-active  { background: #e8f4e8; border: 1px solid #b8ddb8; }
     .schedule-row.s-off     { background: #f5f5f5; border: 1px solid #e5e5e0; }
     .schedule-row.s-resume  { background: #fff3e0; border: 1px solid #f0c878; }
     .schedule-date { font-size: 12px; font-weight: 500; min-width: 88px; flex-shrink: 0; padding-top: 1px; }
     .schedule-row.s-active .schedule-date  { color: #2d6b2d; }
-    .schedule-row.s-off .schedule-date     { color: #999; }
+    .schedule-row.s-off    .schedule-date  { color: #999; }
     .schedule-row.s-resume .schedule-date  { color: #a05c00; }
     .schedule-desc { font-size: 12px; line-height: 1.6; }
     .schedule-row.s-active .schedule-desc  { color: #3a6b3a; }
-    .schedule-row.s-off .schedule-desc     { color: #aaa; }
+    .schedule-row.s-off    .schedule-desc  { color: #aaa; }
     .schedule-row.s-resume .schedule-desc  { color: #a05c00; }
     .notice-bottom { font-size: 12px; color: #185fa5; font-family: 'Noto Sans KR', sans-serif; line-height: 1.8; padding-top: 0.6rem; border-top: 1px solid #c5daf5; }
     .notice-bottom strong { font-weight: 500; color: #185fa5; }
 
-    .review-section { margin-top: 3rem; }
-    .review-summary { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+    .review-section   { margin-top: 3rem; }
+    .review-summary   { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
     .review-big-score { font-size: 48px; font-weight: 700; color: #3d3424; line-height: 1; }
     .review-stars-big { font-size: 22px; color: #f0c040; letter-spacing: 2px; }
-    .review-count { font-size: 12px; color: #999; font-family: 'Noto Sans KR', sans-serif; margin-top: 2px; }
-    .review-form-card { background: #faf7f0; border: 1px solid #e8dfc8; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; }
+    .review-count     { font-size: 12px; color: #999; font-family: 'Noto Sans KR', sans-serif; margin-top: 2px; }
+    .review-form-card  { background: #faf7f0; border: 1px solid #e8dfc8; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; }
     .review-form-title { font-size: 13px; font-weight: 500; color: #3d3424; font-family: 'Noto Sans KR', sans-serif; margin-bottom: 0.75rem; }
     .star-input { display: flex; flex-direction: row-reverse; justify-content: flex-end; gap: 4px; margin-bottom: 0.75rem; }
     .star-input input { display: none; }
     .star-input label { font-size: 28px; color: #ddd; cursor: pointer; transition: color 0.1s; }
     .star-input label:hover, .star-input label:hover ~ label, .star-input input:checked ~ label { color: #f0c040; }
-    .review-name-row { display: flex; gap: 8px; margin-bottom: 8px; }
-    .review-name-row input { flex: 1; border: 1px solid #ddd; border-radius: 8px; padding: 9px 12px; font-size: 13px; font-family: 'Noto Sans KR', sans-serif; outline: none; background: #fff; }
+    .review-name-row input { flex: 1; border: 1px solid #ddd; border-radius: 8px; padding: 9px 12px; font-size: 13px; font-family: 'Noto Sans KR', sans-serif; outline: none; background: #fff; width: 100%; margin-bottom: 8px; }
     .review-name-row input:focus { border-color: #b07d3a; }
     .review-textarea { width: 100%; border: 1px solid #ddd; border-radius: 8px; padding: 9px 12px; font-size: 13px; font-family: 'Noto Sans KR', sans-serif; outline: none; resize: vertical; min-height: 72px; line-height: 1.6; background: #fff; margin-bottom: 8px; }
     .review-textarea:focus { border-color: #b07d3a; }
     .review-submit-btn { width: 100%; padding: 10px; background: #3d3424; color: #f5f0e8; border: none; border-radius: 8px; font-size: 13px; font-family: 'Noto Sans KR', sans-serif; font-weight: 500; cursor: pointer; }
     .review-submit-btn:hover { background: #5a4e38; }
     .review-submit-btn:disabled { background: #999; cursor: not-allowed; }
-    .review-list { display: flex; flex-direction: column; gap: 12px; }
-    .review-card { background: #fff; border: 1px solid #e8e0cc; border-radius: 10px; padding: 1rem 1.25rem; }
+    .review-list   { display: flex; flex-direction: column; gap: 12px; }
+    .review-card   { background: #fff; border: 1px solid #e8e0cc; border-radius: 10px; padding: 1rem 1.25rem; }
     .review-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
     .review-author { font-size: 13px; font-weight: 500; color: #1a1a1a; font-family: 'Noto Sans KR', sans-serif; }
-    .review-date { font-size: 11px; color: #bbb; font-family: 'Noto Sans KR', sans-serif; }
-    .review-stars { font-size: 14px; color: #f0c040; margin-bottom: 6px; }
-    .review-text { font-size: 13px; color: #555; font-family: 'Noto Sans KR', sans-serif; line-height: 1.7; }
-    .review-empty { text-align: center; padding: 2rem; font-size: 13px; color: #bbb; font-family: 'Noto Sans KR', sans-serif; }
+    .review-date   { font-size: 11px; color: #bbb; font-family: 'Noto Sans KR', sans-serif; }
+    .review-stars  { font-size: 14px; color: #f0c040; margin-bottom: 6px; }
+    .review-text   { font-size: 13px; color: #555; font-family: 'Noto Sans KR', sans-serif; line-height: 1.7; }
+    .review-empty  { text-align: center; padding: 2rem; font-size: 13px; color: #bbb; font-family: 'Noto Sans KR', sans-serif; }
     .review-loading { text-align: center; padding: 1.5rem; font-size: 13px; color: #bbb; font-family: 'Noto Sans KR', sans-serif; }
 
     .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.45); display: none; align-items: center; justify-content: center; z-index: 100; padding: 1rem; }
     .modal-overlay.active { display: flex; }
     .modal { background: #fff; border-radius: 16px; padding: 2rem 1.75rem; max-width: 380px; width: 100%; text-align: center; max-height: 90vh; overflow-y: auto; }
-    .modal-icon { font-size: 36px; margin-bottom: 1rem; }
+    .modal-icon  { font-size: 36px; margin-bottom: 1rem; }
     .modal-title { font-size: 18px; font-weight: 500; color: #1a1a1a; margin-bottom: 0.6rem; }
-    .modal-body { font-size: 13px; color: #666; font-family: 'Noto Sans KR', sans-serif; line-height: 1.9; margin-bottom: 1rem; text-align: left; }
+    .modal-body  { font-size: 13px; color: #666; font-family: 'Noto Sans KR', sans-serif; line-height: 1.9; margin-bottom: 1rem; text-align: left; }
     .modal-body strong { color: #1a1a1a; font-weight: 500; }
-    .modal-account { background: #faf7f0; border-radius: 8px; padding: 0.9rem 1rem; margin: 1rem 0; text-align: center; }
-    .modal-account .bank { font-size: 12px; color: #5a4e38; font-family: 'Noto Sans KR', sans-serif; }
-    .modal-account .acct { font-size: 17px; font-weight: 500; color: #3d3424; letter-spacing: 0.04em; font-family: 'Noto Sans KR', sans-serif; }
+    .modal-account      { background: #faf7f0; border-radius: 8px; padding: 0.9rem 1rem; margin: 1rem 0; text-align: center; }
+    .modal-account .bank   { font-size: 12px; color: #5a4e38; font-family: 'Noto Sans KR', sans-serif; }
+    .modal-account .acct   { font-size: 17px; font-weight: 500; color: #3d3424; letter-spacing: 0.04em; font-family: 'Noto Sans KR', sans-serif; }
     .modal-account .holder { font-size: 12px; color: #5a4e38; font-family: 'Noto Sans KR', sans-serif; }
     .kakao-btn { width: 100%; padding: 12px; background: #FEE500; color: #3C1E1E; border: none; border-radius: 8px; font-size: 14px; font-family: 'Noto Sans KR', sans-serif; font-weight: 500; cursor: pointer; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; gap: 6px; }
     .kakao-btn:hover { background: #f0d800; }
@@ -169,6 +171,7 @@
 </head>
 <body>
 <div class="page page-loading" id="main-page">
+
   <div class="hero">
     <div class="hero-badge" id="hero-badge">화이트 아스파라거스 직거래</div>
     <div class="hero-title" id="hero-title">올해도 찾아주셔서<br>감사합니다</div>
@@ -176,9 +179,7 @@
   </div>
 
   <div class="apology-card">
-    <p id="apology-text">작년에 주문해 주신 분들, 다시 찾아와 주셔서 진심으로 감사드립니다.<br><br>
-    올해는 전쟁으로 인한 물가 상승으로 인해 <strong>작년보다 가격이 조금 오르게 되었습니다.</strong> 저희도 최대한 부담을 줄이려 했지만 어쩔 수 없는 부분이 있어 정말 죄송한 마음입니다.<br><br>
-    그래도 <strong>4월 27일까지 주문해 주시는 분들께 배송비를 무료</strong>로 드리며, 정성껏 수확한 아스파라거스를 보내드리겠습니다. 감사합니다 🌿</p>
+    <p id="apology-text">작년에 주문해 주신 분들, 다시 찾아와 주셔서 진심으로 감사드립니다.<br><br>올해는 전쟁으로 인한 물가 상승으로 인해 <strong>작년보다 가격이 조금 오르게 되었습니다.</strong> 저희도 최대한 부담을 줄이려 했지만 어쩔 수 없는 부분이 있어 정말 죄송한 마음입니다.<br><br>그래도 <strong>4월 27일까지 주문해 주시는 분들께 배송비를 무료</strong>로 드리며, 정성껏 수확한 아스파라거스를 보내드리겠습니다. 감사합니다 🌿</p>
   </div>
 
   <div class="premium-card">
@@ -203,22 +204,56 @@
       <div class="countdown-sep">:</div>
       <div class="countdown-block"><div class="countdown-num" id="cd-secs">00</div><div class="countdown-unit">초</div></div>
     </div>
-    <div class="countdown-desc" id="countdown-desc">4월 27일까지 주문해 주시는 분들께 배송비를 무료로 드립니다. 이후에는 5만원(2KG) 이상 주문 시 무료입니다.</div>
+    <div class="countdown-desc" id="countdown-desc">4월 27일까지 주문해 주시는 분들께 배송비를 무료로 드립니다.</div>
   </div>
 
-  <div class="pricing-row">
-    <div class="price-card">
-      <div class="price-label">1KG 가격</div>
-      <div class="price-value" id="price-display">40,000원</div>
-      <div class="price-note">산지 직거래가 · 1KG 단위</div>
-    </div>
-    <div class="price-card">
-      <div class="price-label">배송비</div>
-      <div class="price-value" id="delivery-price-display">무료</div>
-      <div class="price-note" id="delivery-price-note">4/27까지 이벤트</div>
+  <!-- ───── 상품 옵션 ───── -->
+  <div class="form-section">
+    <div class="section-title">상품 선택 (1KG 단위 · 두 종류 함께 주문 가능)</div>
+    <div class="option-list">
+
+      <div class="option-card selected" id="card-a">
+        <div class="option-header" onclick="toggleOption('a')">
+          <div class="option-radio"></div>
+          <div class="option-info">
+            <div class="option-name" id="opt-a-name">A급 (프리미엄)</div>
+            <div class="option-price"><span id="opt-a-price-display">50,000원</span> / 1KG</div>
+            <div class="option-desc" id="opt-a-desc">미슐랭 레스토랑에서 선택한 최상급 · 굵고 균일한 대</div>
+          </div>
+        </div>
+        <div class="option-qty-row" id="qty-row-a">
+          <span class="option-qty-label">수량</span>
+          <button class="qty-btn" onclick="changeQty('a',-1)">−</button>
+          <div class="qty-display" id="qty-a">1</div>
+          <span class="qty-unit">KG</span>
+          <button class="qty-btn" onclick="changeQty('a',1)">+</button>
+          <div class="option-subtotal" id="subtotal-a">50,000원</div>
+        </div>
+      </div>
+
+      <div class="option-card" id="card-b">
+        <div class="option-header" onclick="toggleOption('b')">
+          <div class="option-radio"></div>
+          <div class="option-info">
+            <div class="option-name" id="opt-b-name">실속 (B급)</div>
+            <div class="option-price"><span id="opt-b-price-display">30,000원</span> / 1KG</div>
+            <div class="option-desc" id="opt-b-desc">굵기·외관은 조금 다르지만 맛과 신선도는 동일</div>
+          </div>
+        </div>
+        <div class="option-qty-row disabled" id="qty-row-b">
+          <span class="option-qty-label">수량</span>
+          <button class="qty-btn" onclick="changeQty('b',-1)">−</button>
+          <div class="qty-display" id="qty-b">0</div>
+          <span class="qty-unit">KG</span>
+          <button class="qty-btn" onclick="changeQty('b',1)">+</button>
+          <div class="option-subtotal" id="subtotal-b">0원</div>
+        </div>
+      </div>
+
     </div>
   </div>
 
+  <!-- ───── 주문자 정보 ───── -->
   <div class="form-section">
     <div class="section-title">주문자 정보</div>
     <div class="field" id="field-name">
@@ -241,29 +276,18 @@
     </div>
   </div>
 
-  <div class="form-section">
-    <div class="section-title">주문 수량 (1KG 단위)</div>
-    <div style="display:flex;align-items:center;">
-      <div class="qty-row" style="flex:1;">
-        <button class="qty-btn" id="btn-minus">−</button>
-        <div class="qty-display" id="qty">1</div>
-        <span class="qty-unit">KG</span>
-        <button class="qty-btn" id="btn-plus">+</button>
-      </div>
-      <div class="qty-price" id="qty-price">40,000원</div>
-    </div>
-  </div>
-
+  <!-- ───── 결제 요약 ───── -->
   <div class="total-card free" id="total-card">
     <div class="total-top">
       <div class="total-label">최종 결제 금액</div>
-      <div class="total-amount" id="total">40,000원</div>
+      <div class="total-amount" id="total">50,000원</div>
     </div>
-    <div class="total-breakdown free" id="total-breakdown">상품 40,000원 + 배송비 무료 (이벤트) 🎉</div>
+    <div class="total-breakdown free" id="total-breakdown">A급 1KG = 50,000원 + 배송비 무료 🎉</div>
   </div>
 
   <button class="submit-btn" id="submit-btn">주문하기</button>
 
+  <!-- ───── 계좌 안내 ───── -->
   <div class="account-card">
     <div class="account-title">계좌이체 안내</div>
     <div class="account-row">
@@ -282,17 +306,18 @@
       입금자명을 <strong>주문 시 작성하신 성함</strong>으로 해주세요.<br>
       입금 확인 후 수확하여 <strong>가장 신선한 상태</strong>로 보내드립니다.
     </div>
-    <div class="notice-card" id="notice-card">
+    <div class="notice-card">
       <div class="notice-card-title">📦 발송 일정 안내</div>
       <div class="notice-schedule" id="notice-schedule"></div>
       <div class="notice-bottom" id="notice-bottom">
-        수확 후 바로 발송해도 택배사 휴일이 끼면 신선도가 떨어질 수 있어,<br>
+        수확 후 바로 발송해도 택배사 휴일이 끼면 신선도가 떨어질 수 있어,
         <strong>가장 신선한 상태로 받아보실 수 있도록</strong> 휴일 전후 발송을 조정하고 있습니다.<br><br>
         수확량에 따라 대기시간이 발생할 수 있으며, 주문 순서대로 처리되오니 양해 부탁드립니다.
       </div>
     </div>
   </div>
 
+  <!-- ───── 후기 ───── -->
   <div class="review-section">
     <div class="section-title">구매 후기</div>
     <div class="review-summary">
@@ -321,7 +346,8 @@
       <div class="review-loading" id="review-loading">후기를 불러오는 중...</div>
     </div>
   </div>
-</div>
+
+</div><!-- /.page -->
 
 <div class="modal-overlay" id="modal">
   <div class="modal">
@@ -342,35 +368,54 @@
 <script>
   var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz8R_2cMje2S46wgRBa2Ef7fcThRY-Db6rwk4muKul9MzzEFTnEMNjlB104OpYi3m1xZw/exec';
 
-  // 기본값 (설정 로드 실패 시 fallback)
-  var PRICE = 40000;
+  // ── 기본값 (설정 로드 실패 시 fallback) ──
+  var PRICE_A = 50000;
+  var PRICE_B = 30000;
+  var OPT_A_NAME = 'A급 (프리미엄)';
+  var OPT_B_NAME = '실속 (B급)';
   var DELIVERY_FEE = 5000;
   var FREE_MIN_AFTER = 50000;
-  var FREE_UNTIL = new Date(Date.UTC(2026, 3, 27, 14, 59, 59)); // 4/27 23:59:59 KST = UTC+9
+  var FREE_UNTIL = new Date(Date.UTC(2026, 3, 27, 14, 59, 59)); // 4/27 23:59:59 KST
+  var FREE_SHIP_ENABLED = true; // 무료배송 이벤트 ON/OFF 토글
 
-  var qty = 1;
+  var qtyA = 1, qtyB = 0;
+  var selA = true, selB = false;
   var kakaoText = '';
-  var configLoaded = false;
 
-  // ─── 설정 로드 ───
+  // ── 설정 로드 ──
   function loadConfig() {
     fetch(SCRIPT_URL + '?action=config')
       .then(function(r) { return r.json(); })
       .then(function(data) {
         var c = data.config || {};
 
-        if (c.price)    PRICE         = parseInt(c.price);
-        if (c.delivery) DELIVERY_FEE  = parseInt(c.delivery);
-        if (c.freeMin)  FREE_MIN_AFTER = parseInt(c.freeMin);
+        if (c.priceA)    PRICE_A = parseInt(c.priceA);
+        else if (c.price) PRICE_A = parseInt(c.price); // 기존 키 하위호환
+        if (c.priceB)    PRICE_B = parseInt(c.priceB);
+        if (c.delivery)  DELIVERY_FEE   = parseInt(c.delivery);
+        if (c.freeMin)   FREE_MIN_AFTER = parseInt(c.freeMin);
 
         if (c.freeUntil) {
-          var dp = c.freeUntil.split('-');
-          FREE_UNTIL = new Date(Date.UTC(parseInt(dp[0]), parseInt(dp[1])-1, parseInt(dp[2]), 14, 59, 59)); // 23:59:59 KST
+          var dp = String(c.freeUntil).split('-');
+          if (dp.length === 3)
+            FREE_UNTIL = new Date(Date.UTC(+dp[0], +dp[1]-1, +dp[2], 14, 59, 59));
         }
 
-        // 텍스트 반영
+        // 무료배송 토글 ('on'/'true'/'1'/'y' → true, 나머지 → false)
+        if (c.freeShipEnabled !== undefined && c.freeShipEnabled !== '') {
+          var v = String(c.freeShipEnabled).toLowerCase();
+          FREE_SHIP_ENABLED = (v === 'on' || v === 'true' || v === '1' || v === 'y');
+        }
+
+        // 옵션 이름·설명
+        if (c.optAName) { OPT_A_NAME = c.optAName; document.getElementById('opt-a-name').textContent = c.optAName; }
+        if (c.optBName) { OPT_B_NAME = c.optBName; document.getElementById('opt-b-name').textContent = c.optBName; }
+        if (c.optADesc) document.getElementById('opt-a-desc').textContent = c.optADesc;
+        if (c.optBDesc) document.getElementById('opt-b-desc').textContent = c.optBDesc;
+
+        // 텍스트
         if (c.badge)          document.getElementById('hero-badge').textContent = c.badge;
-        if (c.heroTitle)      document.getElementById('hero-title').innerHTML = c.heroTitle.replace(/\n/g, '<br>');
+        if (c.heroTitle)      document.getElementById('hero-title').innerHTML = c.heroTitle.replace(/\n/g,'<br>');
         if (c.heroSub)        document.getElementById('hero-sub').textContent = c.heroSub;
         if (c.apology)        document.getElementById('apology-text').innerHTML = c.apology;
         if (c.premium1)       document.getElementById('premium1-text').innerHTML = c.premium1;
@@ -381,273 +426,293 @@
         if (c.account)        document.getElementById('account-number').textContent = c.account;
         if (c.holder)         document.getElementById('account-holder').textContent = c.holder;
 
-        // 가격 표시 업데이트
-        document.getElementById('price-display').textContent = PRICE.toLocaleString() + '원';
+        // 가격 표시 갱신
+        document.getElementById('opt-a-price-display').textContent = PRICE_A.toLocaleString() + '원';
+        document.getElementById('opt-b-price-display').textContent = PRICE_B.toLocaleString() + '원';
 
-        // FREE_UNTIL 바뀌었으니 tick 즉시 재실행
-        tick();
-
-        // 발송 일정 렌더링
         renderSchedule(c);
-
-        configLoaded = true;
+        tick();
         updatePrice();
         document.getElementById('main-page').classList.add('page-loaded');
       })
       .catch(function() {
-        // 설정 로드 실패해도 기본값으로 정상 동작
-        configLoaded = true;
         document.getElementById('main-page').classList.add('page-loaded');
       });
   }
 
-  function pad(n) { return n < 10 ? '0' + n : '' + n; }
-
-  // ─── 발송 일정 렌더링 ───
-  // 행 순서: 1=초록(active), 2=회색(off), 3=주황(resume), 4=초록(active)
-  var SCH_TYPES = ['s-active', 's-off', 's-resume', 's-active'];
-
+  // ── 발송 일정 렌더링 ──
+  var SCH_TYPES = ['s-active','s-off','s-resume','s-active'];
   function renderSchedule(c) {
-    // 기본값 (설정 없을 때 fallback)
-    var defaults = [
-      { date: '~ 4/29 (화)', desc: '입금 확인 순서대로 수확 후 순차 발송' },
-      { date: '4/30 – 5/5',  desc: '택배사 휴일 구간 · 신선도 유지를 위해 발송 중단' },
-      { date: '5/6 (월) ~',  desc: '발송 재개 · 순차 발송 진행' },
-      { date: '',             desc: '' }
+    var def = [
+      { date:'~ 4/29 (화)', desc:'입금 확인 순서대로 수확 후 순차 발송' },
+      { date:'4/30 – 5/5',  desc:'택배사 휴일 구간 · 신선도 유지를 위해 발송 중단' },
+      { date:'5/6 (월) ~',  desc:'발송 재개 · 순차 발송 진행' },
+      { date:'',            desc:'' }
     ];
     var rows = [
-      { date: (c && c.sch1Date) || defaults[0].date, desc: (c && c.sch1Desc) || defaults[0].desc },
-      { date: (c && c.sch2Date) || defaults[1].date, desc: (c && c.sch2Desc) || defaults[1].desc },
-      { date: (c && c.sch3Date) || defaults[2].date, desc: (c && c.sch3Desc) || defaults[2].desc },
-      { date: (c && c.sch4Date) || defaults[3].date, desc: (c && c.sch4Desc) || defaults[3].desc }
+      { date:(c&&c.sch1Date)||def[0].date, desc:(c&&c.sch1Desc)||def[0].desc },
+      { date:(c&&c.sch2Date)||def[1].date, desc:(c&&c.sch2Desc)||def[1].desc },
+      { date:(c&&c.sch3Date)||def[2].date, desc:(c&&c.sch3Desc)||def[2].desc },
+      { date:(c&&c.sch4Date)||def[3].date, desc:(c&&c.sch4Desc)||def[3].desc }
     ];
-
     var html = '';
-    rows.forEach(function(row, i) {
-      if (!row.date.trim()) return; // 날짜 비어있으면 숨김
-      html += '<div class="schedule-row ' + SCH_TYPES[i] + '">' +
-        '<div class="schedule-date">' + row.date + '</div>' +
-        '<div class="schedule-desc">' + row.desc + '</div>' +
-        '</div>';
+    rows.forEach(function(r,i) {
+      if (!String(r.date).trim()) return;
+      html += '<div class="schedule-row '+SCH_TYPES[i]+'">'
+            + '<div class="schedule-date">'+r.date+'</div>'
+            + '<div class="schedule-desc">'+r.desc+'</div></div>';
     });
     document.getElementById('notice-schedule').innerHTML = html;
-
-    // 하단 문구 (*텍스트* → <strong> 변환)
     if (c && c.schBottom) {
-      var bottom = c.schBottom
-        .replace(/\*(.*?)\*/g, '<strong>$1</strong>')
-        .replace(/\n/g, '<br>');
-      document.getElementById('notice-bottom').innerHTML = bottom;
+      document.getElementById('notice-bottom').innerHTML =
+        c.schBottom.replace(/\*(.*?)\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');
     }
   }
-
-  // 설정 없을 때 기본 발송일정 표시
   renderSchedule(null);
-  function isEventActive() { return new Date() <= FREE_UNTIL; }
-  function getDeliveryFee(t) { if (isEventActive()) return 0; return t >= FREE_MIN_AFTER ? 0 : DELIVERY_FEE; }
 
+  // ── 무료배송 이벤트 적용 여부 ──
+  function isEventActive() { return FREE_SHIP_ENABLED && new Date() <= FREE_UNTIL; }
+  function getDelivery(total) {
+    if (isEventActive()) return 0;
+    return total >= FREE_MIN_AFTER ? 0 : DELIVERY_FEE;
+  }
+
+  // ── 카운트다운 tick ──
+  function pad(n) { return n < 10 ? '0'+n : ''+n; }
   function tick() {
-    var now = new Date();
-    var diff = FREE_UNTIL - now;
     var banner = document.getElementById('countdown-banner');
+    if (!FREE_SHIP_ENABLED) {
+      banner.className = 'countdown-banner hidden';
+      return;
+    }
+    var diff = FREE_UNTIL - new Date();
     if (diff <= 0) {
       banner.className = 'countdown-banner expired';
-      document.getElementById('cd-days').textContent = '00';
-      document.getElementById('cd-hours').textContent = '00';
-      document.getElementById('cd-mins').textContent = '00';
-      document.getElementById('cd-secs').textContent = '00';
-      document.getElementById('delivery-price-display').textContent = DELIVERY_FEE.toLocaleString() + '원';
-      document.getElementById('delivery-price-note').textContent = FREE_MIN_AFTER.toLocaleString() + '원 이상 무료';
+      ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(function(id){ document.getElementById(id).textContent='00'; });
     } else {
-      document.getElementById('cd-days').textContent  = pad(Math.floor(diff / 86400000));
-      document.getElementById('cd-hours').textContent = pad(Math.floor((diff % 86400000) / 3600000));
-      document.getElementById('cd-mins').textContent  = pad(Math.floor((diff % 3600000) / 60000));
-      document.getElementById('cd-secs').textContent  = pad(Math.floor((diff % 60000) / 1000));
+      banner.className = 'countdown-banner active';
+      document.getElementById('cd-days').textContent  = pad(Math.floor(diff/86400000));
+      document.getElementById('cd-hours').textContent = pad(Math.floor((diff%86400000)/3600000));
+      document.getElementById('cd-mins').textContent  = pad(Math.floor((diff%3600000)/60000));
+      document.getElementById('cd-secs').textContent  = pad(Math.floor((diff%60000)/1000));
     }
     updatePrice();
   }
 
+  // ── 옵션 토글 ──
+  function toggleOption(opt) {
+    if (opt === 'a') {
+      selA = !selA;
+      if (!selA && !selB) { selA = true; return; } // 최소 하나 보호
+      if (selA) { qtyA = Math.max(1, qtyA); } else { qtyA = 0; }
+      document.getElementById('card-a').classList.toggle('selected', selA);
+      document.getElementById('qty-row-a').classList.toggle('disabled', !selA);
+    } else {
+      selB = !selB;
+      if (!selA && !selB) { selB = true; return; }
+      if (selB) { qtyB = Math.max(1, qtyB); } else { qtyB = 0; }
+      document.getElementById('card-b').classList.toggle('selected', selB);
+      document.getElementById('qty-row-b').classList.toggle('disabled', !selB);
+    }
+    updatePrice();
+  }
+
+  // ── 수량 변경 ──
+  function changeQty(opt, delta) {
+    if (opt === 'a' && selA) { var n = qtyA + delta; if (n >= 1 && n <= 30) qtyA = n; }
+    if (opt === 'b' && selB) { var n = qtyB + delta; if (n >= 1 && n <= 30) qtyB = n; }
+    updatePrice();
+  }
+
+  // ── 금액 계산 & UI 갱신 ──
   function updatePrice() {
-    var pt = qty * PRICE;
-    var d  = getDeliveryFee(pt);
-    var gt = pt + d;
+    var ptA = qtyA * PRICE_A;
+    var ptB = qtyB * PRICE_B;
+    var pt  = ptA + ptB;
+    var d   = getDelivery(pt);
+    var gt  = pt + d;
+
+    document.getElementById('qty-a').textContent      = qtyA;
+    document.getElementById('qty-b').textContent      = qtyB;
+    document.getElementById('subtotal-a').textContent = ptA.toLocaleString() + '원';
+    document.getElementById('subtotal-b').textContent = ptB.toLocaleString() + '원';
+    document.getElementById('total').textContent      = gt.toLocaleString() + '원';
+
+    // 내역 문자열
+    var parts = [];
+    if (qtyA > 0) parts.push(OPT_A_NAME + ' ' + qtyA + 'KG');
+    if (qtyB > 0) parts.push(OPT_B_NAME + ' ' + qtyB + 'KG');
+    var itemStr = (parts.length ? parts.join(' + ') + ' = ' : '상품 ') + pt.toLocaleString() + '원';
+
     var card = document.getElementById('total-card');
     var bd   = document.getElementById('total-breakdown');
-    document.getElementById('qty').textContent      = qty;
-    document.getElementById('qty-price').textContent = pt.toLocaleString() + '원';
-    document.getElementById('total').textContent     = gt.toLocaleString() + '원';
     if (d === 0) {
-      card.className = 'total-card free';
-      bd.className   = 'total-breakdown free';
-      bd.textContent = isEventActive()
-        ? '상품 ' + pt.toLocaleString() + '원 + 배송비 무료 (이벤트) 🎉'
-        : '상품 ' + pt.toLocaleString() + '원 + 배송비 무료 🎉';
+      card.className = 'total-card free'; bd.className = 'total-breakdown free';
+      bd.textContent = itemStr + (isEventActive() ? ' + 배송비 무료 (이벤트) 🎉' : ' + 배송비 무료 🎉');
     } else {
-      card.className = 'total-card paid';
-      bd.className   = 'total-breakdown paid';
-      bd.textContent = '상품 ' + pt.toLocaleString() + '원 + 배송비 ' + DELIVERY_FEE.toLocaleString() + '원 (무료까지 ' + (FREE_MIN_AFTER - pt).toLocaleString() + '원 남음)';
+      card.className = 'total-card paid'; bd.className = 'total-breakdown paid';
+      bd.textContent = itemStr + ' + 배송비 ' + DELIVERY_FEE.toLocaleString() + '원 (무료까지 ' + (FREE_MIN_AFTER-pt).toLocaleString() + '원 남음)';
     }
   }
 
-  // tick은 loadConfig 완료 후 시작 (config 로드 전에 FREE_UNTIL 덮어쓰기 방지)
   tick();
   setInterval(tick, 1000);
   loadConfig();
 
-  document.getElementById('btn-minus').onclick = function() { if (qty > 1) { qty--; updatePrice(); } };
-  document.getElementById('btn-plus').onclick  = function() { if (qty < 30) { qty++; updatePrice(); } };
-
+  // ── 주소 검색 ──
   function searchAddress() {
-    new daum.Postcode({
-      oncomplete: function(data) {
-        document.getElementById('zipcode').value = data.zonecode;
-        document.getElementById('address').value = data.roadAddress || data.jibunAddress;
-        document.getElementById('address-detail').focus();
-        document.getElementById('field-address').classList.remove('error');
-      }
-    }).open();
+    new daum.Postcode({ oncomplete: function(data) {
+      document.getElementById('zipcode').value  = data.zonecode;
+      document.getElementById('address').value  = data.roadAddress || data.jibunAddress;
+      document.getElementById('address-detail').focus();
+      document.getElementById('field-address').classList.remove('error');
+    }}).open();
   }
 
+  // ── 전화번호 포맷 ──
   document.getElementById('phone').oninput = function() {
-    var v = this.value.replace(/[^0-9]/g, '');
-    if (v.length <= 3) this.value = v;
-    else if (v.length <= 7) this.value = v.slice(0,3) + '-' + v.slice(3);
-    else this.value = v.slice(0,3) + '-' + v.slice(3,7) + '-' + v.slice(7,11);
+    var v = this.value.replace(/[^0-9]/g,'');
+    if (v.length <= 3)       this.value = v;
+    else if (v.length <= 7)  this.value = v.slice(0,3)+'-'+v.slice(3);
+    else                     this.value = v.slice(0,3)+'-'+v.slice(3,7)+'-'+v.slice(7,11);
     if (this.value.trim()) document.getElementById('field-phone').classList.remove('error');
   };
-
   document.getElementById('name').oninput = function() {
     if (this.value.trim()) document.getElementById('field-name').classList.remove('error');
   };
 
+  // ── 카카오 공유 ──
   document.getElementById('kakao-btn').onclick = function() {
-    if (navigator.share) {
-      navigator.share({ title: '화이트 아스파라거스 주문내역', text: kakaoText });
-    } else {
-      navigator.clipboard.writeText(kakaoText).then(function() {
-        alert('주문내역이 복사되었습니다!\n카카오톡 나에게 보내기에 붙여넣기 해주세요.');
-      });
-    }
+    if (navigator.share) navigator.share({ title:'화이트 아스파라거스 주문내역', text:kakaoText });
+    else navigator.clipboard.writeText(kakaoText).then(function(){
+      alert('주문내역이 복사되었습니다!\n카카오톡 나에게 보내기에 붙여넣기 해주세요.');
+    });
   };
 
+  // ── 주문 제출 ──
   document.getElementById('submit-btn').onclick = function() {
-    var name          = document.getElementById('name').value.trim();
-    var phone         = document.getElementById('phone').value.trim();
-    var zipcode       = document.getElementById('zipcode').value.trim();
-    var address       = document.getElementById('address').value.trim();
-    var addressDetail = document.getElementById('address-detail').value.trim();
-    var valid = true;
+    var name   = document.getElementById('name').value.trim();
+    var phone  = document.getElementById('phone').value.trim();
+    var zip    = document.getElementById('zipcode').value.trim();
+    var addr   = document.getElementById('address').value.trim();
+    var detail = document.getElementById('address-detail').value.trim();
+    var valid  = true;
 
-    if (!name)            { document.getElementById('field-name').classList.add('error'); valid = false; }
-    else                  { document.getElementById('field-name').classList.remove('error'); }
-    if (!phone)           { document.getElementById('field-phone').classList.add('error'); valid = false; }
-    else                  { document.getElementById('field-phone').classList.remove('error'); }
-    if (!zipcode || !address) { document.getElementById('field-address').classList.add('error'); valid = false; }
-    else                  { document.getElementById('field-address').classList.remove('error'); }
+    if (!name)       { document.getElementById('field-name').classList.add('error');    valid=false; }
+    if (!phone)      { document.getElementById('field-phone').classList.add('error');   valid=false; }
+    if (!zip||!addr) { document.getElementById('field-address').classList.add('error'); valid=false; }
+    if (!selA && !selB || (qtyA===0 && qtyB===0)) { alert('최소 1KG 이상 선택해 주세요.'); valid=false; }
     if (!valid) return;
 
     var btn = document.getElementById('submit-btn');
-    btn.disabled = true;
-    btn.textContent = '접수 중...';
+    btn.disabled = true; btn.textContent = '접수 중...';
 
-    var pt          = qty * PRICE;
-    var d           = getDeliveryFee(pt);
-    var gt          = pt + d;
-    var nowStr      = new Date().toLocaleString('ko-KR');
-    var fullAddress = addressDetail ? address + ' ' + addressDetail : address;
-    var bankName    = document.getElementById('account-bank').textContent;
-    var accountNum  = document.getElementById('account-number').textContent;
-    var holderName  = document.getElementById('account-holder').textContent;
+    var ptA = qtyA * PRICE_A, ptB = qtyB * PRICE_B, pt = ptA+ptB;
+    var d   = getDelivery(pt), gt = pt+d;
+    var fullAddr = detail ? addr+' '+detail : addr;
+    var bankName = document.getElementById('account-bank').textContent;
+    var acctNum  = document.getElementById('account-number').textContent;
+    var holder   = document.getElementById('account-holder').textContent;
+    var nowStr   = new Date().toLocaleString('ko-KR');
 
-    kakaoText = '🌿 화이트 아스파라거스 주문내역\n━━━━━━━━━━━━━━\n📅 주문일시: ' + nowStr + '\n👤 성함: ' + name + '\n📦 수량: ' + qty + 'KG\n🛒 상품금액: ' + pt.toLocaleString() + '원\n🚚 배송비: ' + (d === 0 ? '무료' : DELIVERY_FEE.toLocaleString() + '원') + '\n💰 최종결제: ' + gt.toLocaleString() + '원\n📍 배송지: [' + zipcode + '] ' + fullAddress + '\n━━━━━━━━━━━━━━\n🏦 입금계좌: ' + bankName + ' ' + accountNum + '\n예금주: ' + holderName + '\n입금자명을 [' + name + ']으로 해주세요.';
+    var optLines = [];
+    if (qtyA>0) optLines.push(OPT_A_NAME+' '+qtyA+'KG ('+ptA.toLocaleString()+'원)');
+    if (qtyB>0) optLines.push(OPT_B_NAME+' '+qtyB+'KG ('+ptB.toLocaleString()+'원)');
+
+    kakaoText = '🌿 화이트 아스파라거스 주문내역\n━━━━━━━━━━━━━━\n'
+      +'📅 주문일시: '+nowStr+'\n👤 성함: '+name+'\n'
+      +'📦 주문상품:\n  '+optLines.join('\n  ')+'\n'
+      +'🛒 상품금액: '+pt.toLocaleString()+'원\n'
+      +'🚚 배송비: '+(d===0?'무료':DELIVERY_FEE.toLocaleString()+'원')+'\n'
+      +'💰 최종결제: '+gt.toLocaleString()+'원\n'
+      +'📍 배송지: ['+zip+'] '+fullAddr+'\n━━━━━━━━━━━━━━\n'
+      +'🏦 입금계좌: '+bankName+' '+acctNum+'\n예금주: '+holder+'\n'
+      +'입금자명을 ['+name+']으로 해주세요.';
 
     fetch(SCRIPT_URL, {
-      method: 'POST', mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ type: 'order', name: name, phone: phone, address: address, addressDetail: addressDetail, zipcode: zipcode, qty: qty, total: gt.toLocaleString() + '원' })
+      method:'POST', mode:'no-cors',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        type:'order', name:name, phone:phone,
+        address:addr, addressDetail:detail, zipcode:zip,
+        qty: qtyA+qtyB,         // 총 수량 (기존 호환)
+        qtyA:qtyA, qtyB:qtyB,
+        priceA:PRICE_A, priceB:PRICE_B,
+        optAName:OPT_A_NAME, optBName:OPT_B_NAME,
+        total: gt.toLocaleString()+'원'
+      })
     }).then(function() {
+      var optHtml = '';
+      if (qtyA>0) optHtml += '&nbsp;&nbsp;• <strong>'+OPT_A_NAME+'</strong> '+qtyA+'KG — '+ptA.toLocaleString()+'원<br>';
+      if (qtyB>0) optHtml += '&nbsp;&nbsp;• <strong>'+OPT_B_NAME+'</strong> '+qtyB+'KG — '+ptB.toLocaleString()+'원<br>';
       document.getElementById('modal-title').textContent = '주문이 접수되었습니다';
       document.getElementById('modal-body').innerHTML =
-        '<strong>' + name + '</strong>님, 주문 감사드립니다!<br><br>' +
-        '📦 수량: <strong>' + qty + 'KG</strong><br>' +
-        '🛒 상품금액: <strong>' + pt.toLocaleString() + '원</strong><br>' +
-        '🚚 배송비: <strong>' + (d === 0 ? '무료 🎉' : DELIVERY_FEE.toLocaleString() + '원') + '</strong><br>' +
-        '💰 최종결제: <strong>' + gt.toLocaleString() + '원</strong><br>' +
-        '📍 배송지: [' + zipcode + '] ' + fullAddress + '<br><br>' +
-        '아래 계좌로 입금해 주시면 확인 후 발송해 드립니다.' +
-        '<div class="modal-account"><div class="bank">' + bankName + '</div><div class="acct">' + accountNum + '</div><div class="holder">예금주 ' + holderName + ' · 입금자명: ' + name + '</div></div>' +
-        '<span style="color:#185fa5;font-size:12px;">수확량에 따라 발송까지 대기시간이 생길 수 있습니다. 순서대로 정성껏 보내드리겠습니다 💚</span>';
+        '<strong>'+name+'</strong>님, 주문 감사드립니다!<br><br>'
+        +'📦 주문상품:<br>'+optHtml
+        +'🛒 상품금액: <strong>'+pt.toLocaleString()+'원</strong><br>'
+        +'🚚 배송비: <strong>'+(d===0?'무료 🎉':DELIVERY_FEE.toLocaleString()+'원')+'</strong><br>'
+        +'💰 최종결제: <strong>'+gt.toLocaleString()+'원</strong><br>'
+        +'📍 배송지: ['+zip+'] '+fullAddr+'<br><br>'
+        +'아래 계좌로 입금해 주시면 확인 후 발송해 드립니다.'
+        +'<div class="modal-account"><div class="bank">'+bankName+'</div>'
+        +'<div class="acct">'+acctNum+'</div>'
+        +'<div class="holder">예금주 '+holder+' · 입금자명: '+name+'</div></div>'
+        +'<span style="color:#185fa5;font-size:12px;">수확량에 따라 발송까지 대기시간이 생길 수 있습니다. 순서대로 정성껏 보내드리겠습니다 💚</span>';
       document.getElementById('modal').classList.add('active');
-      btn.disabled = false;
-      btn.textContent = '주문하기';
+      btn.disabled=false; btn.textContent='주문하기';
     }).catch(function() {
-      document.getElementById('modal-title').textContent = '오류가 발생했습니다';
-      document.getElementById('modal-body').innerHTML = '잠시 후 다시 시도해 주세요.';
+      document.getElementById('modal-title').textContent='오류가 발생했습니다';
+      document.getElementById('modal-body').innerHTML='잠시 후 다시 시도해 주세요.';
       document.getElementById('modal').classList.add('active');
-      btn.disabled = false;
-      btn.textContent = '주문하기';
+      btn.disabled=false; btn.textContent='주문하기';
     });
   };
 
-  function starsHtml(n) { return '★'.repeat(n) + '☆'.repeat(5 - n); }
-
+  // ── 후기 ──
+  function starsHtml(n) { return '★'.repeat(n)+'☆'.repeat(5-n); }
   function loadReviews() {
-    fetch(SCRIPT_URL).then(function(r) { return r.json(); }).then(function(reviews) { renderReviews(reviews); }).catch(function() {
-      var l = document.getElementById('review-loading');
-      if (l) l.textContent = '후기를 불러오지 못했습니다.';
-    });
+    fetch(SCRIPT_URL).then(function(r){return r.json();}).then(renderReviews)
+    .catch(function(){ var l=document.getElementById('review-loading'); if(l) l.textContent='후기를 불러오지 못했습니다.'; });
   }
-
   function renderReviews(reviews) {
-    var list    = document.getElementById('review-list');
-    var loading = document.getElementById('review-loading');
-    list.querySelectorAll('.review-card').forEach(function(el) { el.remove(); });
+    var list=document.getElementById('review-list'), loading=document.getElementById('review-loading');
+    list.querySelectorAll('.review-card').forEach(function(el){el.remove();});
     if (loading) loading.remove();
-    if (!reviews || reviews.length === 0) {
-      document.getElementById('avg-score').textContent = '-';
-      document.getElementById('avg-stars').textContent = '☆☆☆☆☆';
-      document.getElementById('review-count').textContent = '아직 후기가 없어요';
-      var empty = document.createElement('div');
-      empty.className = 'review-empty';
-      empty.textContent = '아직 등록된 후기가 없어요. 첫 번째 후기를 남겨주세요!';
-      list.appendChild(empty);
-      return;
+    if (!reviews||reviews.length===0) {
+      document.getElementById('avg-score').textContent='-';
+      document.getElementById('avg-stars').textContent='☆☆☆☆☆';
+      document.getElementById('review-count').textContent='아직 후기가 없어요';
+      var e=document.createElement('div'); e.className='review-empty'; e.textContent='아직 등록된 후기가 없어요. 첫 번째 후기를 남겨주세요!';
+      list.appendChild(e); return;
     }
-    var avg = reviews.reduce(function(s, r) { return s + Number(r.star); }, 0) / reviews.length;
-    document.getElementById('avg-score').textContent = avg.toFixed(1);
-    document.getElementById('avg-stars').textContent = starsHtml(Math.round(avg));
-    document.getElementById('review-count').textContent = '총 ' + reviews.length + '개의 후기';
-    reviews.slice().reverse().forEach(function(r) {
-      var card = document.createElement('div');
-      card.className = 'review-card';
-      card.innerHTML = '<div class="review-header"><span class="review-author">' + r.name + '</span><span class="review-date">' + r.date + '</span></div><div class="review-stars">' + starsHtml(Number(r.star)) + '</div><div class="review-text">' + r.text + '</div>';
-      list.appendChild(card);
+    var avg=reviews.reduce(function(s,r){return s+Number(r.star);},0)/reviews.length;
+    document.getElementById('avg-score').textContent=avg.toFixed(1);
+    document.getElementById('avg-stars').textContent=starsHtml(Math.round(avg));
+    document.getElementById('review-count').textContent='총 '+reviews.length+'개의 후기';
+    reviews.slice().reverse().forEach(function(r){
+      var c=document.createElement('div'); c.className='review-card';
+      c.innerHTML='<div class="review-header"><span class="review-author">'+r.name+'</span><span class="review-date">'+r.date+'</span></div>'
+        +'<div class="review-stars">'+starsHtml(Number(r.star))+'</div><div class="review-text">'+r.text+'</div>';
+      list.appendChild(c);
     });
   }
-
   document.getElementById('review-submit-btn').onclick = function() {
-    var name   = document.getElementById('review-name').value.trim();
-    var text   = document.getElementById('review-text').value.trim();
-    var starEl = document.querySelector('input[name="star"]:checked');
-    if (!name || !text || !starEl) { alert('별점, 성함, 후기 내용을 모두 입력해 주세요.'); return; }
-    var btn = document.getElementById('review-submit-btn');
-    btn.disabled = true; btn.textContent = '등록 중...';
-    fetch(SCRIPT_URL, {
-      method: 'POST', mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ type: 'review', name: name, text: text, star: parseInt(starEl.value) })
-    }).then(function() {
-      document.getElementById('review-name').value = '';
-      document.getElementById('review-text').value = '';
-      document.querySelectorAll('input[name="star"]').forEach(function(el) { el.checked = false; });
-      btn.textContent = '등록되었습니다 ✓';
-      setTimeout(function() { btn.disabled = false; btn.textContent = '후기 등록'; loadReviews(); }, 1500);
-    }).catch(function() {
-      alert('등록 중 오류가 발생했습니다.');
-      btn.disabled = false; btn.textContent = '후기 등록';
-    });
+    var name=document.getElementById('review-name').value.trim();
+    var text=document.getElementById('review-text').value.trim();
+    var starEl=document.querySelector('input[name="star"]:checked');
+    if (!name||!text||!starEl){alert('별점, 성함, 후기 내용을 모두 입력해 주세요.');return;}
+    var btn=document.getElementById('review-submit-btn');
+    btn.disabled=true; btn.textContent='등록 중...';
+    fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({type:'review',name:name,text:text,star:parseInt(starEl.value)})
+    }).then(function(){
+      document.getElementById('review-name').value='';
+      document.getElementById('review-text').value='';
+      document.querySelectorAll('input[name="star"]').forEach(function(el){el.checked=false;});
+      btn.textContent='등록되었습니다 ✓';
+      setTimeout(function(){btn.disabled=false;btn.textContent='후기 등록';loadReviews();},1500);
+    }).catch(function(){alert('등록 중 오류가 발생했습니다.');btn.disabled=false;btn.textContent='후기 등록';});
   };
-
   loadReviews();
 </script>
 </body>
